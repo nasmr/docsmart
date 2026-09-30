@@ -20,9 +20,47 @@ const C = {
 const slotsSeen = new Map(); // slot -> Set(templateId)
 let currentId = '';
 
+// Every {{field}} and [[...]] token in document order, with the conditions and loops it sits
+// inside. Read by fields.js to check templates against templates/fields/catalogue.json.
+const usage = []; // { template, kind: 'field' | 'condition' | 'list' | 'zone' | 'locked' | 'placeholder' | 'error', name, context }
+const stack = []; // open blocks: { kind: 'if', expr, negated } | { kind: 'each', alias, list, where }
+
+function context() {
+  return stack.map((b) => b.kind === 'if' ? (b.negated ? 'NOT ' : '') + b.expr
+    : 'EACH ' + b.alias + ' IN ' + b.list + (b.where ? ' WHERE ' + b.where : ''));
+}
+function record(kind, name) { usage.push({ template: currentId, kind, name, context: context() }); }
+
 function track(slot) {
   if (!slotsSeen.has(slot)) slotsSeen.set(slot, new Set());
   slotsSeen.get(slot).add(currentId);
+  record('field', slot);
+}
+
+function trackBlock(token) {
+  const t = token.slice(2, -2).trim();
+  let m;
+  if ((m = t.match(/^IF\s+(.+)$/))) {
+    record('condition', m[1].trim());
+    stack.push({ kind: 'if', expr: m[1].trim(), negated: false });
+  } else if (t === 'ELSE') {
+    const top = stack[stack.length - 1];
+    if (top && top.kind === 'if' && !top.negated) top.negated = true;
+    else record('error', 'ELSE without IF');
+  } else if (t === 'END IF') {
+    if (stack.length && stack[stack.length - 1].kind === 'if') stack.pop();
+    else record('error', 'END IF without IF');
+  } else if ((m = t.match(/^FOR EACH\s+(\w+)\s+IN\s+([\w.]+)(?:\s+WHERE\s+(.+))?$/))) {
+    record('list', m[2]);
+    stack.push({ kind: 'each', alias: m[1], list: m[2] });
+    if (m[3]) record('condition', m[3].trim()); // inside the loop, so the alias is bound
+    stack[stack.length - 1].where = m[3] && m[3].trim();
+  } else if (t === 'END FOR EACH') {
+    if (stack.length && stack[stack.length - 1].kind === 'each') stack.pop();
+    else record('error', 'END FOR EACH without FOR EACH');
+  } else {
+    record('placeholder', t);
+  }
 }
 
 // Parse inline text: {{slot}} and [[COND ...]] tokens.
@@ -37,6 +75,7 @@ function runs(text, base = {}) {
       out.push(new TextRun({ text: p, font: base.font || SERIF, size: base.size || BODY, bold: base.bold, color: C.ink,
         shading: { type: ShadingType.CLEAR, color: 'auto', fill: C.slotFill } }));
     } else if (p.startsWith('[[')) {
+      trackBlock(p);
       out.push(new TextRun({ text: p, font: SANS, size: 17, bold: true, color: C.condInk,
         shading: { type: ShadingType.CLEAR, color: 'auto', fill: C.condFill } }));
     } else {
@@ -80,8 +119,9 @@ function box(label, text, ink, fill, line, labelColor) {
     border: { top: border, left: border, bottom: border, right: border }, children: kids });
 }
 function N(text) { return box('COUNSEL NOTE (removed on assembly)', text, C.noteInk, C.noteFill, C.noteLine); }
-function AI(id, text) { return box('AI-DRAFTED ZONE · ' + id, text, C.aiInk, C.aiFill, C.aiLine); }
+function AI(id, text) { record('zone', id); return box('AI-DRAFTED ZONE · ' + id, text, C.aiInk, C.aiFill, C.aiLine); }
 function LOCK(text) {
+  record('locked', text);
   const border = { style: BorderStyle.SINGLE, size: 12, color: C.lockLine, space: 6 };
   return new Paragraph({ spacing: sp(120, 160), indent: { left: 113, right: 113 },
     shading: { type: ShadingType.CLEAR, color: 'auto', fill: C.lockFill },
@@ -180,9 +220,18 @@ function cover(meta) {
   return out;
 }
 
-async function build(meta, body, outDir) {
+// Builds a template's body, recording its fields and blocks in `usage`.
+function scan(meta, body) {
   currentId = meta.id;
+  stack.length = 0;
   if (typeof body === 'function') body = body();
+  for (const b of stack) record('error', 'unclosed block: ' + (b.kind === 'if' ? 'IF ' + b.expr : 'FOR EACH ' + b.alias + ' IN ' + b.list));
+  stack.length = 0;
+  return body;
+}
+
+async function build(meta, body, outDir) {
+  body = scan(meta, body);
   const children = [...(meta.noCover ? [] : cover(meta)), ...body.flat()];
   const doc = new Document({
     creator: 'Singularity Document Factory',
@@ -209,4 +258,4 @@ async function build(meta, body, outDir) {
   return file;
 }
 
-module.exports = { C, cover, T, ST, H, P, N, AI, LOCK, COND, BUL, CHECK, TABLE, SPACER, PB, SIG, build, slotsSeen, W, runs, SANS };
+module.exports = { C, cover, T, ST, H, P, N, AI, LOCK, COND, BUL, CHECK, TABLE, SPACER, PB, SIG, build, scan, slotsSeen, usage, W, runs, SANS };

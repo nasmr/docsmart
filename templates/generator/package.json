@@ -4,7 +4,9 @@
   "private": true,
   "description": "Generates the first-pass BVI SPC document templates and the template pack guide.",
   "scripts": {
-    "build": "node build.js out && node guide.js out && python3 fix_borders.py out"
+    "build": "node build.js out && node guide.js out && python3 fix_borders.py out",
+    "fields": "node fields.js",
+    "fields:check": "node fields.js --check"
   },
   "dependencies": {
     "docx": "^9.6.1"
