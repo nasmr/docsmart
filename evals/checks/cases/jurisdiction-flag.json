@@ -1,0 +1,89 @@
+{
+  "check": "jurisdiction_flag",
+  "applicability": {
+    "note": "Placeholder until counsel supplies the lists (open question Q9). The check compares where an individual lives and where an entity was formed. Tax residence is not compared.",
+    "individuals_resident_in": [
+      "Australia",
+      "Canada",
+      "Germany",
+      "Hong Kong",
+      "Singapore",
+      "Switzerland",
+      "United Arab Emirates",
+      "United Kingdom"
+    ],
+    "entities_formed_in": [
+      "British Virgin Islands",
+      "Cayman Islands",
+      "Delaware, United States",
+      "England and Wales",
+      "Hong Kong",
+      "Jersey",
+      "New South Wales, Australia",
+      "Ontario, Canada",
+      "Singapore",
+      "Zug, Switzerland"
+    ]
+  },
+  "cases": [
+    {
+      "id": "JF-01",
+      "kind": "must_trigger",
+      "title": "Individual resident in a jurisdiction outside the list",
+      "base": {
+        "document": "batch_atlas_d1sp",
+        "party": "pty_001"
+      },
+      "changes": [
+        {
+          "op": "set_record",
+          "path": "parties.json#pty_001.residential_address",
+          "value": "10 Example Road, Test District, United States"
+        }
+      ],
+      "expect": [
+        {
+          "severity": "review",
+          "at": "Schedule 1",
+          "about": "investor resident in United States, which is not on D1SP-A's applicability list"
+        }
+      ],
+      "why": "The templates ask counsel whether US persons should be excluded. Until that is answered, a US investor needs a sponsor decision that counsel sees."
+    },
+    {
+      "id": "JF-02",
+      "kind": "must_trigger",
+      "title": "Entity formed outside the list",
+      "base": {
+        "document": "batch_atlas_d1sp",
+        "party": "pty_031"
+      },
+      "changes": [
+        {
+          "op": "set_record",
+          "path": "parties.json#pty_031.jurisdiction",
+          "value": "Labuan, Malaysia"
+        }
+      ],
+      "expect": [
+        {
+          "severity": "review",
+          "at": "§6.1",
+          "about": "investor formed in Labuan, Malaysia, which is not on D1SP-B's applicability list"
+        }
+      ]
+    },
+    {
+      "id": "JF-N1",
+      "kind": "must_not_trigger",
+      "title": "Every fixture investor",
+      "base": {
+        "document": "batch_atlas_d1sp",
+        "party": "*"
+      },
+      "changes": [],
+      "expect": [],
+      "why": "All fixture investors are resident or formed in listed jurisdictions."
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "check": "cross_portfolio",
+  "compared_against": "Every other portfolio under the same umbrella, whatever its status (PROPOSED portfolios count), and the investors in those portfolios who are not investors in this one.",
+  "cases": [
+    {
+      "id": "XP-01", "kind": "must_trigger",
+      "title": "Another portfolio's legal name in drafted text",
+      "base": { "document": "doc_atlas_d13" },
+      "changes": [{ "op": "insert_text", "at": "zone:project_risk_factors", "text": "As with Lumen Segregated Portfolio, completion depends on the issuer's consent." }],
+      "expect": [{ "severity": "blocks", "at": "zone:project_risk_factors", "about": "Lumen Segregated Portfolio", "refers_to": "pf_lumen" }]
+    },
+    {
+      "id": "XP-02", "kind": "must_trigger",
+      "title": "Another portfolio's short name",
+      "base": { "document": "doc_atlas_d13" },
+      "changes": [{ "op": "insert_text", "at": "zone:issuer_description", "text": "The sponsor previously arranged Lumen SP." }],
+      "expect": [{ "severity": "blocks", "at": "zone:issuer_description", "about": "Lumen SP", "refers_to": "pf_lumen" }]
+    },
+    {
+      "id": "XP-03", "kind": "must_trigger",
+      "title": "Another portfolio's share class",
+      "base": { "document": "doc_atlas_d12" },
+      "changes": [{ "op": "replace_text", "at": "§2.3", "find": "Class A Participating Shares", "replace": "Class L Participating Shares" }],
+      "expect": [{ "severity": "blocks", "at": "§2.3", "about": "Class L Participating Shares", "refers_to": "pf_lumen" }],
+      "why": "The slot snapshot would be wrong too. This case models the text being wrong while the records are right."
+    },
+    {
+      "id": "XP-04", "kind": "must_trigger",
+      "title": "Another portfolio's issuer",
+      "base": { "document": "doc_atlas_d13" },
+      "changes": [{ "op": "insert_text", "at": "zone:project_risk_factors", "text": "The issuer competes with Lumenfold Optics, Inc. for grid-sensing contracts." }],
+      "expect": [{ "severity": "blocks", "at": "zone:project_risk_factors", "about": "Lumenfold Optics, Inc.", "refers_to": "pf_lumen" }],
+      "why": "Blocks even when the mention could be innocent (a competitor). INV-10 names asset identifiers without exception. Counsel may want a narrower rule (open question Q2)."
+    },
+    {
+      "id": "XP-05", "kind": "must_trigger",
+      "title": "An investor who is only in another portfolio",
+      "base": { "document": "doc_atlas_d13" },
+      "changes": [{ "op": "insert_text", "at": "zone:issuer_description", "text": "Callum Szabo, an existing investor of the sponsor, introduced the opportunity." }],
+      "expect": [{ "severity": "blocks", "at": "zone:issuer_description", "about": "Callum Szabo", "refers_to": "pty_043" }],
+      "why": "pty_043 invests only in Lumen."
+    },
+    {
+      "id": "XP-06", "kind": "must_trigger",
+      "title": "Near-duplicate portfolio name, exact form",
+      "base": { "document": "doc_atlas_d13" },
+      "changes": [{ "op": "insert_text", "at": "§10.1", "text": "Atlas II Segregated Portfolio may acquire shares in the same issuer." }],
+      "expect": [{ "severity": "blocks", "at": "§10.1", "about": "Atlas II Segregated Portfolio", "refers_to": "pf_atlas2" }],
+      "why": "The document's own name “Atlas Segregated Portfolio” must not stop the other portfolio's name from matching."
+    },
+    {
+      "id": "XP-07", "kind": "must_trigger",
+      "title": "Near-duplicate portfolio name, variant forms",
+      "base": { "document": "doc_atlas_d13" },
+      "changes": [
+        { "op": "insert_text", "at": "zone:project_risk_factors", "text": "See also ATLAS II SEGREGATED PORTFOLIO." },
+        { "op": "insert_text", "at": "zone:project_risk_factors", "text": "Atlas-II SP holds a related position." },
+        { "op": "insert_text", "at": "zone:project_risk_factors", "text": "Atlas 2 Segregated Portfolio is managed by the same sponsor." }
+      ],
+      "expect": [
+        { "severity": "blocks", "at": "zone:project_risk_factors", "about": "ATLAS II SEGREGATED PORTFOLIO", "refers_to": "pf_atlas2" },
+        { "severity": "blocks", "at": "zone:project_risk_factors", "about": "Atlas-II SP", "refers_to": "pf_atlas2" },
+        { "severity": "blocks", "at": "zone:project_risk_factors", "about": "Atlas 2 Segregated Portfolio", "refers_to": "pf_atlas2" }
+      ],
+      "why": "Proposed matching: ignore case and punctuation, treat “SP” and “Segregated Portfolio” as the same, and treat Roman and Arabic numerals as the same. Open question Q3."
+    },
+    {
+      "id": "XP-08", "kind": "must_trigger",
+      "title": "The shorter name inside the longer portfolio's document",
+      "base": { "document": "doc_atlas2_d13" },
+      "changes": [{ "op": "insert_text", "at": "§10.1", "text": "Atlas Segregated Portfolio holds shares in a different issuer." }],
+      "expect": [{ "severity": "blocks", "at": "§10.1", "about": "Atlas Segregated Portfolio", "refers_to": "pf_atlas" }]
+    },
+    {
+      "id": "XP-09", "kind": "must_trigger",
+      "title": "Another portfolio's issuer in the near-duplicate portfolio's document",
+      "base": { "document": "doc_atlas2_d13" },
+      "changes": [{ "op": "insert_text", "at": "zone:issuer_description", "text": "Unlike Kestrel Grid Systems Limited, the issuer has no debt." }],
+      "expect": [{ "severity": "blocks", "at": "zone:issuer_description", "about": "Kestrel Grid Systems Limited", "refers_to": "pf_atlas" }]
+    },
+    {
+      "id": "XP-10", "kind": "must_trigger",
+      "title": "Another portfolio's bank account in the payment schedule",
+      "base": { "document": "batch_atlas_d1sp", "party": "pty_001" },
+      "changes": [{ "op": "set_record", "path": "portfolios/atlas.json#subscription_account", "value_from": "portfolios/lumen.json#subscription_account" }],
+      "expect": [
+        { "severity": "blocks", "at": "Schedule 2", "about": "Lumen Segregated Portfolio (account name)", "refers_to": "pf_lumen" },
+        { "severity": "blocks", "at": "Schedule 2", "about": "Lumen's account number", "refers_to": "pf_lumen" }
+      ],
+      "why": "The costliest leak: the investor's money would be paid into the wrong portfolio. The account number matches even if the name were changed."
+    },
+    {
+      "id": "XP-11", "kind": "must_trigger",
+      "title": "A figure that belongs only to another portfolio",
+      "base": { "document": "doc_atlas_d13" },
+      "changes": [{ "op": "insert_text", "at": "zone:project_risk_factors", "text": "If the round does not close, costs of up to US$25,000 may be deducted." }],
+      "expect": [{ "severity": "blocks", "at": "zone:project_risk_factors", "about": "US$25,000 (Lumen lapse cost cap)", "refers_to": "pf_lumen" }],
+      "why": "INV-10 includes monetary figures. USD 25,000 is Lumen's and no Atlas record has it. A different format (US$25,000 vs USD 25,000.00) still matches. Open question Q1: figures may cause false positives."
+    },
+    {
+      "id": "XP-12", "kind": "must_trigger",
+      "title": "A figure written in words",
+      "base": { "document": "doc_atlas_d13" },
+      "changes": [{ "op": "insert_text", "at": "zone:issuer_description", "text": "The sponsor has raised USD 3 million for a similar investment." }],
+      "expect": [{ "severity": "blocks", "at": "zone:issuer_description", "about": "USD 3 million (Lumen hard cap)", "refers_to": "pf_lumen" }],
+      "why": "Proposed: figures are compared after normalising (3 million = 3,000,000). Part of Q1."
+    },
+    {
+      "id": "XP-13", "kind": "must_trigger", "status": "pending_decision", "decision": "catalogue gap G3",
+      "title": "Short-form agreement names the investor's earlier portfolio",
+      "base": { "document": "batch_atlas_d1sp", "party": "pty_002" },
+      "changes": [],
+      "expect": [{ "severity": "blocks", "at": "§1.3", "about": "Lumen Segregated Portfolio (investor.existing_portfolio_name)", "refers_to": "pf_lumen" }],
+      "why": "Correct under INV-10 as written, but then every D1SP-C fails the gate. Expected result to be revised once G3 is decided."
+    },
+    {
+      "id": "XP-N1", "kind": "must_not_trigger",
+      "title": "Clean documents mention only their own portfolio",
+      "base": { "document": "*" },
+      "changes": [],
+      "expect": [],
+      "except": ["XP-13"],
+      "why": "Every fixture document for Lumen, Atlas and Atlas II, and every Atlas D1-SP. The only expected exception is D1SP-C (XP-13)."
+    },
+    {
+      "id": "XP-N2", "kind": "must_not_trigger",
+      "title": "The longer name does not match the shorter",
+      "base": { "document": "doc_atlas2_d13" },
+      "changes": [],
+      "expect": [],
+      "why": "“Atlas II Segregated Portfolio” and “Atlas II SP” must not match Atlas. A check that searches for “Atlas” alone fails this."
+    },
+    {
+      "id": "XP-N3", "kind": "must_not_trigger",
+      "title": "A common word that is part of another portfolio's name",
+      "base": { "document": "doc_atlas_d13" },
+      "changes": [{ "op": "insert_text", "at": "zone:issuer_description", "text": "The issuer's sensors are rated at 800 lumens." }],
+      "expect": [],
+      "why": "“lumens” is not “Lumen Segregated Portfolio” or “Lumen SP”. Names match as whole names, not single words."
+    },
+    {
+      "id": "XP-N4", "kind": "must_not_trigger",
+      "title": "Umbrella-level names",
+      "base": { "document": "doc_atlas_d12" },
+      "changes": [],
+      "expect": [],
+      "why": "The SPC, its directors (Henrik Solberg is named in the interest declaration), the sponsor, its affiliate and the administrator belong to the umbrella, not to a portfolio."
+    },
+    {
+      "id": "XP-N5", "kind": "must_not_trigger",
+      "title": "Figures this portfolio shares with another",
+      "base": { "document": "doc_atlas_d13" },
+      "changes": [],
+      "expect": [],
+      "why": "Atlas and Lumen both have a USD 100,000.00 minimum, a USD 100.00 subscription price and a USD 0.01 par value. A figure that is also this portfolio's own is not a leak."
+    },
+    {
+      "id": "XP-N6", "kind": "must_not_trigger",
+      "title": "Investor in both portfolios",
+      "base": { "document": "batch_atlas_d1sp", "party": "pty_002" },
+      "changes": [],
+      "expect": [],
+      "except": ["XP-13"],
+      "why": "pty_002 invests in Lumen and Atlas. Their name in their own Atlas agreement is not a leak."
+    },
+    {
+      "id": "XP-N7", "kind": "must_not_trigger",
+      "title": "Words shared by investors and the issuer",
+      "base": { "document": "batch_atlas_d1sp", "party": "pty_036" },
+      "changes": [],
+      "expect": [],
+      "why": "Kestrel Coinvest Vehicle One Limited (an Atlas investor) and Kestrel Grid Systems Limited (Atlas's issuer) both belong to Atlas."
+    },
+    {
+      "id": "XP-N9", "kind": "must_not_trigger",
+      "title": "Surname shared with an investor in another portfolio",
+      "base": { "document": "batch_atlas_d1sp", "party": "pty_031" },
+      "changes": [],
+      "expect": [],
+      "why": "Brightwater Family Holdings Pte. Ltd. invests in Atlas. Beatriz Brightwater (pty_044) invests only in Lumen. Investor names match as whole names; a shared surname is not a leak."
+    },
+    {
+      "id": "XP-N8", "kind": "must_not_trigger",
+      "title": "Template wording about other portfolios in general",
+      "base": { "document": "doc_lumen_d13" },
+      "changes": [],
+      "expect": [],
+      "why": "“any other segregated portfolio of the Company” and “no recourse to the assets of any other segregated portfolio” name no portfolio."
+    }
+  ]
+}

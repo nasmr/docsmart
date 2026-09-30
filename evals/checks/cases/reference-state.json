@@ -1,0 +1,63 @@
+{
+  "check": "reference_state",
+  "required_state": "Proposed for this slice: READY_FOR_SUBMISSION or later, pending catalogue gap G11. The addendum requires CLEARED.",
+  "cases": [
+    {
+      "id": "RF-01", "kind": "must_trigger",
+      "title": "Supplement still being reviewed",
+      "base": { "document": "batch_atlas_d1sp", "party": "pty_001" },
+      "changes": [{ "op": "set_document_state", "document": "doc_atlas_d13", "state": "ASSEMBLED" }],
+      "expect": [{ "severity": "blocks", "at": "§1.2", "about": "Supplement No. 2 is ASSEMBLED, not READY_FOR_SUBMISSION" }]
+    },
+    {
+      "id": "RF-02", "kind": "must_trigger",
+      "title": "Subscription terms not drafted",
+      "base": { "document": "batch_atlas_d1sp", "party": "pty_001" },
+      "changes": [{ "op": "set_document_state", "document": "doc_u3", "state": "none" }],
+      "expect": [{ "severity": "blocks", "at": "§1.2", "about": "no Subscription Terms version to reference" }],
+      "why": "The real position today (decision 0004). No D1-SP can pass the gate until U3 exists."
+    },
+    {
+      "id": "RF-03", "kind": "must_trigger",
+      "title": "Built on an older supplement version",
+      "base": { "document": "batch_atlas_d1sp", "party": "pty_001" },
+      "changes": [
+        { "op": "set_document_state", "document": "doc_atlas_d13", "state": "READY_FOR_SUBMISSION", "version": 1 },
+        { "op": "new_version", "document": "doc_atlas_d13", "version": 2, "state": "READY_FOR_SUBMISSION", "when": "after_assembly" }
+      ],
+      "expect": [{ "severity": "blocks", "at": "§1.2", "about": "references Supplement No. 2 version 1; version 2 is the latest frozen version" }]
+    },
+    {
+      "id": "RF-04", "kind": "must_trigger",
+      "title": "Recorded hash does not match the referenced version",
+      "base": { "document": "batch_atlas_d1sp", "party": "pty_001" },
+      "changes": [{ "op": "set_provenance", "field": "portfolio.supplement_hash", "provenance": "platform", "tamper": "hash of a different version" }],
+      "expect": [{ "severity": "blocks", "at": "§1.2", "about": "portfolio.supplement_hash does not match the supplement version's content hash" }]
+    },
+    {
+      "id": "RF-05", "kind": "must_trigger",
+      "title": "References another portfolio's supplement",
+      "base": { "document": "batch_atlas_d1sp", "party": "pty_001" },
+      "changes": [{ "op": "set_reference", "field": "portfolio.supplement_hash", "document": "doc_lumen_d13" }],
+      "expect": [{ "severity": "blocks", "at": "§1.2", "about": "the referenced supplement belongs to Lumen Segregated Portfolio" }],
+      "also": [{ "check": "cross_portfolio" }]
+    },
+    {
+      "id": "RF-N1", "kind": "must_not_trigger",
+      "title": "Subscription terms and supplement both frozen",
+      "base": { "document": "batch_atlas_d1sp", "party": "pty_001" },
+      "changes": [
+        { "op": "set_document_state", "document": "doc_u3", "state": "READY_FOR_SUBMISSION" },
+        { "op": "set_document_state", "document": "doc_atlas_d13", "state": "READY_FOR_SUBMISSION" }
+      ],
+      "expect": []
+    },
+    {
+      "id": "RF-N2", "kind": "must_not_trigger",
+      "title": "Documents that reference no other document",
+      "base": { "document": "doc_lumen_d12" },
+      "changes": [],
+      "expect": []
+    }
+  ]
+}

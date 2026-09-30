@@ -1,0 +1,83 @@
+{
+  "check": "cross_reference",
+  "cases": [
+    {
+      "id": "XR-01", "kind": "must_trigger",
+      "title": "Reference to a section that was removed",
+      "base": { "document": "doc_lumen_d13" },
+      "changes": [{ "op": "remove", "at": "§11" }],
+      "expect": [{ "severity": "blocks", "at": "§8.1", "about": "“section 11” has no target" }]
+    },
+    {
+      "id": "XR-02", "kind": "must_trigger",
+      "title": "Reference to a section number that does not exist",
+      "base": { "document": "doc_lumen_d13" },
+      "changes": [{ "op": "replace_text", "at": "Important information", "find": "section 9 (Risk factors)", "replace": "section 12 (Risk factors)" }],
+      "expect": [{ "severity": "blocks", "at": "Important information", "about": "“section 12” has no target" }]
+    },
+    {
+      "id": "XR-03", "kind": "must_trigger",
+      "title": "Reference resolves but names the wrong heading",
+      "base": { "document": "doc_lumen_d13" },
+      "changes": [{ "op": "replace_text", "at": "Important information", "find": "section 9 (Risk factors)", "replace": "section 5 (Risk factors)" }],
+      "expect": [{ "severity": "blocks", "at": "Important information", "about": "section 5 is headed “Fees and expenses”, not “Risk factors”" }]
+    },
+    {
+      "id": "XR-04", "kind": "must_trigger",
+      "title": "Target removed by a condition while the reference stays",
+      "base": { "document": "doc_atlas2_d13" },
+      "changes": [
+        { "op": "set_record", "path": "portfolios/atlas-ii.json#asset.placement.has_fee", "value": false },
+        { "op": "replace_text", "at": "§10.2", "find": "[[IF asset.has_placement_fee]] The Sponsor has no interest in the placement fee described in section 4.4. [[END IF]]", "replace": "The Sponsor has no interest in the placement fee described in section 4.4." }
+      ],
+      "expect": [{ "severity": "blocks", "at": "§10.2", "about": "“section 4.4” is excluded because asset.has_placement_fee is false" }],
+      "why": "The template wraps both sides in the same condition. This case removes the wrapper from one side, which is the mistake to catch after a template edit."
+    },
+    {
+      "id": "XR-05", "kind": "must_trigger",
+      "title": "Reference to a schedule part that does not exist",
+      "base": { "document": "batch_atlas_d1sp", "party": "pty_002" },
+      "changes": [{ "op": "replace_text", "at": "§4.2", "find": "Schedule 1, part B", "replace": "Schedule 1, part C" }],
+      "expect": [{ "severity": "blocks", "at": "§4.2", "about": "“Schedule 1, part C” has no target" }]
+    },
+    {
+      "id": "XR-N1", "kind": "must_not_trigger",
+      "title": "References to the Earlier Agreement are external",
+      "base": { "document": "batch_atlas_d1sp", "party": "pty_002" },
+      "changes": [],
+      "expect": [],
+      "why": "D1SP-C refers to “clause 4 of the Earlier Agreement” and “Clauses 7 to 10 of the Earlier Agreement”. D1SP-C has its own clause 4 and no clause 7, so a check that treats these as internal gives one wrong result each way."
+    },
+    {
+      "id": "XR-N2", "kind": "must_not_trigger",
+      "title": "Reference to a clause of the Offering Memorandum",
+      "base": { "document": "doc_atlas_d13" },
+      "changes": [],
+      "expect": [],
+      "why": "§10.6 refers to “clause 14.3 of the Offering Memorandum” (umbrella.related_party_consent_clause). That is external."
+    },
+    {
+      "id": "XR-N3", "kind": "must_not_trigger",
+      "title": "Conditional target and reference removed together",
+      "base": { "document": "doc_atlas2_d13" },
+      "changes": [{ "op": "set_record", "path": "portfolios/atlas-ii.json#asset.placement.has_fee", "value": false }],
+      "expect": []
+    },
+    {
+      "id": "XR-N4", "kind": "must_not_trigger",
+      "title": "Clean documents",
+      "base": { "document": "doc_lumen_d13" },
+      "changes": [],
+      "expect": [],
+      "why": "D13-A refers to “section 9 (Risk factors)” and “section 11”. Both resolve as drafted."
+    },
+    {
+      "id": "XR-N5", "kind": "must_not_trigger",
+      "title": "Reference in an included conditional clause",
+      "base": { "document": "batch_atlas_d1sp", "party": "pty_031" },
+      "changes": [],
+      "expect": [],
+      "why": "In D1SP-B, clause 5.1 says “or as permitted by clause 6” when the investor is an entity; clause 6 is Capacity and authority."
+    }
+  ]
+}

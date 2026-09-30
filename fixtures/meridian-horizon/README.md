@@ -37,6 +37,7 @@ These are for the INV-10 check:
 - "Atlas II Segregated Portfolio" nearly duplicates "Atlas Segregated Portfolio". A check that looks only for "Atlas" gives false positives; one that matches only exact names misses real leaks.
 - Investor "Kestrel Coinvest Vehicle One Limited" shares a word with Atlas's issuer, Kestrel Grid Systems Limited.
 - Individual "Chen Oyelaran" shares a surname with the entity "Oyelaran Partners LP".
+- Lumen-only investor "Beatriz Brightwater" (`pty_044`) shares a surname with the Atlas-only investor "Brightwater Family Holdings Pte. Ltd." (`pty_031`).
 
 ## What the fixtures don't cover
 

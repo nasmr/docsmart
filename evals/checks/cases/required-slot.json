@@ -1,0 +1,144 @@
+{
+  "check": "required_slot",
+  "cases": [
+    {
+      "id": "RQ-01", "kind": "must_trigger",
+      "title": "Unconditional slot has no value",
+      "base": { "document": "doc_lumen_d12" },
+      "changes": [{ "op": "set_record", "path": "portfolios/lumen.json#portfolio.share_class_name", "value": null }],
+      "expect": [{ "severity": "blocks", "at": "§2.3", "about": "portfolio.share_class_name" }]
+    },
+    {
+      "id": "RQ-02", "kind": "must_trigger",
+      "title": "Money amount is not a decimal string",
+      "base": { "document": "doc_lumen_d12" },
+      "changes": [{ "op": "set_record", "path": "portfolios/lumen.json#terms.min_subscription.amount", "value": "100k" }],
+      "expect": [{ "severity": "blocks", "at": "§4.2", "about": "portfolio.min_subscription" }]
+    },
+    {
+      "id": "RQ-03", "kind": "must_trigger",
+      "title": "Portfolio amount in a currency other than the portfolio's base currency",
+      "base": { "document": "doc_lumen_d13" },
+      "changes": [{ "op": "set_record", "path": "portfolios/lumen.json#terms.min_subscription.currency", "value": "GBP" }],
+      "expect": [{ "severity": "blocks", "at": "§1 Summary of terms: Minimum subscription", "about": "portfolio.min_subscription" }],
+      "why": "Proposed rule: portfolio.* money fields must be in portfolio.base_currency. Asset prices may differ. Open question Q6."
+    },
+    {
+      "id": "RQ-04", "kind": "must_trigger",
+      "title": "Slot required by a condition that holds has no value",
+      "base": { "document": "doc_lumen_d13" },
+      "changes": [{ "op": "set_record", "path": "portfolios/lumen.json#terms.hurdle_rate", "value": null }],
+      "expect": [
+        { "severity": "blocks", "at": "§1 Summary of terms: Performance fee", "about": "portfolio.hurdle_rate" },
+        { "severity": "blocks", "at": "§5.2", "about": "portfolio.hurdle_rate" }
+      ],
+      "why": "has_hurdle is true for Lumen, so the hurdle wording is included and needs its rate. Every place the slot appears is reported."
+    },
+    {
+      "id": "RQ-05", "kind": "must_trigger",
+      "title": "Enum value not in the list",
+      "base": { "document": "doc_lumen_d13" },
+      "changes": [{ "op": "set_record", "path": "portfolios/lumen.json#terms.fee_frequency", "value": "monthly" }],
+      "expect": [{ "severity": "blocks", "at": "§5.1", "about": "portfolio.fee_frequency" }]
+    },
+    {
+      "id": "RQ-06", "kind": "must_trigger",
+      "title": "Condition field itself is missing",
+      "base": { "document": "doc_lumen_d13" },
+      "changes": [{ "op": "set_record", "path": "portfolios/lumen.json#terms.has_hurdle", "value": null }],
+      "expect": [{ "severity": "blocks", "at": "§1 Summary of terms: Performance fee", "about": "portfolio.has_hurdle" }],
+      "why": "A missing boolean must not be read as false. Otherwise a missing hurdle flag silently drops the hurdle wording."
+    },
+    {
+      "id": "RQ-07", "kind": "must_trigger",
+      "title": "Entity investor has no authorised signatories",
+      "base": { "document": "batch_atlas_d1sp", "party": "pty_031" },
+      "changes": [{ "op": "set_record", "path": "parties.json#pty_031.authorised_signatories", "value": [] }],
+      "expect": [{ "severity": "blocks", "at": "Signed for and on behalf of the Investor", "about": "investor.authorised_signatories" }],
+      "why": "A list used in a FOR EACH that produces a signature block must not be empty."
+    },
+    {
+      "id": "RQ-08", "kind": "must_trigger",
+      "title": "Sponsor-supplied asset without the affiliate's cost",
+      "base": { "document": "doc_atlas_d13" },
+      "changes": [{ "op": "set_record", "path": "portfolios/atlas.json#asset.gp_cost_basis_per_share", "value": null }],
+      "expect": [
+        { "severity": "blocks", "at": "§1 Summary of terms: Seller’s cost", "about": "asset.sponsor_cost_per_share" },
+        { "severity": "blocks", "at": "§10.3", "about": "asset.sponsor_cost_per_share" }
+      ]
+    },
+    {
+      "id": "RQ-09", "kind": "must_trigger",
+      "title": "Affiliate's cost has no evidence behind it",
+      "base": { "document": "doc_atlas_d13" },
+      "changes": [{ "op": "set_record", "path": "portfolios/atlas.json#asset.gp_cost_evidence", "value": null }],
+      "expect": [{ "severity": "blocks", "at": "§1 Summary of terms: Seller’s cost", "about": "asset.sponsor_cost_per_share" }],
+      "why": "The catalogue requires the cost to link to evidence in SVC-EVID when the asset is gp_sourced."
+    },
+    {
+      "id": "RQ-10", "kind": "must_trigger",
+      "title": "Portfolio name without the required words",
+      "base": { "document": "doc_lumen_d12" },
+      "changes": [{ "op": "set_record", "path": "portfolios/lumen.json#portfolio.legal_name", "value": "Lumen SP" }],
+      "expect": [{ "severity": "blocks", "at": "§2.1", "about": "portfolio.legal_name" }],
+      "why": "Decision 0003: the legal name must contain “Segregated Portfolio”. Form validation should stop this first; the check catches records that changed after validation."
+    },
+    {
+      "id": "RQ-11", "kind": "must_trigger",
+      "title": "Calculated value was typed in",
+      "base": { "document": "doc_lumen_d12" },
+      "changes": [{ "op": "set_provenance", "field": "asset.total_consideration", "provenance": "typed" }],
+      "expect": [{ "severity": "blocks", "at": "§5.1", "about": "asset.total_consideration" }],
+      "why": "No number in a document is computed by hand or by a model (CLAUDE.md). A calculated slot must carry a calculation-service evidence pointer. The harness keeps whatever value the slot has and changes only its provenance, so this tests provenance, not arithmetic."
+    },
+    {
+      "id": "RQ-12", "kind": "must_trigger",
+      "title": "Document input missing",
+      "base": { "document": "doc_atlas2_d12" },
+      "changes": [{ "op": "set_input", "path": "meeting.place", "value": null }],
+      "expect": [{ "severity": "blocks", "at": "Minutes header: Place", "about": "meeting.place" }]
+    },
+    {
+      "id": "RQ-N1", "kind": "must_not_trigger",
+      "title": "Slot under a condition that does not hold",
+      "base": { "document": "doc_atlas_d13" },
+      "changes": [],
+      "expect": [],
+      "why": "Atlas has has_hurdle false and no hurdle_rate. The hurdle wording is excluded, so its slot is not required."
+    },
+    {
+      "id": "RQ-N2", "kind": "must_not_trigger",
+      "title": "Signing dates are blank at assembly",
+      "base": { "document": "doc_lumen_d12" },
+      "changes": [],
+      "expect": [],
+      "why": "director.signed_date has origin execution (catalogue gap G6). If this fails, no written resolution can reach READY_FOR_SUBMISSION."
+    },
+    {
+      "id": "RQ-N3", "kind": "must_not_trigger",
+      "title": "Trust name absent for a non-trustee entity",
+      "base": { "document": "batch_atlas_d1sp", "party": "pty_031" },
+      "changes": [],
+      "expect": []
+    },
+    {
+      "id": "RQ-N4", "kind": "must_not_trigger",
+      "title": "Calculated values from the calculation service",
+      "base": { "document": "doc_atlas_d12" },
+      "changes": [
+        { "op": "set_provenance", "field": "asset.total_consideration", "provenance": "calculation_service" },
+        { "op": "set_provenance", "field": "asset.markup_pct", "provenance": "calculation_service" }
+      ],
+      "expect": [],
+      "why": "Values come from the calculation service (or its test double). Properly sourced calculated slots pass."
+    },
+    {
+      "id": "RQ-N5", "kind": "must_not_trigger",
+      "title": "Optional field absent where the template does not use it",
+      "base": { "document": "doc_lumen_d13" },
+      "changes": [],
+      "expect": [],
+      "why": "Lumen has no placement fee, valuation or completion window. D13-A never uses them."
+    }
+  ]
+}

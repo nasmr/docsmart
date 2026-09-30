@@ -1,0 +1,85 @@
+{
+  "version": "0.1",
+  "status": "Proposed severities for agreement with BVI counsel (build plan M0). Severities will live in SVC-POLICY; this file is the starting point.",
+  "severities": {
+    "blocks": "Stops the submission gate. The sponsor can only fix it; there is no sponsor override.",
+    "review": "Needs the sponsor's decision (fix, or keep with a reason counsel will see) before the gate passes."
+  },
+  "checks": [
+    {
+      "id": "required_slot",
+      "name": "Required slot missing or wrong type",
+      "severity": "blocks",
+      "source": "DF-20; build plan §4 condition 2",
+      "detects": "A slot the template uses (outside any condition, or under a condition that holds) has no value, a value of the wrong type, a value not in its enum, or fails its catalogue validation. A calculated slot whose value did not come from the calculation service.",
+      "ignores": "Slots with origin `execution` (catalogue gap G6). Slots under a condition that does not hold.",
+      "cases": "cases/required-slot.json"
+    },
+    {
+      "id": "cross_reference",
+      "name": "Broken internal cross-reference",
+      "severity": "blocks",
+      "source": "DF-20",
+      "detects": "A reference to a section, clause, schedule or part of this document that does not exist in the assembled version, including one whose target was removed by a condition. A reference whose quoted heading does not match the target's heading.",
+      "ignores": "References to other documents (the Offering Memorandum, the Earlier Agreement, statutes).",
+      "cases": "cases/cross-reference.json"
+    },
+    {
+      "id": "defined_terms",
+      "name": "Defined term used but not defined, or defined but not used",
+      "severity": "review",
+      "source": "DF-20",
+      "detects": "A known defined term used without a definition in this document or in a document it incorporates. A term defined here and never used again. A term defined twice.",
+      "ignores": "Proper names (statutes, regulators, places). Singular and plural forms of the same term. Terms defined in incorporated documents: the Offering Memorandum for supplements, and U3 and the supplement for subscription agreements.",
+      "cases": "cases/defined-terms.json"
+    },
+    {
+      "id": "contracting_party",
+      "name": "Contracting-party wording missing or not matching the registry",
+      "severity": "blocks",
+      "source": "INV-9; DF-P10; DF-62; build plan §4 condition 3",
+      "detects": "A portfolio-scoped document with no locked designation, or a designation that is not exactly the one generated from the current umbrella and portfolio records.",
+      "ignores": "Umbrella-scoped documents. Rendering differences (line breaks, fonts); the comparison is on canonical content.",
+      "cases": "cases/contracting-party.json"
+    },
+    {
+      "id": "cross_portfolio",
+      "name": "Mentions another portfolio's name, share class, asset, investors or figures",
+      "severity": "blocks",
+      "source": "INV-10; DF-P11; DF-63; build plan §4 condition 4",
+      "detects": "In any part of the document (slots, template text, AI zones, schedules), a match for any other portfolio under the same umbrella: legal or short name (including near-duplicates), share class name, issuer or asset identifiers, subscription account, the names of investors who are not investors in this portfolio, or monetary figures that belong to the other portfolio and not to this one.",
+      "ignores": "This portfolio's own records. Umbrella-level names (the SPC, its directors, the sponsor, service providers). Investors in both portfolios. Common words that happen to share a name.",
+      "cases": "cases/cross-portfolio.json"
+    },
+    {
+      "id": "retired_template",
+      "name": "Template version retired or superseded since assembly",
+      "severity": "review",
+      "source": "DF-03",
+      "detects": "The template version the document was assembled from has been retired or superseded.",
+      "ignores": "Nothing.",
+      "cases": "cases/retired-template.json",
+      "open_question": "Q5: DF-03 says flag, not block, but gate condition 1 needs a template that is approved and not retired."
+    },
+    {
+      "id": "reference_state",
+      "name": "Referenced umbrella terms or supplement not in the required state",
+      "severity": "blocks",
+      "source": "Addendum §4.2; build plan §4 condition 8",
+      "detects": "For D1-SP: no U3 or D13 version is referenced, a referenced version is not in the required state, is not the latest frozen version, or its recorded hash does not match that version's content hash.",
+      "ignores": "Documents that reference no other document (D12, D13).",
+      "cases": "cases/reference-state.json",
+      "open_question": "Catalogue gap G11: the required state is CLEARED in the addendum, but this slice ends at READY_FOR_SUBMISSION."
+    },
+    {
+      "id": "jurisdiction_flag",
+      "name": "Jurisdiction outside the template's applicability list",
+      "severity": "review",
+      "source": "DF-20",
+      "detects": "An investor's residence, tax residence or place of formation that is not on the template's applicability list.",
+      "ignores": "Nothing.",
+      "cases": "cases/jurisdiction-flag.json",
+      "open_question": "Q9: the applicability lists come from counsel (the selling-restrictions question in D13). The cases use a placeholder list."
+    }
+  ]
+}

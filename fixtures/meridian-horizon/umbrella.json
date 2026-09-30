@@ -36,7 +36,16 @@
   "offering_memorandum": {
     "date": "2026-09-15",
     "requires_related_party_consent": true,
-    "related_party_consent_clause": "clause 14.3"
+    "related_party_consent_clause": "clause 14.3",
+    "defined_terms": [
+      "Administrator",
+      "Business Day",
+      "Company",
+      "Directors",
+      "Sponsor",
+      "Segregated Portfolio"
+    ],
+    "note": "Invented list of terms the offering memorandum defines. Supplements incorporate them (\"Words defined in the Offering Memorandum have the same meaning\")."
   },
   "service_providers": {
     "administrator": {

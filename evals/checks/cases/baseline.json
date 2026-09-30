@@ -1,0 +1,33 @@
+{
+  "check": "*",
+  "description": "What every clean fixture document should produce, with no changes. Blocking findings here mean either a check is wrong or a template or fixture is. Review findings listed here come from the first-pass templates as drafted.",
+  "cases": [
+    { "id": "BL-01", "base": { "document": "doc_lumen_d12" }, "template": "D12-A", "expect": [] },
+    { "id": "BL-02", "base": { "document": "doc_lumen_d13" }, "template": "D13-A", "expect": [] },
+    { "id": "BL-03", "base": { "document": "doc_atlas_d12" }, "template": "D12-B",
+      "expect": [{ "check": "defined_terms", "severity": "review", "case": "DT-04" }] },
+    { "id": "BL-04", "base": { "document": "doc_atlas_d13" }, "template": "D13-B",
+      "expect": [{ "check": "defined_terms", "severity": "review", "case": "DT-05" }] },
+    { "id": "BL-05", "base": { "document": "doc_atlas2_d12" }, "template": "D12-C",
+      "expect": [{ "check": "defined_terms", "severity": "review", "case": "DT-06" }],
+      "note": "D12-C also has the unbound {{director.name}} in its declarations of interest (catalogue template issue). The assembler should refuse the template before any check runs; this entry assumes the template is fixed." },
+    { "id": "BL-06", "base": { "document": "doc_atlas2_d13" }, "template": "D13-C", "expect": [] },
+    { "id": "BL-07", "base": { "document": "batch_atlas_d1sp", "party": "D1SP-A investors" }, "template": "D1SP-A",
+      "expect": [
+        { "check": "defined_terms", "severity": "review", "case": "DT-08" },
+        { "check": "reference_state", "severity": "blocks", "case": "RF-02", "note": "Until U3 exists." }
+      ] },
+    { "id": "BL-08", "base": { "document": "batch_atlas_d1sp", "party": "D1SP-B investors" }, "template": "D1SP-B",
+      "expect": [
+        { "check": "defined_terms", "severity": "review", "case": "DT-08" },
+        { "check": "reference_state", "severity": "blocks", "case": "RF-02", "note": "Until U3 exists." }
+      ],
+      "note": "The trustee clause 6.3 placeholder ([[Counsel wording …]]) must be replaced before this template can be imported." },
+    { "id": "BL-09", "base": { "document": "batch_atlas_d1sp", "party": "D1SP-C investors" }, "template": "D1SP-C",
+      "expect": [
+        { "check": "defined_terms", "severity": "review", "case": "DT-08" },
+        { "check": "reference_state", "severity": "blocks", "case": "RF-02", "note": "Until U3 exists." },
+        { "check": "cross_portfolio", "severity": "blocks", "case": "XP-13", "note": "Pending catalogue gap G3." }
+      ] }
+  ]
+}

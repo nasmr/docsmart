@@ -1,0 +1,105 @@
+{
+  "check": "defined_terms",
+  "cases": [
+    {
+      "id": "DT-01", "kind": "must_trigger",
+      "title": "Term used after its definition was removed",
+      "base": { "document": "doc_lumen_d13" },
+      "changes": [{ "op": "replace_text", "at": "§4.1", "find": " (the “Round Closing”)", "replace": "" }],
+      "expect": [{ "severity": "review", "at": "§4.2", "about": "“Round Closing” is used but not defined" }]
+    },
+    {
+      "id": "DT-02", "kind": "must_trigger",
+      "title": "Term defined and never used",
+      "base": { "document": "doc_lumen_d13" },
+      "changes": [{ "op": "replace_text", "at": "§2.1", "find": "and to distribute the proceeds", "replace": "and to distribute the proceeds (the “Net Proceeds”)" }],
+      "expect": [{ "severity": "review", "at": "§2.1", "about": "“Net Proceeds” is defined but not used" }]
+    },
+    {
+      "id": "DT-03", "kind": "must_trigger",
+      "title": "Term defined twice",
+      "base": { "document": "doc_lumen_d13" },
+      "changes": [{ "op": "replace_text", "at": "§3.1", "find": "(the “Issuer”)", "replace": "(the “Company Shares”)" }],
+      "expect": [{ "severity": "review", "at": "§3.1", "about": "“Company Shares” is defined twice (§2.1 and §3.1)" }],
+      "also": [{ "check": "defined_terms", "about": "“Issuer” is used but not defined" }]
+    },
+    {
+      "id": "DT-04", "kind": "must_trigger",
+      "title": "D12-B as drafted: “Sponsor” defined but not used",
+      "base": { "document": "doc_atlas_d12" },
+      "changes": [],
+      "expect": [{ "severity": "review", "at": "§1.2", "about": "“Sponsor” is defined but not used" }],
+      "why": "Real finding in the first-pass template. Counsel may drop the definition, or keep it because the Conflict Disclosure refers to the Sponsor."
+    },
+    {
+      "id": "DT-05", "kind": "must_trigger",
+      "title": "D13-B as drafted: “Conflict Disclosure” defined but not used",
+      "base": { "document": "doc_atlas_d13" },
+      "changes": [],
+      "expect": [{ "severity": "review", "at": "§10.5", "about": "“Conflict Disclosure” is defined but not used" }],
+      "why": "Real finding in the first-pass template: the term is defined in the last conflicts paragraph and not used again."
+    },
+    {
+      "id": "DT-06", "kind": "must_trigger",
+      "title": "D12-C as drafted: “Supplement” defined twice",
+      "base": { "document": "doc_atlas2_d12" },
+      "changes": [],
+      "expect": [{ "severity": "review", "at": "§4.1", "about": "“Supplement” is defined twice (Documents tabled and §4.1)" }],
+      "why": "Real finding: the shared operative resolutions define it again after the tabled-documents list has."
+    },
+    {
+      "id": "DT-07", "kind": "must_trigger",
+      "title": "D12-C for a sponsor-supplied asset: “Independent Directors” used but not defined",
+      "base": { "document": "doc_atlas_d12", "template": "D12-C" },
+      "changes": [{ "op": "set_input", "path": "meeting", "value": { "date": "2026-12-14", "time": "10:00+04:00", "place": "By video conference", "in_attendance": "None", "chair_director_id": "dir_01", "attendee_director_ids": ["dir_01", "dir_02", "dir_03"] } }],
+      "expect": [
+        { "severity": "review", "at": "§5.2", "about": "“Independent Directors” is used but not defined" },
+        { "severity": "review", "at": "§4.1", "about": "“Supplement” is defined twice" }
+      ],
+      "why": "Real finding: D12-B defines “Independent Directors” but D12-C, the meeting variant for the same situation, does not. The Atlas facts are used with D12-C forced."
+    },
+    {
+      "id": "DT-08", "kind": "must_trigger",
+      "title": "D1-SP as drafted: “Offering Memorandum” and “Sponsor” used but not defined",
+      "base": { "document": "batch_atlas_d1sp", "party": "pty_001" },
+      "changes": [],
+      "expect": [
+        { "severity": "review", "at": "§1.2", "about": "“Offering Memorandum” is used but not defined" },
+        { "severity": "review", "at": "§5.1", "about": "“Sponsor” is used but not defined" }
+      ],
+      "why": "Real finding, and it may go away: U3 (the Subscription Terms) is incorporated and may define both, but U3 isn't drafted yet. Recheck when it is."
+    },
+    {
+      "id": "DT-N1", "kind": "must_not_trigger",
+      "title": "Terms defined in the Offering Memorandum",
+      "base": { "document": "doc_lumen_d13" },
+      "changes": [],
+      "expect": [],
+      "why": "D13 uses “Company” and “Sponsor” without defining them and says words defined in the Offering Memorandum have the same meaning. The fixture lists the Offering Memorandum's terms in umbrella.json. “This Supplement” refers to the document itself."
+    },
+    {
+      "id": "DT-N2", "kind": "must_not_trigger",
+      "title": "Proper names are not defined terms",
+      "base": { "document": "doc_lumen_d12" },
+      "changes": [],
+      "expect": [],
+      "why": "“Financial Services Commission”, “Securities and Investment Business Act” and “BVI Business Companies Act” are names, not defined terms."
+    },
+    {
+      "id": "DT-N3", "kind": "must_not_trigger",
+      "title": "Singular use of a plural definition",
+      "base": { "document": "doc_atlas2_d13" },
+      "changes": [],
+      "expect": [],
+      "why": "D13-C defines “Sellers” and uses “each Seller”."
+    },
+    {
+      "id": "DT-N4", "kind": "must_not_trigger",
+      "title": "Lower-case use is not a use of the term",
+      "base": { "document": "doc_lumen_d13" },
+      "changes": [{ "op": "insert_text", "at": "zone:issuer_description", "text": "The issuer sells optical sensors to industrial customers." }],
+      "expect": [],
+      "why": "“issuer” in lower case is ordinary English and is neither a use of “Issuer” nor an undefined term."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "check": "retired_template",
+  "cases": [
+    {
+      "id": "RT-01", "kind": "must_trigger",
+      "title": "Template retired after assembly",
+      "base": { "document": "doc_lumen_d12" },
+      "changes": [{ "op": "set_template", "template": "D12-A", "status": "retired", "when": "after_assembly" }],
+      "expect": [{ "severity": "review", "at": "document", "about": "assembled from D12-A, which has been retired" }],
+      "also": [{ "gate": "condition 1", "result": "fails" }],
+      "why": "DF-03: in-flight documents are flagged, not blocked. Gate condition 1 still fails, so the sponsor must re-assemble on the current template. Open question Q5."
+    },
+    {
+      "id": "RT-02", "kind": "must_trigger",
+      "title": "Template superseded by a newer approved version",
+      "base": { "document": "doc_lumen_d12" },
+      "changes": [{ "op": "set_template", "template": "D12-A", "status": "superseded", "superseded_by": "D12-A v2", "when": "after_assembly" }],
+      "expect": [{ "severity": "review", "at": "document", "about": "a newer approved version of D12-A exists" }]
+    },
+    {
+      "id": "RT-N1", "kind": "must_not_trigger",
+      "title": "Template approved and current",
+      "base": { "document": "doc_lumen_d12" },
+      "changes": [],
+      "expect": []
+    },
+    {
+      "id": "RT-N2", "kind": "must_not_trigger",
+      "title": "A different variant of the same class retired",
+      "base": { "document": "doc_lumen_d12" },
+      "changes": [{ "op": "set_template", "template": "D12-C", "status": "retired", "when": "after_assembly" }],
+      "expect": []
+    }
+  ]
+}
