@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tool 2 — Document Factory: architecture and lifecycle</title>
+<style>
+  :root{
+    --paper:#EEF1F4; --panel:#FFFFFF; --ink:#17202A; --ink-2:#4A5568; --line:#C9D1DA;
+    --code:#3D4F63;          /* deterministic / system-computed */
+    --agent:#2F5D9E; --agent-tint:#DCE7F5;   /* agent-drafted, L1 blue */
+    --human:#2E6E4E; --human-tint:#DDEDE3;   /* human-authored, counsel */
+    --gate:#B9781C; --gate-tint:#F6E9CF;     /* L3 amber, the gate */
+    --halt:#A63D2F; --halt-tint:#F3DDD8;     /* L4 red */
+    --grey:#8A96A3; --grey-tint:#E4E8EC;     /* L0 grey, unverified */
+    --teal:#2A7F7A;                          /* L2 */
+    --ext:#5B4B8A; --ext-tint:#E7E1F2;       /* downstream tools */
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 "IBM Plex Sans","Segoe UI",system-ui,-apple-system,sans-serif}
+  code,.mono{font-family:"IBM Plex Mono","SFMono-Regular",Menlo,Consolas,monospace;font-size:.86em}
+  a{color:inherit}
+  header{padding:22px 28px 0;max-width:1440px;margin:0 auto}
+  h1{font-size:22px;font-weight:600;margin:0 0 2px;letter-spacing:-.01em}
+  header p{margin:0;color:var(--ink-2);max-width:78ch}
+  .tabs{display:flex;gap:4px;margin:18px 0 0;border-bottom:1px solid var(--line)}
+  .tab{appearance:none;background:none;border:0;border-bottom:3px solid transparent;padding:10px 14px;font:inherit;font-weight:600;color:var(--ink-2);cursor:pointer}
+  .tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+  .tab:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--agent);outline-offset:2px}
+  main{max-width:1440px;margin:0 auto;padding:18px 28px 40px}
+  .view{display:none}.view.active{display:block}
+
+  /* legend */
+  .legend{display:flex;flex-wrap:wrap;gap:14px 22px;font-size:13px;color:var(--ink-2);margin:0 0 14px}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .sw{width:14px;height:14px;border-radius:3px;border:1.5px solid}
+  .sw.code{background:#fff;border-color:var(--code)}
+  .sw.agent{background:var(--agent-tint);border-color:var(--agent)}
+  .sw.human{background:var(--human-tint);border-color:var(--human)}
+  .sw.svc{background:var(--grey-tint);border-color:var(--grey);border-style:dashed}
+  .sw.ext{background:var(--ext-tint);border-color:var(--ext)}
+  .sw.gate{background:var(--gate-tint);border-color:var(--gate)}
+
+  /* map layout */
+  .map-wrap{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:18px;align-items:start}
+  @media (max-width:1000px){.map-wrap{grid-template-columns:1fr}}
+  .canvas{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px}
+  svg{width:100%;height:auto;display:block}
+  .node{cursor:pointer}
+  .node rect{fill:#fff;stroke:var(--code);stroke-width:1.5;rx:4}
+  .node.agent rect{fill:var(--agent-tint);stroke:var(--agent)}
+  .node.human rect{fill:var(--human-tint);stroke:var(--human)}
+  .node.svc rect{fill:var(--grey-tint);stroke:var(--grey);stroke-dasharray:4 3}
+  .node.ext rect{fill:var(--ext-tint);stroke:var(--ext)}
+  .node.surface rect{fill:#fff;stroke:var(--ink)}
+  .node text{font-family:inherit;font-size:13px;fill:var(--ink);pointer-events:none}
+  .node text.sub{font-size:11px;fill:var(--ink-2)}
+  .node.selected rect{stroke-width:3}
+  .node.dim{opacity:.28}
+  .edge{fill:none;stroke:#9AA6B3;stroke-width:1.4;marker-end:url(#arr)}
+  .edge.bus{stroke-dasharray:5 4}
+  .edge.lit{stroke:var(--ink);stroke-width:2.2;marker-end:url(#arrlit)}
+  .edge.dim{opacity:.12}
+  .lane{fill:none;stroke:var(--line);stroke-dasharray:2 4}
+  .lane-label{font-size:11px;fill:var(--ink-2);letter-spacing:.02em}
+  .badge{font-size:10px;font-weight:600;fill:#fff}
+
+  /* detail panel */
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px 18px;min-height:280px;position:sticky;top:12px}
+  .panel h2{font-size:17px;margin:0 0 4px;font-weight:600}
+  .panel .kind{font-size:12px;color:var(--ink-2);margin-bottom:10px}
+  .panel p{margin:0 0 10px}
+  .panel dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:14px}
+  .panel dt{color:var(--ink-2)}
+  .panel dd{margin:0}
+  .pill{display:inline-block;padding:1px 7px;border-radius:10px;font-size:11px;font-weight:600;line-height:1.5;color:#fff;vertical-align:middle;margin-right:4px}
+  .pill.L0{background:var(--grey)}.pill.L1{background:var(--agent)}.pill.L2{background:var(--teal)}.pill.L3{background:var(--gate)}.pill.L4{background:var(--halt)}.pill.P{background:#000}.pill.D{background:var(--code)}.pill.H{background:var(--human)}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .chip{background:none;border:1px solid var(--line);border-radius:4px;padding:2px 8px;font:inherit;font-size:12.5px;cursor:pointer;color:var(--ink)}
+  .chip:hover{border-color:var(--ink)}
+  .hint{color:var(--ink-2);font-size:13px}
+
+  /* lifecycle */
+  .track{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px}
+  .state rect{fill:#fff;stroke:var(--code);stroke-width:1.5;rx:16}
+  .state text{font-size:12.5px;fill:var(--ink);text-anchor:middle;pointer-events:none}
+  .state.current rect{fill:var(--ink);stroke:var(--ink)}
+  .state.current text{fill:#fff;font-weight:600}
+  .state.done rect{stroke:var(--ink)}
+  .state.frozen rect{stroke:var(--gate)}
+  .flow{fill:none;stroke:#9AA6B3;stroke-width:1.4;marker-end:url(#arr2)}
+  .flow.loop{stroke:var(--gate);stroke-dasharray:4 3}
+  .flow.fork{stroke:var(--halt);stroke-dasharray:4 3}
+  .flow.lit{stroke:var(--ink);stroke-width:2.4;marker-end:url(#arrlit2)}
+  .flow-label{font-size:10.5px;fill:var(--ink-2)}
+  .flow-label.gate{fill:var(--gate);font-weight:600}
+  .flow-label.fork{fill:var(--halt)}
+  .gatebar{fill:var(--gate)}
+  .gatebar.open{fill:var(--human)}
+
+  .life{display:grid;grid-template-columns:300px minmax(0,1fr);gap:18px;margin-top:16px;align-items:start}
+  @media (max-width:900px){.life{grid-template-columns:1fr}}
+  .steps{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:8px}
+  .steps ol{list-style:none;margin:0;padding:0;counter-reset:s}
+  .steps li{counter-increment:s}
+  .steps button{width:100%;text-align:left;background:none;border:0;border-left:3px solid transparent;padding:8px 10px 8px 12px;font:inherit;cursor:pointer;color:var(--ink);display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:baseline;border-radius:0 4px 4px 0}
+  .steps button::before{content:counter(s);font-family:"IBM Plex Mono",Menlo,monospace;font-size:12px;color:var(--ink-2)}
+  .steps button:hover{background:var(--paper)}
+  .steps button[aria-current="step"]{border-left-color:var(--ink);background:var(--paper);font-weight:600}
+  .steps button.gate-step[aria-current="step"]{border-left-color:var(--gate)}
+  .detail{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px 20px}
+  .detail .top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+  .detail h2{font-size:19px;margin:0 0 2px;font-weight:600}
+  .detail .actor{font-size:13px;color:var(--ink-2)}
+  .controls{display:flex;gap:6px}
+  .controls button{background:#fff;border:1px solid var(--line);border-radius:4px;padding:6px 12px;font:inherit;cursor:pointer;color:var(--ink)}
+  .controls button:hover{border-color:var(--ink)}
+  .controls button.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px 24px;margin-top:14px}
+  @media (max-width:700px){.cols{grid-template-columns:1fr}}
+  .cols h3{font-size:13px;color:var(--ink-2);margin:0 0 4px;font-weight:600}
+  .cols p,.cols ul{margin:0 0 8px}
+  .cols ul{padding-left:18px}
+  .who{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:14px}
+  .who span:first-child{color:var(--ink-2)}
+  .gatenote{margin-top:14px;padding:10px 14px;border-left:4px solid var(--gate);background:var(--gate-tint);font-size:14px}
+  .gatenote.halt{border-left-color:var(--halt);background:var(--halt-tint)}
+  .gatenote.human{border-left-color:var(--human);background:var(--human-tint)}
+  .minimap{margin-top:16px}
+  .minimap h3{font-size:13px;color:var(--ink-2);margin:0 0 6px;font-weight:600}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+  .edge,.node,.flow,.state rect{transition:opacity .2s,stroke .2s,fill .2s}
+</style>
+</head>
+<body>
+<header>
+  <h1>Tool 2 — Counsel-in-the-Loop Document Factory</h1>
+  <p>System architecture and the document lifecycle, as specified in <em>Singularity_Tool2_Document_Factory_Spec_and_Plan.md</em> (§4, §5.2, §6). Click any component or step for its role, authority tier and requirement IDs.</p>
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="tab-map" aria-selected="true" aria-controls="view-map">Component map</button>
+    <button class="tab" role="tab" id="tab-life" aria-selected="false" aria-controls="view-life">Document lifecycle</button>
+  </div>
+</header>
+
+<main>
+<!-- ===================== COMPONENT MAP ===================== -->
+<section id="view-map" class="view active" role="tabpanel" aria-labelledby="tab-map">
+  <div class="legend">
+    <span><i class="sw code"></i>Deterministic code (DP-1)</span>
+    <span><i class="sw agent"></i>LRA agent involved (L1/L2)</span>
+    <span><i class="sw human"></i>Human gate (counsel, GP, signatory)</span>
+    <span><i class="sw svc"></i>Shared platform service (built once)</span>
+    <span><i class="sw ext"></i>Downstream tool via SVC-BUS</span>
+  </div>
+  <div class="map-wrap">
+    <div class="canvas">
+      <svg id="map" viewBox="0 0 1200 760" role="img" aria-label="Component map of the Document Factory">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#9AA6B3"/></marker>
+          <marker id="arrlit" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17202A"/></marker>
+        </defs>
+        <!-- lanes -->
+        <rect class="lane" x="14" y="14" width="920" height="96" rx="6"/>
+        <text class="lane-label" x="24" y="32">User surfaces</text>
+        <rect class="lane" x="14" y="126" width="920" height="360" rx="6"/>
+        <text class="lane-label" x="24" y="144">Document Factory services</text>
+        <rect class="lane" x="14" y="502" width="920" height="120" rx="6"/>
+        <text class="lane-label" x="24" y="520">Shared platform services (Agent Spec §1.2) and identity</text>
+        <rect class="lane" x="946" y="126" width="240" height="360" rx="6"/>
+        <text class="lane-label" x="956" y="144">Downstream tools (typed events only)</text>
+        <rect class="lane" x="14" y="638" width="1172" height="108" rx="6"/>
+        <text class="lane-label" x="24" y="656">Boundary and trust controls</text>
+        <g id="edges"></g>
+        <g id="nodes"></g>
+      </svg>
+    </div>
+    <aside class="panel" id="detail-map" aria-live="polite">
+      <h2>Select a component</h2>
+      <p class="hint">The map is arranged by trust posture: code computes and enforces, the agent drafts and flags, humans decide, shared services record. Arrows are the direction information moves; dashed arrows are typed SVC-BUS events.</p>
+      <p class="hint">Hovering a node lights up everything it talks to. Clicking pins the selection and opens its detail here.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ===================== LIFECYCLE ===================== -->
+<section id="view-life" class="view" role="tabpanel" aria-labelledby="tab-life">
+  <div class="legend">
+    <span><i class="sw code"></i>State (DocumentInstance)</span>
+    <span><i class="sw gate"></i>Counsel gate — cannot be bypassed (DF-P1)</span>
+    <span style="color:var(--gate)">— — amend loop (new version)</span>
+    <span style="color:var(--halt)">— — edit after clearance forks a new version (DF-P4)</span>
+  </div>
+  <div class="track">
+    <svg id="track" viewBox="0 0 1290 275" role="img" aria-label="Document state machine">
+      <defs>
+        <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#9AA6B3"/></marker>
+        <marker id="arrlit2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#17202A"/></marker>
+      </defs>
+      <g id="flows"></g>
+      <g id="gate"></g>
+      <g id="states"></g>
+    </svg>
+  </div>
+
+  <div class="life">
+    <nav class="steps" aria-label="Lifecycle steps"><ol id="steplist"></ol></nav>
+    <article class="detail" id="detail-life" aria-live="polite">
+      <div class="top">
+        <div>
+          <h2 id="st-title"></h2>
+          <div class="actor" id="st-actor"></div>
+        </div>
+        <div class="controls">
+          <button id="prev" aria-label="Previous step">Back</button>
+          <button id="play" class="primary">Play</button>
+          <button id="next" aria-label="Next step">Next</button>
+        </div>
+      </div>
+      <div class="cols">
+        <div>
+          <h3>What happens</h3>
+          <p id="st-what"></p>
+          <h3>Who does what</h3>
+          <div class="who" id="st-who"></div>
+        </div>
+        <div>
+          <h3>Enforced here</h3>
+          <ul id="st-rules"></ul>
+          <h3>Information produced</h3>
+          <ul id="st-out"></ul>
+        </div>
+      </div>
+      <div id="st-note"></div>
+      <div class="minimap">
+        <h3>Components active in this step</h3>
+        <div class="chips" id="st-comps"></div>
+      </div>
+    </article>
+  </div>
+</section>
+</main>
+
+<script>
+/* ---------------- component data ---------------- */
+const N = {
+  gp:      {x:40,y:44,w:200,h:56,kind:'surface',label:'GP Workspace',sub:'external · tenant-scoped',
+    title:'GP Workspace', kindText:'External surface — GP principals and ops staff',
+    role:'Where a GP sets up vehicles and terms, starts a document, reviews findings, chooses counsel, orders validation, issues notices and confirms extracted obligations. Every unexecuted view carries the platform-rendered LRA-P0 banner.',
+    tier:['H'], reqs:['DF-10','DF-11','DF-13','DF-24','DF-31','DF-45','§9.1'], links:['fdm','asm','sm','mkt','extract','identity']},
+  room:    {x:262,y:44,w:210,h:56,kind:'human',label:'Counsel Review Room',sub:'external · queue grammar',
+    title:'Counsel Review Room', kindText:'External surface — validating lawyers; built on the SVC-QUEUE item anatomy (Ops Console §8.2)',
+    role:'Redline-capable viewer with platform findings as margin annotations and agent zones tinted. Amend writes a new version with a mandatory structured reason. The clearance control shows credential status, enforces dwell time and is disabled while any load-bearing field is grey (P4). Sealed privilege partition items are visually distinct.',
+    tier:['H','L3'], reqs:['DF-35','DF-36','DF-37','DF-02','INV-1','INV-7','INV-8','RQ-1..5'], links:['svc-queue','sm','clause','tpl','mkt']},
+  portal:  {x:494,y:44,w:190,h:56,kind:'human',label:'Signatory Portal',sub:'LPs & counterparties',
+    title:'Signatory Portal', kindText:'External surface — LPs, transferees, counterparties',
+    role:'Identity check per document class, view of the cleared version only, sign, download. First account creation captures per-purpose consent grants in plain language (DF-P6). No marketing surface — this is the demand-side account the marketplace phase depends on, earned without securities activity.',
+    tier:['H'], reqs:['DF-41','DF-13','DF-P6','INV-6'], links:['exec','identity']},
+  ops:     {x:716,y:44,w:200,h:56,kind:'surface',label:'Ops Console (A10)',sub:'internal · network ops, health',
+    title:'Ops Console additions', kindText:'Internal surface — platform counsel, network ops, engineering',
+    role:'Network ops board (roster, credential expiry, capacity, quality), template registry with approval provenance, factory health (orders, SLA breaches, extraction backlog, classifier blocks, eval status) and the Audit & Evidence explorer with re-derive.',
+    tier:['L0','L2'], reqs:['DF-39','DF-50','DF-51','§9.4'], links:['mkt','tpl','svc-log','svc-evid']},
+
+  tpl:     {x:40,y:170,w:200,h:64,kind:'human',label:'Template Library',sub:'versioned · counsel-approved',
+    title:'Template Library', kindText:'Content-addressed templates; approval is a human gate',
+    role:'Ingests firm masters (parser proposes clause tree, slots and free-text zones), holds the platform library and firm-private libraries. Only versions with a named lawyer approval, jurisdiction and fund-type applicability are selectable (DF-P2). Template approval is a SVC-QUEUE item with diff to the prior version.',
+    tier:['L1','L3'], reqs:['DF-01','DF-02','DF-03','DF-P2'], links:['clause','asm','svc-queue','svc-evid']},
+  fdm:     {x:262,y:170,w:210,h:64,kind:'code',label:'Fund Data Model',sub:'vehicle · terms · parties · consent',
+    title:'Fund Data Model', kindText:'Deterministic canonical model shared with Tools 1, 3, 4, 5',
+    role:'Vehicle (jurisdiction, entity, fund type, regulatory wrapper), typed Terms (economics, governance, transfer restrictions, MFN policy), Parties and Roles with per-purpose consent grants. It is the slot source for every assembled document and the encoding source for Tool 4. KYC and eligibility are referenced from the identity module, never determined here.',
+    tier:['D'], reqs:['DF-10','DF-11','DF-12','DF-13','INV-6'], links:['asm','identity','t4','t3']},
+  asm:     {x:494,y:170,w:200,h:64,kind:'agent',label:'Assembly Engine',sub:'slot-fill + LLM free-text zones',
+    title:'Assembly Engine (LRA-05)', kindText:'Deterministic slot filling; LRA drafts only in mapped free-text zones',
+    role:'Code fills names, dates, amounts, percentages, thresholds and cross-references from the Fund Data Model, type-checked. The LLM drafts only in designated zones (recitals, bespoke side-letter provisions, cover notes) from GP-supplied facts and the clause library. Drafted zones render in agent-provenance style until counsel clears them. Whether a provision is appropriate is never the agent\'s call (DF-P3).',
+    tier:['D','L1'], reqs:['LRA-05','DF-21','DF-P3','GR-1','GR-6'], links:['find','sm','clause','svc-evid','svc-log']},
+  find:    {x:716,y:170,w:200,h:64,kind:'agent',label:'Findings Engine',sub:'x-ref · terms · contradictions',
+    title:'Findings Engine', kindText:'Deterministic checks plus confidence-gated LLM findings',
+    role:'Cross-reference integrity, defined-term consistency, missing slots, jurisdiction flags and MFN conflicts are code. Contradiction candidates and deviation summaries are LLM, confidence-gated (GR-2) and evidence-pointed. Prohibited-content classifiers (GR-3) run on every LLM zone before storage. Findings are never resolved by the agent — only dispositioned by a human.',
+    tier:['D','L1'], reqs:['DF-20','DF-22','DF-23','GR-2','GR-3'], links:['sm','clause','svc-evid']},
+
+  clause:  {x:40,y:262,w:200,h:64,kind:'code',label:'Clause Library & Diff',sub:'deviation from standard',
+    title:'Clause Library & Diff Engine', kindText:'Deterministic',
+    role:'Clauses are the unit of diffing and of side-letter provision selection. Any draft is diffed against its approved template version and against the last cleared version; deviations are enumerated in words as well as highlighted (Ops Console §8.2 item 4).',
+    tier:['D'], reqs:['DF-04','DF-05','DF-21'], links:['asm','find','room']},
+  sm:      {x:262,y:262,w:210,h:64,kind:'code',label:'Document State Machine',sub:'INV-1..8 enforced at API',
+    title:'Document State Machine', kindText:'Deterministic — the enforcement point for DF-P1 and DF-P4',
+    role:'DRAFTING → ASSEMBLED → SUBMITTED → UNDER_VALIDATION → (AMENDED loop) → CLEARED → OUT_FOR_SIGNATURE → EXECUTED → EXTRACTING → ARCHIVED. No transition into CLEARED without a Clearance row from a verified, jurisdiction-admitted lawyer (INV-1). DraftVersions are immutable (INV-3); an edit after clearance forks a new version that re-enters at SUBMITTED. Proposer cannot clear (INV-7).',
+    tier:['D'], reqs:['INV-1','INV-2','INV-3','INV-7','INV-8','DF-P1','DF-P4'], links:['mkt','exec','svc-log','svc-policy','room']},
+  mkt:     {x:494,y:262,w:200,h:64,kind:'human',label:'Validation Marketplace',sub:'match · fixed fee · SLA',
+    title:'Counsel Validation Marketplace', kindText:'Deterministic ranking and accounting; every decision is a lawyer\'s or GP\'s',
+    role:'Lawyer profiles with evidence-bound admission verification, fee menus within published bands, matching by admission/capacity/SLA/quality, conflicts attestation, engagement letters (lawyer ↔ GP; the platform is not a party), validation orders with SLA clocks and reassignment, payout and platform-fee accounting whose structure awaits the §13.3 counsel decision.',
+    tier:['D','H'], reqs:['DF-30..34','DF-38','DF-39','§7','§13.3'], links:['sm','identity','svc-calc','svc-queue','room']},
+  exec:    {x:716,y:262,w:200,h:64,kind:'code',label:'Execution & Envelopes',sub:'cleared hash only',
+    title:'Execution & Envelope Service', kindText:'Deterministic; human-initiated',
+    role:'Creates a signature envelope only from the frozen hash of the CLEARED version — a mismatch fails hard (INV-2). Signatories are bound to Party identities. Completion certificate and final PDF hash are stored in SVC-EVID and the instance moves to EXECUTED. No agent path exists to this service.',
+    tier:['D'], reqs:['DF-40','DF-41','DF-42','INV-2'], links:['esign','extract','portal','svc-evid']},
+
+  extract: {x:40,y:354,w:200,h:64,kind:'agent',label:'Obligation Extraction',sub:'LRA-07 · human-confirmed',
+    title:'Obligation & Register Extraction', kindText:'LRA extraction, human confirmation before anything leaves',
+    role:'From executed documents: known clauses → structured extraction (code); bespoke text → LLM extraction with confidence gate and evidence pointers. Produces Obligation, RegisterEvent and LPA-parameter proposals. Nothing is published to SVC-BUS until a human sets confirmed_by (INV-5). This is where the PDF becomes structured facts for Tools 1, 3, 4 and 5 (DF-P5).',
+    tier:['D','L1'], reqs:['LRA-07','DF-43','DF-44','INV-5','DF-P5','LRA-14'], links:['svc-bus','svc-evid','gp']},
+  esign:   {x:716,y:354,w:200,h:64,kind:'code',label:'E-signature adapter',sub:'vendor-agnostic',
+    title:'E-signature adapter', kindText:'Vendor integration behind the Envelope Service',
+    role:'One vendor in v1 with completion certificates and audit trail. ESIGN/UETA/eIDAS posture and identity-verification level per document class and jurisdiction are confirmed by counsel (§13.5) before the adapter ships.',
+    tier:['D'], reqs:['DF-40','§13.5','§10'], links:['exec']},
+  notices: {x:262,y:354,w:210,h:64,kind:'code',label:'Notices (D4 / D5)',sub:'SVC-CALC or grey flag',
+    title:'Capital-call and distribution notices', kindText:'Deterministic; amounts never come from the agent',
+    role:'Batch composer for D4/D5. Amounts carry a SVC-CALC evidence pointer (via Tool 4) or an explicit gp_entered_unreconciled flag that renders grey and appears in the audit record (INV-4). A vehicle under SVC-HALT shows the barrier graphic and no issue control (DF-53). Emits notice.issued to Tool 1.',
+    tier:['D','L3','L4'], reqs:['DF-45','DF-53','INV-4','DP-1'], links:['svc-calc','svc-halt','t1','sm']},
+  privacy: {x:494,y:354,w:200,h:64,kind:'code',label:'Privilege Partition',sub:'per-engagement · sealed',
+    title:'Privilege partition', kindText:'Data-model partition, not a setting (DF-P7)',
+    role:'Per-engagement sealed space with its own encryption key; visible to the engaged lawyers and the GP principals they designate. Platform staff access is break-glass with GC approval, time-boxed and logged as a security event. Counsel decides whether partitioned content may be sent to an external LLM; if not, LLM zones are disabled inside the partition and the workflow still runs (DF-52).',
+    tier:['D'], reqs:['DF-P7','§4.3','§11','§13.2'], links:['room','asm','svc-log']},
+
+  'svc-evid':  {x:40,y:540,w:130,h:54,kind:'svc',label:'SVC-EVID',sub:'evidence store',title:'SVC-EVID — Evidence Store',kindText:'Shared service',role:'Immutable, content-addressed store of every source: template hashes, slot snapshots, admission-verification captures, executed PDFs, completion certificates. A claim with no evidence pointer is stripped at output validation (GR-1). Powers the evidence chip and evidence-or-grey rendering (P4).',tier:['D'],reqs:['GR-1','P4','§1.2'],links:[]},
+  'svc-queue': {x:184,y:540,w:130,h:54,kind:'svc',label:'SVC-QUEUE',sub:'review queue',title:'SVC-QUEUE — Human Review Queue',kindText:'Shared service',role:'The single approval grammar. Template approvals, clearances and batch approvals are queue items with the standard anatomy: the ask, evidence panel, diff, dissent surface, controls with structured reasons, dwell time, synthetic-item injection and self-approval lockout. Tool 2 implements no second approval widget (P6).',tier:['D'],reqs:['RQ-1..5','P6','P7'],links:[]},
+  'svc-log':   {x:328,y:540,w:130,h:54,kind:'svc',label:'SVC-LOG',sub:'WORM audit log',title:'SVC-LOG — Immutable Audit Log',kindText:'Shared service',role:'Every draft, finding, amendment, clearance, envelope and extraction with model ID, prompt version, tool-schema and policy version (GR-6). Any historical draft is re-derivable in a sandbox (NFR-2, DF-51).',tier:['D'],reqs:['DF-50','DF-51','GR-6','NFR-2'],links:[]},
+  'svc-policy':{x:472,y:540,w:130,h:54,kind:'svc',label:'SVC-POLICY',sub:'tiers · dwell floors',title:'SVC-POLICY — Policy Engine',kindText:'Shared service',role:'Authority matrix, per-class dwell-time floors, template-selection rule tables, jurisdiction applicability. Tier is enforced here, not by prompt (§1.1). Changes are dual-controlled by Eng + Compliance with counsel sign-off for LRA functions.',tier:['D'],reqs:['INV-8','NFR-8','DP-4'],links:[]},
+  'svc-bus':   {x:616,y:540,w:130,h:54,kind:'svc',label:'SVC-BUS',sub:'typed events',title:'SVC-BUS — Inter-tool bus',kindText:'Shared service',role:'Schema-validated events only — no free text. Carries register.subscription.recorded, register.transfer.recorded, obligation.created[], lpa.parameters.encoded, notice.issued, consent.recorded, election.window.opened. Only human-confirmed facts are published (INV-5).',tier:['D'],reqs:['INV-5','§10'],links:['t1','t3','t4','t5']},
+  'svc-calc':  {x:760,y:540,w:130,h:54,kind:'svc',label:'SVC-CALC / HALT',sub:'amounts · stop signals',title:'SVC-CALC and SVC-HALT',kindText:'Shared services',role:'SVC-CALC: every amount in a notice and every fee in marketplace accounting is pure, unit-tested code — never the LLM (DP-1). SVC-HALT: a vehicle-scoped halt (e.g. a Tool 1 reconciliation break) blocks issuance of D4/D5 for that vehicle; only a human clears it (DF-53).',tier:['D','L4'],reqs:['DP-1','DF-53','INV-4'],links:['notices']},
+  identity:    {x:904,y:540,w:0,h:0,kind:'svc',label:'',sub:'',title:'',kindText:'',role:'',tier:[],reqs:[],links:[]},
+
+  t1:{x:962,y:170,w:216,h:52,kind:'ext',label:'Tool 1 — ILPA Reporting',sub:'notice.issued · terms.changed',title:'Tool 1 — ILPA-Native LP Reporting & Oversight',kindText:'Downstream consumer',role:'Consumes notice.issued (with cash-flow classification) and vehicle.terms.changed. Tool 2 never computes the amounts; Tool 1 reconciles them against administrator and bank data.',tier:['D'],reqs:['§10'],links:[]},
+  t3:{x:962,y:238,w:216,h:52,kind:'ext',label:'Tool 3 — Register & Transfers',sub:'subscription · transfer · consent',title:'Tool 3 — LP Transfer, Secondary & Election Engine',kindText:'Downstream consumer and register of record',role:'Receives register.subscription.recorded (D1), register.transfer.recorded (D7), consent.recorded (D6) and election.window.opened (D10); answers transfer.restriction.check.requested with LRA-07 extractions. Tool 3 is the register of record; Tool 2 only proposes events.',tier:['D'],reqs:['DF-43','§10'],links:[]},
+  t4:{x:962,y:306,w:216,h:52,kind:'ext',label:'Tool 4 — Waterfall Engine',sub:'lpa.parameters.encoded',title:'Tool 4 — LPA-Encoded Waterfall & Distribution Engine',kindText:'Downstream consumer and upstream amount source',role:'Receives counsel-validated LPA parameter encodings from executed D8/D9 (DF-44). Supplies SVC-CALC amounts back to the D4/D5 notice composer.',tier:['D'],reqs:['DF-44','INV-4'],links:['notices']},
+  t5:{x:962,y:374,w:216,h:52,kind:'ext',label:'Tool 5 — Compliance & ODD',sub:'obligation.created[] · drift',title:'Tool 5 — Compliance & ODD-Readiness OS',kindText:'Downstream consumer',role:'Receives human-confirmed obligations extracted from side letters and LPAs, MFN compendium updates and LRA-14 drift alerts. Only confirmed obligations cross (INV-5).',tier:['D'],reqs:['LRA-07','LRA-14','§10'],links:[]},
+
+  identity2:{x:40,y:676,w:270,h:56,kind:'svc',label:'Shared identity module',sub:'KYC status · eligibility · consent grants',title:'Shared identity module',kindText:'Shared service (the former "Eligibility Passport", demoted per Brief v2 §1)',role:'Party identity, KYC status and eligibility attestations are referenced, never determined, by Tool 2 (Universal P). Per-purpose consent grants live here and gate every cross-vehicle read (INV-6). Lawyers are credentialed through it too.',tier:['D'],reqs:['DF-12','DF-13','INV-6','DF-P6'],links:['fdm','portal','mkt']},
+  dp3:{x:330,y:676,w:270,h:56,kind:'code',label:'Untrusted-input boundary (DP-3)',sub:'templates, term sheets, PDFs are data',title:'Untrusted-input boundary',kindText:'Control',role:'Uploaded firm templates, term sheets, LP-requested side-letter language and executed PDFs are data. Directive text found inside them is quoted in an injection_suspected finding, the zone is not drafted, and the reviewer is flagged. NFR-3 corpus covers poisoned templates, adversarial LP requests and hidden PDF text layers.',tier:['D'],reqs:['DP-3','NFR-3','§8.3'],links:['tpl','fdm','find']},
+  kill:{x:620,y:676,w:270,h:56,kind:'code',label:'Kill switch & L0 posture',sub:'workflow runs with LRA at L0',title:'Kill switch coverage',kindText:'Control (Agent Spec §7.4)',role:'Dropping LRA to L0 disables LLM zones and LLM extraction. Slot-only assembly, findings that are code, the entire counsel and execution workflow, and notices continue. Quarterly drill: a slot-only D1 and a D4 must complete end-to-end (DF-NFR-4). If the business cannot run without the agent, the agent has too much.',tier:['L0'],reqs:['DF-52','DF-NFR-4','GR-8'],links:['asm','extract']},
+  p0:{x:910,y:676,w:276,h:56,kind:'human',label:'LRA-P0 banner & GR-3 classifiers',sub:'never legal advice · rendered by platform',title:'LRA-P0 and GR-3',kindText:'Control',role:'Every unexecuted rendering carries "Prepared for review by qualified counsel. Not a legal opinion and not legal advice." — rendered by the view layer, not trusted to the agent. Classifiers intercept legal conclusions, return/liquidity assurances and eligibility determinations before any human sees them. Acceptance: 0 conclusions against a ~200-prompt elicitation set.',tier:['P'],reqs:['LRA-P0','GR-3','DF-23','§14.1'],links:['asm','find','gp','portal']},
+};
+delete N.identity;
+
+/* explicit directed edges: [from, to, kind, label] */
+const E = [
+  ['gp','fdm'],['gp','asm'],['gp','mkt'],['gp','notices'],
+  ['tpl','asm'],['tpl','clause'],['fdm','asm'],['asm','find'],['asm','sm'],['find','sm'],['clause','room'],
+  ['sm','mkt'],['mkt','room'],['room','sm'],['sm','exec'],['exec','esign'],['exec','portal'],['exec','extract'],
+  ['extract','gp'],['extract','svc-bus','bus'],['notices','svc-bus','bus'],
+  ['svc-bus','t1','bus'],['svc-bus','t3','bus'],['svc-bus','t4','bus'],['svc-bus','t5','bus'],
+  ['t4','notices','bus'],['identity2','fdm'],['identity2','mkt'],
+  ['privacy','room'],['tpl','svc-queue'],['room','svc-queue'],['asm','svc-evid'],['exec','svc-evid'],['sm','svc-log'],['svc-policy','sm'],['svc-calc','notices'],
+];
+
+const nodesG = document.getElementById('nodes'), edgesG = document.getElementById('edges');
+const ctr = n => ({x:n.x+n.w/2,y:n.y+n.h/2});
+function port(a,b){ // edge from box a toward b, leaving from nearest side
+  const ca=ctr(a),cb=ctr(b),dx=cb.x-ca.x,dy=cb.y-ca.y;
+  if(Math.abs(dx)*a.h>Math.abs(dy)*a.w){return {x:dx>0?a.x+a.w:a.x,y:ca.y+(dy/Math.abs(dx||1))*a.w/2*0.6}}
+  return {x:ca.x+(dx/Math.abs(dy||1))*a.h/2*0.6,y:dy>0?a.y+a.h:a.y};
+}
+E.forEach(([f,t,k])=>{
+  const a=N[f],b=N[t]; if(!a||!b) return;
+  const p1=port(a,b),p2=port(b,a);
+  const mx=(p1.x+p2.x)/2, my=(p1.y+p2.y)/2;
+  const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+  const horiz=Math.abs(p2.x-p1.x)>Math.abs(p2.y-p1.y);
+  const d=horiz?`M${p1.x},${p1.y} C${mx},${p1.y} ${mx},${p2.y} ${p2.x},${p2.y}`:`M${p1.x},${p1.y} C${p1.x},${my} ${p2.x},${my} ${p2.x},${p2.y}`;
+  path.setAttribute('d',d); path.setAttribute('class','edge'+(k==='bus'?' bus':'')); path.dataset.from=f; path.dataset.to=t;
+  edgesG.appendChild(path);
+});
+Object.entries(N).forEach(([id,n])=>{
+  const g=document.createElementNS('http://www.w3.org/2000/svg','g');
+  g.setAttribute('class','node '+n.kind); g.dataset.id=id; g.setAttribute('tabindex','0'); g.setAttribute('role','button'); g.setAttribute('aria-label',n.title);
+  g.innerHTML=`<rect x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}"/>
+    <text x="${n.x+12}" y="${n.y+(n.sub?24:n.h/2+5)}" font-weight="600">${n.label}</text>
+    ${n.sub?`<text class="sub" x="${n.x+12}" y="${n.y+42}">${n.sub}</text>`:''}`;
+  // tier badges top-right
+  let bx=n.x+n.w-6;
+  [...n.tier].reverse().forEach(t=>{
+    const w=t.length>1?22:16; bx-=w+3;
+    const col={L0:'#8A96A3',L1:'#2F5D9E',L2:'#2A7F7A',L3:'#B9781C',L4:'#A63D2F',P:'#000',D:'#3D4F63',H:'#2E6E4E'}[t];
+    g.innerHTML+=`<rect x="${bx}" y="${n.y-7}" width="${w}" height="14" rx="7" fill="${col}"/><text class="badge" x="${bx+w/2}" y="${n.y+3.5}" text-anchor="middle">${t==='D'?'⚙':t==='H'?'👤':t}</text>`;
+  });
+  nodesG.appendChild(g);
+});
+
+let pinned=null;
+function neighbours(id){const s=new Set([id]);E.forEach(([f,t])=>{if(f===id)s.add(t);if(t===id)s.add(f)});(N[id].links||[]).forEach(l=>s.add(l));return s;}
+function light(id){
+  const s=id?neighbours(id):null;
+  nodesG.querySelectorAll('.node').forEach(g=>{g.classList.toggle('dim',!!s&&!s.has(g.dataset.id));g.classList.toggle('selected',g.dataset.id===pinned)});
+  edgesG.querySelectorAll('.edge').forEach(p=>{const on=!!s&&(p.dataset.from===id||p.dataset.to===id);p.classList.toggle('lit',on);p.classList.toggle('dim',!!s&&!on)});
+}
+const tierLabel={L0:'L0 observe',L1:'L1 draft',L2:'L2 execute-reversible',L3:'L3 execute-gated',L4:'L4 break-glass (fail-safe only)',P:'Prohibited',D:'Deterministic code',H:'Human decision'};
+function showNode(id){
+  const n=N[id]; pinned=id; light(id);
+  document.getElementById('detail-map').innerHTML=`
+    <h2>${n.title}</h2><div class="kind">${n.kindText}</div>
+    <p>${n.role}</p>
+    <dl>
+      <dt>Posture</dt><dd>${n.tier.map(t=>`<span class="pill ${t}">${t==='D'?'⚙':t==='H'?'👤':t}</span>${tierLabel[t]}`).join('<br>')}</dd>
+      <dt>Spec refs</dt><dd class="mono">${n.reqs.join(' · ')}</dd>
+      <dt>Talks to</dt><dd><div class="chips">${[...neighbours(id)].filter(x=>x!==id&&N[x]).map(x=>`<button class="chip" data-go="${x}">${N[x].label}</button>`).join('')}</div></dd>
+    </dl>`;
+  document.getElementById('detail-map').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>showNode(b.dataset.go));
+}
+nodesG.addEventListener('mouseover',e=>{const g=e.target.closest('.node');if(g&&!pinned)light(g.dataset.id)});
+nodesG.addEventListener('mouseout',e=>{if(!pinned)light(null)});
+nodesG.addEventListener('click',e=>{const g=e.target.closest('.node');if(!g)return;if(pinned===g.dataset.id){pinned=null;light(null);}else showNode(g.dataset.id)});
+nodesG.addEventListener('keydown',e=>{const g=e.target.closest('.node');if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();showNode(g.dataset.id)}});
+document.getElementById('map').addEventListener('click',e=>{if(e.target.tagName==='svg'||e.target.classList.contains('lane')){pinned=null;light(null)}});
+
+/* ---------------- lifecycle ---------------- */
+const S = [
+  {id:'DRAFTING',x:30,y:130},{id:'ASSEMBLED',x:206,y:130},{id:'SUBMITTED',x:382,y:130},{id:'UNDER_VALIDATION',x:558,y:130},
+  {id:'CLEARED',x:784,y:130,frozen:true},{id:'OUT_FOR_SIGNATURE',x:960,y:130,frozen:true},{id:'EXECUTED',x:1136,y:130,frozen:true},
+  {id:'EXTRACTING',x:1136,y:225,frozen:true},{id:'ARCHIVED',x:960,y:225,frozen:true},
+  {id:'AMENDED',x:558,y:36,loop:true},{id:'REJECTED',x:340,y:36,loop:true},
+];
+const SW=124,SH=32;
+/* [from, to, label, kind, path(d), labelX, labelY, anchor] */
+const F=[
+  ['DRAFTING','ASSEMBLED','assemble'],['ASSEMBLED','SUBMITTED','order'],['SUBMITTED','UNDER_VALIDATION','accept'],
+  ['UNDER_VALIDATION','CLEARED','',true],['CLEARED','OUT_FOR_SIGNATURE','envelope'],['OUT_FOR_SIGNATURE','EXECUTED','signed'],
+  ['EXECUTED','EXTRACTING','extract'],['EXTRACTING','ARCHIVED','confirm'],
+  ['UNDER_VALIDATION','AMENDED','amend + reason','loop'],['AMENDED','UNDER_VALIDATION','new version','loop'],
+  ['UNDER_VALIDATION','REJECTED','reject + reason','loop'],['REJECTED','DRAFTING','','loop'],
+  ['OUT_FOR_SIGNATURE','SUBMITTED','any edit → new version, envelope voided','fork'],
+];
+const st=Object.fromEntries(S.map(s=>[s.id,s]));
+const flowsG=document.getElementById('flows'),statesG=document.getElementById('states');
+function addLabel(x,y,text,cls,anchor){const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',x);t.setAttribute('y',y);t.setAttribute('class','flow-label'+(cls?' '+cls:''));if(anchor)t.setAttribute('text-anchor',anchor);t.textContent=text;flowsG.appendChild(t)}
+F.forEach(([a,b,label,kind])=>{
+  const A=st[a],B=st[b]; const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+  let d;
+  if(a==='UNDER_VALIDATION'&&b==='AMENDED'){d=`M${A.x+SW/3},${A.y} L${B.x+SW/3},${B.y+SH}`; addLabel(A.x+SW/3-6,(A.y+B.y+SH)/2+4,label,'','end'); }
+  else if(a==='AMENDED'){d=`M${A.x+SW*2/3},${A.y+SH} L${B.x+SW*2/3},${B.y}`; addLabel(A.x+SW*2/3+6,(A.y+SH+B.y)/2+4,label,'gate','');}
+  else if(b==='REJECTED'){d=`M${A.x+14},${A.y} L${B.x+SW-14},${B.y+SH}`; addLabel(B.x+SW+2,B.y+SH+40,label,'','end');}
+  else if(a==='REJECTED'){d=`M${A.x},${A.y+SH/2} C${A.x-120},${A.y+SH/2} ${B.x+SW/2},${B.y-50} ${B.x+SW/2},${B.y}`;}
+  else if(kind==='fork'){d=`M${A.x+SW/2},${A.y+SH} C${A.x+SW/2},${A.y+105} ${B.x+SW/2},${B.y+105} ${B.x+SW/2},${B.y+SH}`; addLabel((A.x+B.x+SW)/2,A.y+SH+66,label,'fork','middle');}
+  else if(a==='EXECUTED'){d=`M${A.x+SW/2},${A.y+SH} L${B.x+SW/2},${B.y}`; addLabel(A.x+SW/2+8,A.y+SH+38,label,'','');}
+  else if(a==='EXTRACTING'){d=`M${A.x},${A.y+SH/2} L${B.x+SW},${B.y+SH/2}`; addLabel((A.x+B.x+SW)/2,A.y+SH/2-7,label,'','middle');}
+  else {d=`M${A.x+SW},${A.y+SH/2} L${B.x},${B.y+SH/2}`; if(label) addLabel((A.x+SW+B.x)/2,A.y+SH/2-9,label,'','middle');}
+  p.setAttribute('d',d);p.setAttribute('class','flow'+(kind&&kind!==true?' '+kind:''));p.dataset.from=a;p.dataset.to=b;flowsG.appendChild(p);
+});
+// gate barrier between UNDER_VALIDATION and CLEARED
+const gx=st.CLEARED.x-42;
+document.getElementById('gate').innerHTML=`<rect id="gatebar" class="gatebar" x="${gx}" y="${st.CLEARED.y-26}" width="7" height="${SH+52}" rx="3"/>
+ <text x="${gx+3}" y="${st.CLEARED.y+SH+40}" text-anchor="middle" class="flow-label gate">counsel gate · INV-1 · no override</text>
+ <text x="${st.CLEARED.x+SW/2}" y="${st.CLEARED.y-14}" text-anchor="middle" class="flow-label" fill="#B9781C">hash frozen from here (DF-P4)</text>`;
+S.forEach(s=>{
+  const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('class','state'+(s.frozen?' frozen':''));g.dataset.id=s.id;
+  g.innerHTML=`<rect x="${s.x}" y="${s.y}" width="${SW}" height="${SH}"/><text x="${s.x+SW/2}" y="${s.y+SH/2+4.5}">${s.id.replace(/_/g,' ')}</text>`;statesG.appendChild(g);
+});
+
+const STEPS=[
+ {t:'Set up the vehicle and its terms',state:'DRAFTING',actor:'GP · deterministic',comps:['gp','fdm','identity2'],
+  what:'The GP creates the vehicle (jurisdiction, entity type, fund type, regulatory wrapper) and captures the term sheet as typed data. A PDF term sheet can be imported; every extracted field is evidence-pointed and must be confirmed by the GP before it becomes a slot value. Parties are referenced from the shared identity module, which shows KYC and eligibility status but never lets Tool 2 determine either.',
+  who:[['GP','enters and confirms every input'],['LRA (L1)','proposes field values from an uploaded term sheet, with evidence pointers'],['Code','type-checks the model; determines which templates are eligible']],
+  rules:['DF-10, DF-11, DF-12','Consent grants created with default scope = this vehicle only (DF-13, INV-6)','Eligibility determination is Universal P for the agent'],
+  out:['Vehicle and Terms records (versioned)','Party and Role rows with consent grants','Evidence bundle for any imported term sheet']},
+ {t:'Choose the document class; the rule table selects the template',state:'DRAFTING',actor:'Deterministic · GP',comps:['gp','tpl','svc-policy','clause'],
+  what:'The GP picks a document class (e.g. D2 side letter). A counsel-approved rule table in SVC-POLICY maps jurisdiction × entity type × class × fund type to exactly one approved template version. Unapproved or retired versions cannot be selected. The agent may explain what the rule table did; it never chooses a template on legal suitability.',
+  who:[['GP','chooses the class and, for side letters, picks clause-library provisions or describes bespoke requests'],['Code','selects the template version; shows its approval provenance (who, when, for which jurisdictions)'],['Counsel (earlier)','approved the template version through a SVC-QUEUE item (DF-02)']],
+  rules:['DF-P2 templates carry provenance or they do not exist','DF-04, DF-05 clause library and deviation diff'],
+  out:['DocumentInstance created, bound to a template_version hash and engagement','Slot schema and free-text zone map loaded']},
+ {t:'Assemble: code fills slots, the agent drafts only in mapped zones',state:'ASSEMBLED',actor:'Deterministic + LRA (L1)',comps:['asm','fdm','tpl','svc-evid','svc-log','p0','kill'],
+  what:'Names, dates, amounts, percentages, thresholds and cross-references are filled by code from the Fund Data Model. The LLM writes only in designated free-text zones (recitals, bespoke provisions, cover notes) from GP-supplied facts and the clause library, and each zone is stored with agent provenance, model and prompt version. The platform renders the LRA-P0 banner on the result.',
+  who:[['Code','deterministic slot fill; rejects missing or ill-typed slots'],['LRA (L1)','drafts zone text; every factual assertion needs an evidence pointer or is stripped (GR-1)'],['Nobody','decides whether a provision is appropriate — that is the next human step']],
+  rules:['LRA-05, DF-21, DF-P3','GR-1 evidence-or-silence, GR-6 versioning','With LRA at L0 the document still assembles with zones left empty (DF-52)'],
+  out:['DraftVersion v1 (immutable, content-addressed)','Slot snapshot and zone provenance in SVC-LOG']},
+ {t:'Findings: cross-references, defined terms, contradictions, MFN conflicts, classifiers',state:'ASSEMBLED',actor:'Deterministic + LRA (L1)',comps:['find','clause','fdm','svc-evid','dp3','p0'],
+  what:'Deterministic checks run first: cross-reference integrity, defined-term consistency, missing slots, jurisdiction flags and the MFN interaction check against the vehicle\'s policy and existing side letters. Then confidence-gated LLM findings propose contradiction candidates and summarise deviations from the template. GR-3 classifiers scan every LLM zone for legal conclusions, return or liquidity assurances and eligibility determinations before anything is stored. Directive text found inside uploaded material becomes an injection_suspected finding.',
+  who:[['Code','deterministic findings; MFN conflicts are blocking (DF-22)'],['LRA (L1)','contradiction and deviation findings, each with evidence pointers and a confidence score'],['Humans only','disposition findings — the agent never marks one resolved']],
+  rules:['DF-20, DF-22, DF-23','GR-2 confidence gating, GR-3 hard-coded refusal, DP-3 untrusted input'],
+  out:['Finding rows with location, severity, evidence pointers','Classifier block events (logged, never shown)']},
+ {t:'GP self-review and structured comments',state:'ASSEMBLED',actor:'GP',comps:['gp','clause','sm'],
+  what:'The GP reads the draft with provenance styling (agent zones tinted, computed fields with evidence chips) and the diff to the template. The GP cannot edit LLM zones in place; comments become instructions to counsel or trigger a re-draft that produces a new version. The GP may withdraw at any point before execution.',
+  who:[['GP','reviews, comments, requests re-drafts'],['Code','each re-draft is a new DraftVersion (INV-3); diff to previous shown']],
+  rules:['DF-24','INV-3 versions are never mutated'],
+  out:['GP comments attached to the version','Possibly DraftVersion v2…n']},
+ {t:'Order validation: choose counsel, fixed fee, engagement',state:'SUBMITTED',actor:'GP + lawyer',comps:['gp','mkt','identity2','svc-calc','room'],
+  what:'The GP chooses their own counsel (if on-platform) or requests network counsel. Ranking is deterministic — admission match, capacity, SLA history, quality score, conflicts pre-check. The fixed fee and SLA are shown before ordering. If no engagement exists, the engagement letter (lawyer ↔ GP; the platform is not a party) is executed first and its hash stored. The lawyer attests to a conflicts check and accepts the order; the SLA clock starts.',
+  who:[['GP','selects counsel, accepts fee'],['Lawyer','attests conflicts, accepts order'],['Code','ranks, holds fee, starts SLA clock, reassigns on breach'],['Counsel of record (§13.3)','has decided whether the platform fee is charged to the GP or the lawyer before this ships']],
+  rules:['DF-30 to DF-34, DF-38','Credential verification is evidence-bound (§7.2)'],
+  out:['Engagement (with privilege partition id)','ValidationOrder: offered → accepted']},
+ {t:'Counsel review in the redline room; amend with a structured reason',state:'UNDER_VALIDATION',actor:'Lawyer',comps:['room','svc-queue','clause','privacy','tpl'],
+  what:'The order appears as a SVC-QUEUE item with the standard anatomy: the ask, evidence panel, diff to template and to any prior cleared version, the agent narrative cross-highlighted to evidence, and the dissent surface with every open finding. The lawyer dispositions findings and amends in a redline editor. Each amendment writes a new DraftVersion with a mandatory structured reason (drafting error, missing provision, jurisdiction issue, client instruction, template defect, other). A "template defect" reason opens a review item for the template owner. Rejection sends the instance back to DRAFTING with a reason.',
+  who:[['Lawyer','reviews, dispositions findings, amends or rejects'],['Code','writes new versions; blocks approve controls while any load-bearing field is grey (P4)'],['Platform counsel (later)','samples clearances for quality (DF-39)']],
+  rules:['DF-36, DF-37','RQ-3 reject-with-reason is mandatory and feeds the eval suite (GR-7)','Partitioned items are sealed; crossing the boundary is an explicit logged act (DF-P7)'],
+  out:['Amendment rows → eval cases','DraftVersion n+1 that automatically re-enters UNDER_VALIDATION','Template-defect review items']},
+ {t:'Clearance: attestation, credential check, dwell time — the hash freezes',state:'CLEARED',actor:'Lawyer (L3 gate)',gate:true,comps:['room','sm','svc-policy','svc-log','svc-evid','identity2'],
+  what:'The lawyer types the attestation ("I have reviewed version <hash> and clear it for execution"). At that moment the platform re-verifies the lawyer\'s admission for the document\'s governing-law jurisdiction and checks that the dwell time meets the class floor set in SVC-POLICY. The state machine writes the Clearance row and the version\'s content hash becomes frozen. There is no admin override: the transition into CLEARED does not exist without a valid Clearance row, at the API level.',
+  who:[['Lawyer','clears — the only role that can'],['Code','INV-1 gate, credential re-verification, dwell check, hash freeze'],['Agent','nothing — no agent is ever the final gate (Universal P)']],
+  rules:['DF-35, DF-P1, DF-P4','INV-1 verified admission required · INV-7 proposer cannot clear · INV-8 dwell floor (below-floor is an audit exception)','Ops Console P3 asymmetric friction: typed confirmation, dwell fill'],
+  out:['Clearance row (written once) with credential and dwell evidence','Frozen content hash referenced by everything downstream']},
+ {t:'Envelope from the cleared hash; signatories sign; consent captured',state:'EXECUTED',actor:'GP initiates · signatories · deterministic',comps:['exec','esign','portal','identity2','svc-evid'],
+  what:'The GP initiates execution. The Envelope Service builds the signature envelope only from the frozen hash — a mismatch fails hard. Signatories are bound to Party identities and verified to the level the class requires (D1 needs an identity-module match). LPs and counterparties sign in the Signatory Portal; a first-time signatory creates an account and grants per-purpose consent in plain language. On completion the vendor certificate and final PDF hash are stored in SVC-EVID. Any attempted edit in OUT_FOR_SIGNATURE forks a new version that re-enters at SUBMITTED — the executed document is always the one counsel actually cleared.',
+  who:[['GP','initiates the envelope, sets signing order'],['Signatories','verify identity, sign, grant consent'],['Code','INV-2 hash match, identity binding, completion evidence'],['Agent','no path to this service exists']],
+  rules:['DF-40 to DF-42','INV-2 envelope hash == cleared hash','DF-P6 consent before network · §13.5 e-sign validity confirmed per class and jurisdiction'],
+  out:['Envelope, completion certificate, ExecutedDocument (final PDF hash) in SVC-EVID','New Party accounts with consent grants']},
+ {t:'Extract obligations, register events and LPA parameters',state:'EXTRACTING',actor:'Deterministic + LRA (L1)',comps:['extract','svc-evid','fdm','kill'],
+  what:'From the executed document, known clauses are extracted structurally by code; bespoke text is extracted by the LLM with a confidence gate and evidence pointers into the executed PDF. The result is a set of proposals: Obligations (reporting, fee, MFN, co-invest, transfer, notice), RegisterEvents (subscription, transfer) and, for D8/D9, LPA parameter encodings for Tool 4. Nothing is published yet.',
+  who:[['Code','structured extraction over known clause IDs; RegisterEvent proposals'],['LRA (L1)','bespoke-clause extraction, evidence-pointed, confidence-gated'],['Nobody yet','confirms — that is the next step']],
+  rules:['LRA-07, DF-43, DF-44','GR-1, GR-2 · with LRA at L0, known-clause extraction still runs (DF-52)'],
+  out:['Obligation, RegisterEvent and parameter proposals with confirmed_by = null']},
+ {t:'Human confirms; typed events leave for Tools 1, 3, 4, 5',state:'ARCHIVED',actor:'GP or counsel · deterministic',comps:['gp','extract','svc-bus','t1','t3','t4','t5'],
+  what:'The GP (or counsel, for LPA parameter encodings) confirms each proposal. Only then does the platform publish schema-validated events on SVC-BUS: register.subscription.recorded and register.transfer.recorded to Tool 3 (the register of record), obligation.created[] and mfn.compendium.updated to Tool 5, lpa.parameters.encoded to Tool 4, notice.issued to Tool 1. LRA-14 later compares executed parameters against Tool 4 and Tool 5 configuration and raises drift alerts. The PDF was evidence; the structured record is the product.',
+  who:[['GP','confirms obligations and register events'],['Counsel','validates LPA parameter encodings (Brief v2 Tool 4)'],['Code','publishes only confirmed facts; schema-validates every event'],['LRA (L2)','drift alerts, never corrections']],
+  rules:['INV-5 no publication without confirmed_by','DF-P5 execution creates structured facts','LRA-14 drift detection'],
+  out:['SVC-BUS events consumed by Tools 1, 3, 4, 5','Instance ARCHIVED; full chain re-derivable from SVC-LOG (DF-51)']},
+];
+const order=S.map(s=>s.id);
+let cur=0,timer=null;
+const list=document.getElementById('steplist');
+STEPS.forEach((s,i)=>{const li=document.createElement('li');li.innerHTML=`<button class="${s.gate?'gate-step':''}" data-i="${i}"><span>${s.t}</span></button>`;list.appendChild(li)});
+list.addEventListener('click',e=>{const b=e.target.closest('button');if(b){stop();go(+b.dataset.i)}});
+function go(i){
+  cur=(i+STEPS.length)%STEPS.length; const s=STEPS[cur];
+  list.querySelectorAll('button').forEach(b=>b.removeAttribute('aria-current')); list.querySelector(`[data-i="${cur}"]`).setAttribute('aria-current','step');
+  // states
+  const reached=order.indexOf(s.state); const mainSeq=['DRAFTING','ASSEMBLED','SUBMITTED','UNDER_VALIDATION','CLEARED','OUT_FOR_SIGNATURE','EXECUTED','EXTRACTING','ARCHIVED'];
+  const idx=mainSeq.indexOf(s.state);
+  statesG.querySelectorAll('.state').forEach(g=>{const k=mainSeq.indexOf(g.dataset.id);g.classList.toggle('current',g.dataset.id===s.state||(s.state==='EXECUTED'&&g.dataset.id==='OUT_FOR_SIGNATURE'&&false));g.classList.toggle('done',k>-1&&k<idx);
+    if(cur===6){g.classList.toggle('current',g.dataset.id==='UNDER_VALIDATION'||g.dataset.id==='AMENDED')}});
+  flowsG.querySelectorAll('.flow').forEach(p=>{const a=mainSeq.indexOf(p.dataset.from),b=mainSeq.indexOf(p.dataset.to);let lit=a>-1&&b>-1&&b<=idx&&a<idx;if(cur===6&&(p.dataset.to==='AMENDED'||p.dataset.from==='AMENDED'||p.dataset.to==='REJECTED'))lit=true;if(cur===8&&p.dataset.from==='OUT_FOR_SIGNATURE'&&p.dataset.to==='SUBMITTED')lit=true;p.classList.toggle('lit',lit)});
+  document.getElementById('gatebar').classList.toggle('open',idx>=4);
+  // detail
+  document.getElementById('st-title').textContent=s.t;
+  document.getElementById('st-actor').innerHTML=`Step ${cur+1} of ${STEPS.length} · ${s.actor} · state after this step: <code>${s.state}</code>`;
+  document.getElementById('st-what').textContent=s.what;
+  document.getElementById('st-who').innerHTML=s.who.map(([a,b])=>`<span>${a}</span><span>${b}</span>`).join('');
+  document.getElementById('st-rules').innerHTML=s.rules.map(r=>`<li>${r}</li>`).join('');
+  document.getElementById('st-out').innerHTML=s.out.map(r=>`<li>${r}</li>`).join('');
+  const note=document.getElementById('st-note');
+  if(s.gate) note.innerHTML=`<div class="gatenote">This is the one gate in the product. It is enforced by the state machine and the API, not by the UI, and it has no override. A cleared document is a frozen hash from this point; every later object — envelope, executed PDF, obligation — references that hash, so what LPs sign is exactly what counsel saw.</div>`;
+  else if(cur===8) note.innerHTML=`<div class="gatenote halt">Edit-after-clearance is a common real-world control failure. Here it is structurally impossible: an edit in OUT_FOR_SIGNATURE creates a new DraftVersion in SUBMITTED, and the existing envelope is voided because its hash no longer matches a version in CLEARED.</div>`;
+  else if(cur===10) note.innerHTML=`<div class="gatenote human">Human confirmation is what separates a draft extraction from an obligation of record. The agent proposes; a person confirms; the bus carries only confirmed, schema-valid facts.</div>`;
+  else note.innerHTML='';
+  document.getElementById('st-comps').innerHTML=s.comps.filter(c=>N[c]).map(c=>`<button class="chip" data-go="${c}" title="Open in component map">${N[c].label}</button>`).join('');
+  document.getElementById('st-comps').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{switchTab('map');showNode(b.dataset.go);document.getElementById('detail-map').scrollIntoView({behavior:'smooth',block:'nearest'})});
+}
+function stop(){if(timer){clearInterval(timer);timer=null;document.getElementById('play').textContent='Play'}}
+document.getElementById('prev').onclick=()=>{stop();go(cur-1)};
+document.getElementById('next').onclick=()=>{stop();go(cur+1)};
+document.getElementById('play').onclick=()=>{if(timer){stop();return}document.getElementById('play').textContent='Pause';if(cur===STEPS.length-1)go(0);timer=setInterval(()=>{if(cur===STEPS.length-1){stop();return}go(cur+1)},5500)};
+statesG.addEventListener('click',e=>{const g=e.target.closest('.state');if(!g)return;const i=STEPS.findIndex(s=>s.state===g.dataset.id||(g.dataset.id==='OUT_FOR_SIGNATURE'&&s.state==='EXECUTED')||(g.dataset.id==='AMENDED'&&s.state==='UNDER_VALIDATION'));if(i>-1){stop();go(i)}});
+
+/* ---------------- tabs ---------------- */
+function switchTab(which){
+  ['map','life'].forEach(v=>{const on=v===which;document.getElementById('tab-'+v).setAttribute('aria-selected',on);document.getElementById('view-'+v).classList.toggle('active',on)});
+}
+document.getElementById('tab-map').onclick=()=>{stop();switchTab('map')};
+document.getElementById('tab-life').onclick=()=>switchTab('life');
+go(0);
+</script>
+</body>
+</html>

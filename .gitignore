@@ -1,0 +1,23 @@
+# Dependencies and build output
+node_modules/
+dist/
+build/
+coverage/
+*.log
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Real design-partner, investor or counsel material: never commit
+fixtures/private/
+
+# Template generator output (regenerate with npm run build in templates/generator)
+templates/generator/out/
+
+# OS and editor files
+.DS_Store
+.idea/
+.vscode/
+*.swp
