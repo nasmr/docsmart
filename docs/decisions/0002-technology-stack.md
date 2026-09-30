@@ -1,6 +1,6 @@
 # 0002 Technology stack for the first build slice
 
-Status: Accepted
+Status: Accepted (Word rendering superseded by 0006)
 Date: 30 September 2026 (accepted 1 October 2026)
 Decided by: nas
 

@@ -9,6 +9,7 @@ One file per decision. A decision starts as **Proposed**, becomes **Accepted** o
 | [0003](0003-contracting-wording-and-portfolio-names.md) | Contracting-party wording and portfolio naming | Proposed | BVI counsel |
 | [0004](0004-first-three-document-types.md) | First three document types | Proposed | Founder, design partner |
 | [0005](0005-m1-tooling-and-libraries.md) | Tooling and libraries for milestone M1 | Accepted | — |
+| [0006](0006-word-rendering.md) | Render Word documents from the canonical content | Accepted | — |
 
 ## Format
 
