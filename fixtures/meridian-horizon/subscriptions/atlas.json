@@ -1,0 +1,874 @@
+[
+  {
+    "id": "sub_atlas_001",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_001",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-001",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_002",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_002",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-002",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_003",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_003",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-003",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_004",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_004",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "exempted"
+    },
+    "payment_reference": "ATL-004",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_005",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_005",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-005",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_006",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_006",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-006",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_007",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_007",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-007",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_008",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_008",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-008",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_009",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_009",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-009",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_010",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_010",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-010",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_011",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_011",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "exempted"
+    },
+    "payment_reference": "ATL-011",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_012",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_012",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-012",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_013",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_013",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-013",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_014",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_014",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-014",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_015",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_015",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-015",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_016",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_016",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-016",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_017",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_017",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-017",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_018",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_018",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "exempted"
+    },
+    "payment_reference": "ATL-018",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_019",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_019",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-019",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_020",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_020",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-020",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_021",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_021",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-021",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_022",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_022",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-022",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_023",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_023",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-023",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_024",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_024",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-024",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_025",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_025",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "exempted"
+    },
+    "payment_reference": "ATL-025",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_026",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_026",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-026",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_027",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_027",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-027",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_028",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_028",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-028",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_029",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_029",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-029",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_030",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_030",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "ATL-030",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_031",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_031",
+    "requested_amount": {
+      "amount": "125000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional",
+      "formed_for_investment": false
+    },
+    "payment_reference": "ATL-031",
+    "allocation": {
+      "allocated": {
+        "amount": "125000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_032",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_032",
+    "requested_amount": {
+      "amount": "125000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "exempted",
+      "formed_for_investment": false
+    },
+    "payment_reference": "ATL-032",
+    "allocation": {
+      "allocated": {
+        "amount": "125000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_033",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_033",
+    "requested_amount": {
+      "amount": "125000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional",
+      "formed_for_investment": false
+    },
+    "payment_reference": "ATL-033",
+    "allocation": {
+      "allocated": {
+        "amount": "125000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_034",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_034",
+    "requested_amount": {
+      "amount": "125000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional",
+      "formed_for_investment": false
+    },
+    "payment_reference": "ATL-034",
+    "allocation": {
+      "allocated": {
+        "amount": "125000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_035",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_035",
+    "requested_amount": {
+      "amount": "125000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional",
+      "formed_for_investment": false
+    },
+    "payment_reference": "ATL-035",
+    "allocation": {
+      "allocated": {
+        "amount": "125000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_036",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_036",
+    "requested_amount": {
+      "amount": "125000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional",
+      "formed_for_investment": true
+    },
+    "payment_reference": "ATL-036",
+    "allocation": {
+      "allocated": {
+        "amount": "125000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_037",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_037",
+    "requested_amount": {
+      "amount": "150000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional",
+      "formed_for_investment": false
+    },
+    "payment_reference": "ATL-037",
+    "allocation": {
+      "allocated": {
+        "amount": "150000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_038",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_038",
+    "requested_amount": {
+      "amount": "150000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional",
+      "formed_for_investment": false
+    },
+    "payment_reference": "ATL-038",
+    "allocation": {
+      "allocated": {
+        "amount": "150000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_039",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_039",
+    "requested_amount": {
+      "amount": "150000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "exempted",
+      "formed_for_investment": false
+    },
+    "payment_reference": "ATL-039",
+    "allocation": {
+      "allocated": {
+        "amount": "150000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_040",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_040",
+    "requested_amount": {
+      "amount": "250000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional",
+      "formed_for_investment": false
+    },
+    "payment_reference": "ATL-040",
+    "allocation": {
+      "allocated": {
+        "amount": "250000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_atlas_041",
+    "offer_id": "off_atlas_1",
+    "party_id": "pty_041",
+    "requested_amount": {
+      "amount": "250000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional",
+      "formed_for_investment": false
+    },
+    "payment_reference": "ATL-041",
+    "allocation": {
+      "allocated": {
+        "amount": "250000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  }
+]

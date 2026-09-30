@@ -1,0 +1,11 @@
+{
+  "id": "spn_meridian",
+  "legal_name": "Meridian Horizon Partners Limited",
+  "affiliates": [
+    {
+      "id": "aff_coinvest1",
+      "legal_name": "Meridian Horizon Co-Invest I LP",
+      "relationship": "Fund managed by the sponsor"
+    }
+  ]
+}

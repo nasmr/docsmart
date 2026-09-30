@@ -1,0 +1,106 @@
+{
+  "portfolio": {
+    "id": "pf_atlas",
+    "umbrella_id": "umb_meridian",
+    "legal_name": "Atlas Segregated Portfolio",
+    "short_name": "Atlas SP",
+    "project_ref": "PRJ-002",
+    "share_class_name": "Class A Participating Shares",
+    "share_par_value": {
+      "amount": "0.01",
+      "currency": "USD"
+    },
+    "base_currency": "USD",
+    "status": "PROPOSED",
+    "allocation_policy": {
+      "description": "pro rata to the amounts applied for"
+    }
+  },
+  "terms": {
+    "portfolio_id": "pf_atlas",
+    "version": 1,
+    "min_subscription": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "subscription_price": {
+      "amount": "100.00",
+      "currency": "USD"
+    },
+    "mgmt_fee_rate": "0.015",
+    "fee_basis": "the aggregate subscribed capital of the Portfolio",
+    "fee_frequency": "quarterly",
+    "perf_fee_rate": "0.15",
+    "has_hurdle": false,
+    "org_expense_cap": {
+      "amount": "75000.00",
+      "currency": "USD"
+    },
+    "term_years": 6,
+    "extension_years": 2,
+    "costs_deducted_on_lapse": false
+  },
+  "offer": {
+    "id": "off_atlas_1",
+    "portfolio_id": "pf_atlas",
+    "open_date": "2027-01-11",
+    "close_date": "2027-02-12",
+    "funding_deadline": "2027-02-19",
+    "target_size": {
+      "amount": "4500000.00",
+      "currency": "USD"
+    },
+    "hard_cap": {
+      "amount": "5000000.00",
+      "currency": "USD"
+    },
+    "minimum_close_amount": {
+      "amount": "2000000.00",
+      "currency": "USD"
+    }
+  },
+  "asset": {
+    "id": "ast_atlas",
+    "portfolio_id": "pf_atlas",
+    "issuer_name": "Kestrel Grid Systems Limited",
+    "issuer_jurisdiction": "England and Wales",
+    "instrument": "Series A Preferred Shares",
+    "acquisition_source": "gp_sourced",
+    "quantity": 400000,
+    "price_per_share": {
+      "amount": "12.50",
+      "currency": "USD"
+    },
+    "seller_name": "Meridian Horizon Co-Invest I LP",
+    "seller_affiliate_id": "aff_coinvest1",
+    "gp_cost_basis_per_share": {
+      "amount": "9.40",
+      "currency": "USD"
+    },
+    "gp_acquisition_date": "2024-06-18",
+    "gp_cost_evidence": {
+      "evidence_ref": "evid:sha256:TEST-PLACEHOLDER-atlas-spa",
+      "description": "Share purchase agreement for the affiliate’s original purchase (placeholder; no file)"
+    },
+    "sponsor_retains_shares": true,
+    "sponsor_retained_quantity": 150000,
+    "valuation": {
+      "valuer_name": "Northgate Valuation Advisers LLP",
+      "date": "2026-11-30",
+      "range_per_share": {
+        "low": "11.80",
+        "high": "13.10",
+        "currency": "USD"
+      }
+    },
+    "consent_status": "requested",
+    "transfer_restrictions": "Transfers need board consent and are subject to pre-emption rights of existing shareholders under the articles of association."
+  },
+  "subscription_account": {
+    "account_name": "Meridian Horizon SPC Limited – Atlas Segregated Portfolio Subscription Account",
+    "bank_name": "Example Bank (Fictional) Limited",
+    "account_number": "XX00TESTATLAS00000",
+    "swift": "TESTVGXX",
+    "verified_by": "Harbour Point Fund Services (BVI) Limited"
+  }
+}

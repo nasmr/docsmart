@@ -1,0 +1,197 @@
+{
+  "note": "DocumentInstance inputs entered when each document is created, and records of documents the fixtures assume already exist. expected_template is what the selection rules (build plan B3) should pick.",
+  "documents": [
+    {
+      "id": "doc_u3",
+      "class": "U3",
+      "scope": "umbrella",
+      "umbrella_id": "umb_meridian",
+      "version_label": "1.0",
+      "note": "Umbrella subscription terms are not drafted yet (decision 0004). Placeholder so D1-SP fixtures have something to reference."
+    },
+    {
+      "id": "doc_lumen_d12",
+      "class": "D12",
+      "scope": "portfolio",
+      "portfolio_id": "pf_lumen",
+      "expected_template": "D12-A",
+      "inputs": {
+        "resolution_date": "2026-10-20",
+        "effective_date": "2026-10-20"
+      }
+    },
+    {
+      "id": "doc_lumen_d13",
+      "class": "D13",
+      "scope": "portfolio",
+      "portfolio_id": "pf_lumen",
+      "expected_template": "D13-A",
+      "inputs": {
+        "supplement_number": 1,
+        "date": "2026-10-28"
+      }
+    },
+    {
+      "id": "doc_atlas_d12",
+      "class": "D12",
+      "scope": "portfolio",
+      "portfolio_id": "pf_atlas",
+      "expected_template": "D12-B",
+      "inputs": {
+        "resolution_date": "2026-12-14",
+        "effective_date": "2027-01-04",
+        "director_interests": [
+          {
+            "director_id": "dir_02",
+            "is_interested": true,
+            "abstains": true,
+            "description": "a director and shareholder of the general partner of the Seller"
+          }
+        ]
+      }
+    },
+    {
+      "id": "doc_atlas_d15",
+      "class": "D15",
+      "scope": "portfolio",
+      "portfolio_id": "pf_atlas",
+      "inputs": {
+        "date": "2026-12-18"
+      },
+      "note": "Conflict disclosure statement. D15 is not in this slice; only its date is used (README gap G4)."
+    },
+    {
+      "id": "doc_atlas_d13",
+      "class": "D13",
+      "scope": "portfolio",
+      "portfolio_id": "pf_atlas",
+      "expected_template": "D13-B",
+      "inputs": {
+        "supplement_number": 2,
+        "date": "2026-12-18"
+      }
+    },
+    {
+      "id": "doc_atlas2_d12",
+      "class": "D12",
+      "scope": "portfolio",
+      "portfolio_id": "pf_atlas2",
+      "expected_template": "D12-C",
+      "inputs": {
+        "effective_date": "2027-02-10",
+        "meeting": {
+          "date": "2027-02-10",
+          "time": "15:00+04:00",
+          "place": "By video conference",
+          "in_attendance": "A representative of the Company’s administrator",
+          "chair_director_id": "dir_01",
+          "attendee_director_ids": [
+            "dir_01",
+            "dir_02",
+            "dir_03"
+          ]
+        },
+        "director_interests": [
+          {
+            "director_id": "dir_03",
+            "is_interested": true,
+            "abstains": true,
+            "description": "a holder of common stock of Tessellate Bio, Inc. in a personal capacity"
+          }
+        ]
+      }
+    },
+    {
+      "id": "doc_atlas2_d13",
+      "class": "D13",
+      "scope": "portfolio",
+      "portfolio_id": "pf_atlas2",
+      "expected_template": "D13-C",
+      "inputs": {
+        "supplement_number": 3,
+        "date": "2027-02-17"
+      }
+    },
+    {
+      "id": "batch_atlas_d1sp",
+      "class": "D1-SP",
+      "scope": "portfolio",
+      "portfolio_id": "pf_atlas",
+      "batch": true,
+      "inputs": {
+        "company_signatory_id": "sig_01",
+        "subscriptions": "subscriptions/atlas.json"
+      },
+      "expected_templates": "D1SP-C for pty_002, pty_009, pty_017, pty_033, pty_035; otherwise D1SP-A for individuals and D1SP-B for entities",
+      "per_investor_inputs": [
+        {
+          "party_id": "pty_002",
+          "changes_since_prior": "None."
+        },
+        {
+          "party_id": "pty_009",
+          "changes_since_prior": "Residential address changed; new address recorded in the platform on 2026-11-20."
+        },
+        {
+          "party_id": "pty_017",
+          "changes_since_prior": "None."
+        },
+        {
+          "party_id": "pty_033",
+          "changes_since_prior": "None."
+        },
+        {
+          "party_id": "pty_035",
+          "changes_since_prior": "None."
+        }
+      ]
+    }
+  ],
+  "executed": [
+    {
+      "id": "doc_lumen_d1sp_pty_002",
+      "class": "D1-SP",
+      "portfolio_id": "pf_lumen",
+      "party_id": "pty_002",
+      "ref": "LUM-SA-001",
+      "executed_date": "2026-12-01",
+      "note": "Executed Lumen subscription agreement; the earlier agreement for D1SP-C."
+    },
+    {
+      "id": "doc_lumen_d1sp_pty_009",
+      "class": "D1-SP",
+      "portfolio_id": "pf_lumen",
+      "party_id": "pty_009",
+      "ref": "LUM-SA-002",
+      "executed_date": "2026-12-02",
+      "note": "Executed Lumen subscription agreement; the earlier agreement for D1SP-C."
+    },
+    {
+      "id": "doc_lumen_d1sp_pty_017",
+      "class": "D1-SP",
+      "portfolio_id": "pf_lumen",
+      "party_id": "pty_017",
+      "ref": "LUM-SA-003",
+      "executed_date": "2026-12-03",
+      "note": "Executed Lumen subscription agreement; the earlier agreement for D1SP-C."
+    },
+    {
+      "id": "doc_lumen_d1sp_pty_033",
+      "class": "D1-SP",
+      "portfolio_id": "pf_lumen",
+      "party_id": "pty_033",
+      "ref": "LUM-SA-004",
+      "executed_date": "2026-12-04",
+      "note": "Executed Lumen subscription agreement; the earlier agreement for D1SP-C."
+    },
+    {
+      "id": "doc_lumen_d1sp_pty_035",
+      "class": "D1-SP",
+      "portfolio_id": "pf_lumen",
+      "party_id": "pty_035",
+      "ref": "LUM-SA-005",
+      "executed_date": "2026-12-05",
+      "note": "Executed Lumen subscription agreement; the earlier agreement for D1SP-C."
+    }
+  ]
+}

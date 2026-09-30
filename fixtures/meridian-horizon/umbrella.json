@@ -1,0 +1,59 @@
+{
+  "id": "umb_meridian",
+  "legal_name": "Meridian Horizon SPC Limited",
+  "company_number": "TEST-2099001",
+  "registered_agent": "Example Registered Agents (BVI) Limited",
+  "registered_office": "Example House, 1 Test Street, Road Town, Tortola, British Virgin Islands",
+  "fund_category": "private_investment_fund",
+  "is_regulated_fund": true,
+  "investor_basis_description": "professional investors and exempted investors only, as those terms are used in the Securities and Investment Business Act (Revised Edition 2020)",
+  "directors": [
+    {
+      "id": "dir_01",
+      "name": "Amara Okafor",
+      "independent": true
+    },
+    {
+      "id": "dir_02",
+      "name": "Henrik Solberg",
+      "independent": false,
+      "note": "Principal of the sponsor"
+    },
+    {
+      "id": "dir_03",
+      "name": "Priya Raman",
+      "independent": true
+    }
+  ],
+  "authorised_signatories": [
+    {
+      "id": "sig_01",
+      "director_id": "dir_01",
+      "name": "Amara Okafor",
+      "title": "Director"
+    }
+  ],
+  "offering_memorandum": {
+    "date": "2026-09-15",
+    "requires_related_party_consent": true,
+    "related_party_consent_clause": "clause 14.3"
+  },
+  "service_providers": {
+    "administrator": {
+      "name": "Harbour Point Fund Services (BVI) Limited"
+    },
+    "auditor": {
+      "name": "Example Audit LLP"
+    }
+  },
+  "cost_allocation_rules": [
+    {
+      "ref": "CAR-2026-01",
+      "category": "umbrella_general",
+      "basis": "by_committed_capital",
+      "effective_from": "2026-09-15",
+      "approved_by": "dir_01"
+    }
+  ],
+  "sponsor_id": "spn_meridian"
+}

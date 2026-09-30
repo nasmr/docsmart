@@ -1,0 +1,172 @@
+[
+  {
+    "id": "sub_lumen_001",
+    "offer_id": "off_lumen_1",
+    "party_id": "pty_002",
+    "requested_amount": {
+      "amount": "200000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "LUM-001",
+    "allocation": {
+      "allocated": {
+        "amount": "200000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_lumen_002",
+    "offer_id": "off_lumen_1",
+    "party_id": "pty_009",
+    "requested_amount": {
+      "amount": "150000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "LUM-002",
+    "allocation": {
+      "allocated": {
+        "amount": "150000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_lumen_003",
+    "offer_id": "off_lumen_1",
+    "party_id": "pty_017",
+    "requested_amount": {
+      "amount": "400000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "LUM-003",
+    "allocation": {
+      "allocated": {
+        "amount": "400000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_lumen_004",
+    "offer_id": "off_lumen_1",
+    "party_id": "pty_033",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional",
+      "formed_for_investment": false
+    },
+    "payment_reference": "LUM-004",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_lumen_005",
+    "offer_id": "off_lumen_1",
+    "party_id": "pty_035",
+    "requested_amount": {
+      "amount": "250000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional",
+      "formed_for_investment": false
+    },
+    "payment_reference": "LUM-005",
+    "allocation": {
+      "allocated": {
+        "amount": "250000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_lumen_006",
+    "offer_id": "off_lumen_1",
+    "party_id": "pty_042",
+    "requested_amount": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "LUM-006",
+    "allocation": {
+      "allocated": {
+        "amount": "100000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_lumen_007",
+    "offer_id": "off_lumen_1",
+    "party_id": "pty_043",
+    "requested_amount": {
+      "amount": "300000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "LUM-007",
+    "allocation": {
+      "allocated": {
+        "amount": "300000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  },
+  {
+    "id": "sub_lumen_008",
+    "offer_id": "off_lumen_1",
+    "party_id": "pty_044",
+    "requested_amount": {
+      "amount": "500000.00",
+      "currency": "USD"
+    },
+    "eligibility": {
+      "status": "professional"
+    },
+    "payment_reference": "LUM-008",
+    "allocation": {
+      "allocated": {
+        "amount": "500000.00",
+        "currency": "USD"
+      },
+      "entered_by": "sponsor",
+      "note": "Typed in until the allocation engine exists (DF-65)"
+    }
+  }
+]

@@ -1,0 +1,92 @@
+{
+  "portfolio": {
+    "id": "pf_lumen",
+    "umbrella_id": "umb_meridian",
+    "legal_name": "Lumen Segregated Portfolio",
+    "short_name": "Lumen SP",
+    "project_ref": "PRJ-001",
+    "share_class_name": "Class L Participating Shares",
+    "share_par_value": {
+      "amount": "0.01",
+      "currency": "USD"
+    },
+    "base_currency": "USD",
+    "status": "PROPOSED",
+    "allocation_policy": {
+      "description": "pro rata to the amounts applied for"
+    }
+  },
+  "terms": {
+    "portfolio_id": "pf_lumen",
+    "version": 1,
+    "min_subscription": {
+      "amount": "100000.00",
+      "currency": "USD"
+    },
+    "subscription_price": {
+      "amount": "100.00",
+      "currency": "USD"
+    },
+    "mgmt_fee_rate": "0.02",
+    "fee_basis": "the aggregate subscribed capital of the Portfolio",
+    "fee_frequency": "quarterly",
+    "perf_fee_rate": "0.20",
+    "has_hurdle": true,
+    "hurdle_rate": "0.08",
+    "org_expense_cap": {
+      "amount": "60000.00",
+      "currency": "USD"
+    },
+    "term_years": 7,
+    "extension_years": 2,
+    "costs_deducted_on_lapse": true,
+    "lapse_cost_cap": {
+      "amount": "25000.00",
+      "currency": "USD"
+    }
+  },
+  "offer": {
+    "id": "off_lumen_1",
+    "portfolio_id": "pf_lumen",
+    "open_date": "2026-11-02",
+    "close_date": "2026-12-04",
+    "funding_deadline": "2026-12-11",
+    "target_size": {
+      "amount": "2500000.00",
+      "currency": "USD"
+    },
+    "hard_cap": {
+      "amount": "3000000.00",
+      "currency": "USD"
+    },
+    "minimum_close_amount": {
+      "amount": "1500000.00",
+      "currency": "USD"
+    }
+  },
+  "asset": {
+    "id": "ast_lumen",
+    "portfolio_id": "pf_lumen",
+    "issuer_name": "Lumenfold Optics, Inc.",
+    "issuer_jurisdiction": "Delaware, United States",
+    "instrument": "Series B Preferred Stock",
+    "acquisition_source": "issuer_primary",
+    "quantity": 250000,
+    "price_per_share": {
+      "amount": "12.00",
+      "currency": "USD"
+    },
+    "seller_name": "Lumenfold Optics, Inc.",
+    "round_name": "Series B",
+    "long_stop_date": "2027-01-29",
+    "consent_status": "not_required",
+    "transfer_restrictions": "Transfers need board consent and are subject to a right of first refusal in favour of the issuer under its bylaws."
+  },
+  "subscription_account": {
+    "account_name": "Meridian Horizon SPC Limited – Lumen Segregated Portfolio Subscription Account",
+    "bank_name": "Example Bank (Fictional) Limited",
+    "account_number": "XX00TESTLUMEN00000",
+    "swift": "TESTVGXX",
+    "verified_by": "Harbour Point Fund Services (BVI) Limited"
+  }
+}

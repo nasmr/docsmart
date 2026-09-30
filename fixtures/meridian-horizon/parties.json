@@ -1,0 +1,887 @@
+[
+  {
+    "id": "pty_001",
+    "type": "individual",
+    "full_name": "Adaeze Achterberg",
+    "date_of_birth": "1958-01-01",
+    "nationality": "Singaporean",
+    "residential_address": "10 Example Road, Test District, Singapore",
+    "tax_residence": "Singapore",
+    "tax_id": "TEST-TIN-00001",
+    "email": "investor001@example.com",
+    "kyc": {
+      "completed_date": "2026-01-15"
+    }
+  },
+  {
+    "id": "pty_002",
+    "type": "individual",
+    "full_name": "Bruno Hollingsworth",
+    "date_of_birth": "1961-02-06",
+    "nationality": "Chinese",
+    "residential_address": "11 Example Road, Test District, Hong Kong",
+    "tax_residence": "Hong Kong",
+    "tax_id": "TEST-TIN-00002",
+    "email": "investor002@example.com",
+    "kyc": {
+      "completed_date": "2026-02-15"
+    }
+  },
+  {
+    "id": "pty_003",
+    "type": "individual",
+    "full_name": "Chen Oyelaran",
+    "date_of_birth": "1964-03-11",
+    "nationality": "Australian",
+    "residential_address": "12 Example Road, Test District, Australia",
+    "tax_residence": "Australia",
+    "tax_id": "TEST-TIN-00003",
+    "email": "investor003@example.com",
+    "kyc": {
+      "completed_date": "2026-03-15"
+    }
+  },
+  {
+    "id": "pty_004",
+    "type": "individual",
+    "full_name": "Daniela Valcourt",
+    "date_of_birth": "1967-04-16",
+    "nationality": "British",
+    "residential_address": "13 Example Road, Test District, United Kingdom",
+    "tax_residence": "United Kingdom",
+    "tax_id": "TEST-TIN-00004",
+    "email": "investor004@example.com",
+    "kyc": {
+      "completed_date": "2026-04-15"
+    }
+  },
+  {
+    "id": "pty_005",
+    "type": "individual",
+    "full_name": "Emeka Coventry",
+    "date_of_birth": "1970-05-21",
+    "nationality": "Emirati",
+    "residential_address": "14 Example Road, Test District, United Arab Emirates",
+    "tax_residence": "United Arab Emirates",
+    "tax_id": "TEST-TIN-00005",
+    "email": "investor005@example.com",
+    "kyc": {
+      "completed_date": "2026-05-15"
+    }
+  },
+  {
+    "id": "pty_006",
+    "type": "individual",
+    "full_name": "Farah Fairweather",
+    "date_of_birth": "1973-06-26",
+    "nationality": "Swiss",
+    "residential_address": "15 Example Road, Test District, Switzerland",
+    "tax_residence": "Switzerland",
+    "tax_id": "TEST-TIN-00006",
+    "email": "investor006@example.com",
+    "kyc": {
+      "completed_date": "2026-06-15"
+    }
+  },
+  {
+    "id": "pty_007",
+    "type": "individual",
+    "full_name": "Gustav Mbeki-Hart",
+    "date_of_birth": "1976-07-03",
+    "nationality": "German",
+    "residential_address": "16 Example Road, Test District, Germany",
+    "tax_residence": "Germany",
+    "tax_id": "TEST-TIN-00007",
+    "email": "investor007@example.com",
+    "kyc": {
+      "completed_date": "2026-07-15"
+    }
+  },
+  {
+    "id": "pty_008",
+    "type": "individual",
+    "full_name": "Hana Thorvaldsen",
+    "date_of_birth": "1979-08-08",
+    "nationality": "Canadian",
+    "residential_address": "17 Example Road, Test District, Canada",
+    "tax_residence": "Canada",
+    "tax_id": "TEST-TIN-00008",
+    "email": "investor008@example.com",
+    "kyc": {
+      "completed_date": "2026-08-15"
+    }
+  },
+  {
+    "id": "pty_009",
+    "type": "individual",
+    "full_name": "Ignacio Ashworth",
+    "date_of_birth": "1982-09-13",
+    "nationality": "Singaporean",
+    "residential_address": "18 Example Road, Test District, Singapore",
+    "tax_residence": "Singapore",
+    "tax_id": "TEST-TIN-00009",
+    "email": "investor009@example.com",
+    "kyc": {
+      "completed_date": "2026-09-15"
+    }
+  },
+  {
+    "id": "pty_010",
+    "type": "individual",
+    "full_name": "Jae-won Delacroix-Ng",
+    "date_of_birth": "1985-10-18",
+    "nationality": "Chinese",
+    "residential_address": "19 Example Road, Test District, Hong Kong",
+    "tax_residence": "Hong Kong",
+    "tax_id": "TEST-TIN-00010",
+    "email": "investor010@example.com",
+    "kyc": {
+      "completed_date": "2026-01-15"
+    }
+  },
+  {
+    "id": "pty_011",
+    "type": "individual",
+    "full_name": "Kavya Kowalczyk",
+    "date_of_birth": "1988-11-23",
+    "nationality": "Australian",
+    "residential_address": "20 Example Road, Test District, Australia",
+    "tax_residence": "Australia",
+    "tax_id": "TEST-TIN-00011",
+    "email": "investor011@example.com",
+    "kyc": {
+      "completed_date": "2026-02-15"
+    }
+  },
+  {
+    "id": "pty_012",
+    "type": "individual",
+    "full_name": "Lars Rasmussen",
+    "date_of_birth": "1991-12-28",
+    "nationality": "British",
+    "residential_address": "21 Example Road, Test District, United Kingdom",
+    "tax_residence": "United Kingdom",
+    "tax_id": "TEST-TIN-00012",
+    "email": "investor012@example.com",
+    "kyc": {
+      "completed_date": "2026-03-15"
+    }
+  },
+  {
+    "id": "pty_013",
+    "type": "individual",
+    "full_name": "Mei Yardley",
+    "date_of_birth": "1959-01-05",
+    "nationality": "Emirati",
+    "residential_address": "22 Example Road, Test District, United Arab Emirates",
+    "tax_residence": "United Arab Emirates",
+    "tax_id": "TEST-TIN-00013",
+    "email": "investor013@example.com",
+    "kyc": {
+      "completed_date": "2026-04-15"
+    }
+  },
+  {
+    "id": "pty_014",
+    "type": "individual",
+    "full_name": "Nikolai Brightwater",
+    "date_of_birth": "1962-02-10",
+    "nationality": "Swiss",
+    "residential_address": "23 Example Road, Test District, Switzerland",
+    "tax_residence": "Switzerland",
+    "tax_id": "TEST-TIN-00014",
+    "email": "investor014@example.com",
+    "kyc": {
+      "completed_date": "2026-05-15"
+    }
+  },
+  {
+    "id": "pty_015",
+    "type": "individual",
+    "full_name": "Oluwaseun Ishikawa",
+    "date_of_birth": "1965-03-15",
+    "nationality": "German",
+    "residential_address": "24 Example Road, Test District, Germany",
+    "tax_residence": "Germany",
+    "tax_id": "TEST-TIN-00015",
+    "email": "investor015@example.com",
+    "kyc": {
+      "completed_date": "2026-06-15"
+    }
+  },
+  {
+    "id": "pty_016",
+    "type": "individual",
+    "full_name": "Paloma Pemberton",
+    "date_of_birth": "1968-04-20",
+    "nationality": "Canadian",
+    "residential_address": "25 Example Road, Test District, Canada",
+    "tax_residence": "Canada",
+    "tax_id": "TEST-TIN-00016",
+    "email": "investor016@example.com",
+    "kyc": {
+      "completed_date": "2026-07-15"
+    }
+  },
+  {
+    "id": "pty_017",
+    "type": "individual",
+    "full_name": "Quentin Wexley",
+    "date_of_birth": "1971-05-25",
+    "nationality": "Singaporean",
+    "residential_address": "26 Example Road, Test District, Singapore",
+    "tax_residence": "Singapore",
+    "tax_id": "TEST-TIN-00017",
+    "email": "investor017@example.com",
+    "kyc": {
+      "completed_date": "2026-08-15"
+    }
+  },
+  {
+    "id": "pty_018",
+    "type": "individual",
+    "full_name": "Rania Drummond",
+    "date_of_birth": "1974-06-02",
+    "nationality": "Chinese",
+    "residential_address": "27 Example Road, Test District, Hong Kong",
+    "tax_residence": "Hong Kong",
+    "tax_id": "TEST-TIN-00018",
+    "email": "investor018@example.com",
+    "kyc": {
+      "completed_date": "2026-09-15"
+    }
+  },
+  {
+    "id": "pty_019",
+    "type": "individual",
+    "full_name": "Sione Gunawardena",
+    "date_of_birth": "1977-07-07",
+    "nationality": "Australian",
+    "residential_address": "28 Example Road, Test District, Australia",
+    "tax_residence": "Australia",
+    "tax_id": "TEST-TIN-00019",
+    "email": "investor019@example.com",
+    "kyc": {
+      "completed_date": "2026-01-15"
+    }
+  },
+  {
+    "id": "pty_020",
+    "type": "individual",
+    "full_name": "Tomasz Nakashima",
+    "date_of_birth": "1980-08-12",
+    "nationality": "British",
+    "residential_address": "29 Example Road, Test District, United Kingdom",
+    "tax_residence": "United Kingdom",
+    "tax_id": "TEST-TIN-00020",
+    "email": "investor020@example.com",
+    "kyc": {
+      "completed_date": "2026-02-15"
+    }
+  },
+  {
+    "id": "pty_021",
+    "type": "individual",
+    "full_name": "Uma Uchenna",
+    "date_of_birth": "1983-09-17",
+    "nationality": "Emirati",
+    "residential_address": "30 Example Road, Test District, United Arab Emirates",
+    "tax_residence": "United Arab Emirates",
+    "tax_id": "TEST-TIN-00021",
+    "email": "investor021@example.com",
+    "kyc": {
+      "completed_date": "2026-03-15"
+    }
+  },
+  {
+    "id": "pty_022",
+    "type": "individual",
+    "full_name": "Viktor Bellamy",
+    "date_of_birth": "1986-10-22",
+    "nationality": "Swiss",
+    "residential_address": "31 Example Road, Test District, Switzerland",
+    "tax_residence": "Switzerland",
+    "tax_id": "TEST-TIN-00022",
+    "email": "investor022@example.com",
+    "kyc": {
+      "completed_date": "2026-04-15"
+    }
+  },
+  {
+    "id": "pty_023",
+    "type": "individual",
+    "full_name": "Wen Eberhardt",
+    "date_of_birth": "1989-11-27",
+    "nationality": "German",
+    "residential_address": "32 Example Road, Test District, Germany",
+    "tax_residence": "Germany",
+    "tax_id": "TEST-TIN-00023",
+    "email": "investor023@example.com",
+    "kyc": {
+      "completed_date": "2026-05-15"
+    }
+  },
+  {
+    "id": "pty_024",
+    "type": "individual",
+    "full_name": "Ximena Lindqvist",
+    "date_of_birth": "1992-12-04",
+    "nationality": "Canadian",
+    "residential_address": "33 Example Road, Test District, Canada",
+    "tax_residence": "Canada",
+    "tax_id": "TEST-TIN-00024",
+    "email": "investor024@example.com",
+    "kyc": {
+      "completed_date": "2026-06-15"
+    }
+  },
+  {
+    "id": "pty_025",
+    "type": "individual",
+    "full_name": "Yusuf Szabo",
+    "date_of_birth": "1960-01-09",
+    "nationality": "Singaporean",
+    "residential_address": "34 Example Road, Test District, Singapore",
+    "tax_residence": "Singapore",
+    "tax_id": "TEST-TIN-00025",
+    "email": "investor025@example.com",
+    "kyc": {
+      "completed_date": "2026-07-15"
+    }
+  },
+  {
+    "id": "pty_026",
+    "type": "individual",
+    "full_name": "Zofia Zelenko",
+    "date_of_birth": "1963-02-14",
+    "nationality": "Chinese",
+    "residential_address": "35 Example Road, Test District, Hong Kong",
+    "tax_residence": "Hong Kong",
+    "tax_id": "TEST-TIN-00026",
+    "email": "investor026@example.com",
+    "kyc": {
+      "completed_date": "2026-08-15"
+    }
+  },
+  {
+    "id": "pty_027",
+    "type": "individual",
+    "full_name": "Arjun Castellanos",
+    "date_of_birth": "1966-03-19",
+    "nationality": "Australian",
+    "residential_address": "36 Example Road, Test District, Australia",
+    "tax_residence": "Australia",
+    "tax_id": "TEST-TIN-00027",
+    "email": "investor027@example.com",
+    "kyc": {
+      "completed_date": "2026-09-15"
+    }
+  },
+  {
+    "id": "pty_028",
+    "type": "individual",
+    "full_name": "Beatriz Jovanovic",
+    "date_of_birth": "1969-04-24",
+    "nationality": "British",
+    "residential_address": "37 Example Road, Test District, United Kingdom",
+    "tax_residence": "United Kingdom",
+    "tax_id": "TEST-TIN-00028",
+    "email": "investor028@example.com",
+    "kyc": {
+      "completed_date": "2026-01-15"
+    }
+  },
+  {
+    "id": "pty_029",
+    "type": "individual",
+    "full_name": "Callum Quiroga",
+    "date_of_birth": "1972-05-01",
+    "nationality": "Emirati",
+    "residential_address": "38 Example Road, Test District, United Arab Emirates",
+    "tax_residence": "United Arab Emirates",
+    "tax_id": "TEST-TIN-00029",
+    "email": "investor029@example.com",
+    "kyc": {
+      "completed_date": "2026-02-15"
+    }
+  },
+  {
+    "id": "pty_030",
+    "type": "individual",
+    "full_name": "Dilnoza Xiang",
+    "date_of_birth": "1975-06-06",
+    "nationality": "Swiss",
+    "residential_address": "39 Example Road, Test District, Switzerland",
+    "tax_residence": "Switzerland",
+    "tax_id": "TEST-TIN-00030",
+    "email": "investor030@example.com",
+    "kyc": {
+      "completed_date": "2026-03-15"
+    }
+  },
+  {
+    "id": "pty_031",
+    "type": "entity",
+    "legal_name": "Brightwater Family Holdings Pte. Ltd.",
+    "entity_type": "company",
+    "jurisdiction": "Singapore",
+    "registration_number": "TEST-REG-00031",
+    "registered_address": "200 Example Road, Test District, Singapore",
+    "tax_residence": "Singapore",
+    "tax_id": "TEST-TIN-00031",
+    "email": "entity031@example.org",
+    "notice_contact": "Farah Lindqvist, entity031@example.org",
+    "is_trustee": false,
+    "authorised_signatories": [
+      {
+        "name": "Farah Lindqvist",
+        "title": "Director"
+      },
+      {
+        "name": "Rania Eberhardt",
+        "title": "Director"
+      }
+    ],
+    "controllers": [
+      {
+        "name": "Farah Lindqvist",
+        "role": "Director",
+        "ownership_description": "None"
+      },
+      {
+        "name": "Rania Eberhardt",
+        "role": "Director",
+        "ownership_description": "None"
+      },
+      {
+        "name": "Jae-won Castellanos",
+        "role": "Beneficial owner",
+        "ownership_description": "40% of the voting shares"
+      }
+    ],
+    "kyc": {
+      "completed_date": "2026-01-20"
+    }
+  },
+  {
+    "id": "pty_032",
+    "type": "entity",
+    "legal_name": "Castellanos Capital Limited",
+    "entity_type": "company",
+    "jurisdiction": "Hong Kong",
+    "registration_number": "TEST-REG-00032",
+    "registered_address": "201 Example Road, Test District, Hong Kong",
+    "tax_residence": "Hong Kong",
+    "tax_id": "TEST-TIN-00032",
+    "email": "entity032@example.org",
+    "notice_contact": "Gustav Oyelaran, entity032@example.org",
+    "is_trustee": false,
+    "authorised_signatories": [
+      {
+        "name": "Gustav Oyelaran",
+        "title": "Director"
+      }
+    ],
+    "controllers": [
+      {
+        "name": "Gustav Oyelaran",
+        "role": "Director",
+        "ownership_description": "None"
+      },
+      {
+        "name": "Kavya Nakashima",
+        "role": "Beneficial owner",
+        "ownership_description": "41% of the voting shares"
+      }
+    ],
+    "kyc": {
+      "completed_date": "2026-02-20"
+    }
+  },
+  {
+    "id": "pty_033",
+    "type": "entity",
+    "legal_name": "Fairweather Ventures Pty Ltd",
+    "entity_type": "company",
+    "jurisdiction": "New South Wales, Australia",
+    "registration_number": "TEST-REG-00033",
+    "registered_address": "202 Example Road, Test District, Australia",
+    "tax_residence": "Australia",
+    "tax_id": "TEST-TIN-00033",
+    "email": "entity033@example.org",
+    "notice_contact": "Hana Rasmussen, entity033@example.org",
+    "is_trustee": false,
+    "authorised_signatories": [
+      {
+        "name": "Hana Rasmussen",
+        "title": "Director"
+      }
+    ],
+    "controllers": [
+      {
+        "name": "Hana Rasmussen",
+        "role": "Director",
+        "ownership_description": "None"
+      },
+      {
+        "name": "Lars Yardley",
+        "role": "Beneficial owner",
+        "ownership_description": "42% of the voting shares"
+      }
+    ],
+    "kyc": {
+      "completed_date": "2026-03-20"
+    }
+  },
+  {
+    "id": "pty_034",
+    "type": "entity",
+    "legal_name": "Nakashima Investments Limited",
+    "entity_type": "company",
+    "jurisdiction": "British Virgin Islands",
+    "registration_number": "TEST-REG-00034",
+    "registered_address": "203 Example Road, Test District, British Virgin Islands",
+    "tax_residence": "British Virgin Islands",
+    "tax_id": "TEST-TIN-00034",
+    "email": "entity034@example.org",
+    "notice_contact": "Ignacio Uchenna, entity034@example.org",
+    "is_trustee": false,
+    "authorised_signatories": [
+      {
+        "name": "Ignacio Uchenna",
+        "title": "Director"
+      },
+      {
+        "name": "Uma Thorvaldsen",
+        "title": "Director"
+      }
+    ],
+    "controllers": [
+      {
+        "name": "Ignacio Uchenna",
+        "role": "Director",
+        "ownership_description": "None"
+      },
+      {
+        "name": "Uma Thorvaldsen",
+        "role": "Director",
+        "ownership_description": "None"
+      },
+      {
+        "name": "Mei Fairweather",
+        "role": "Beneficial owner",
+        "ownership_description": "43% of the voting shares"
+      }
+    ],
+    "kyc": {
+      "completed_date": "2026-04-20"
+    }
+  },
+  {
+    "id": "pty_035",
+    "type": "entity",
+    "legal_name": "Lindqvist Invest AG",
+    "entity_type": "company",
+    "jurisdiction": "Zug, Switzerland",
+    "registration_number": "TEST-REG-00035",
+    "registered_address": "204 Example Road, Test District, Switzerland",
+    "tax_residence": "Switzerland",
+    "tax_id": "TEST-TIN-00035",
+    "email": "entity035@example.org",
+    "notice_contact": "Jae-won Xiang, entity035@example.org",
+    "is_trustee": false,
+    "authorised_signatories": [
+      {
+        "name": "Jae-won Xiang",
+        "title": "Director"
+      }
+    ],
+    "controllers": [
+      {
+        "name": "Jae-won Xiang",
+        "role": "Director",
+        "ownership_description": "None"
+      },
+      {
+        "name": "Nikolai Quiroga",
+        "role": "Beneficial owner",
+        "ownership_description": "44% of the voting shares"
+      }
+    ],
+    "kyc": {
+      "completed_date": "2026-05-20"
+    }
+  },
+  {
+    "id": "pty_036",
+    "type": "entity",
+    "legal_name": "Kestrel Coinvest Vehicle One Limited",
+    "entity_type": "company",
+    "jurisdiction": "Cayman Islands",
+    "registration_number": "TEST-REG-00036",
+    "registered_address": "205 Example Road, Test District, Cayman Islands",
+    "tax_residence": "Cayman Islands",
+    "tax_id": "TEST-TIN-00036",
+    "email": "entity036@example.org",
+    "notice_contact": "Kavya Ashworth, entity036@example.org",
+    "is_trustee": false,
+    "authorised_signatories": [
+      {
+        "name": "Kavya Ashworth",
+        "title": "Director"
+      }
+    ],
+    "controllers": [
+      {
+        "name": "Kavya Ashworth",
+        "role": "Director",
+        "ownership_description": "None"
+      },
+      {
+        "name": "Oluwaseun Bellamy",
+        "role": "Beneficial owner",
+        "ownership_description": "45% of the voting shares"
+      }
+    ],
+    "kyc": {
+      "completed_date": "2026-06-20"
+    }
+  },
+  {
+    "id": "pty_037",
+    "type": "entity",
+    "legal_name": "Oyelaran Partners LP",
+    "entity_type": "limited_partnership",
+    "jurisdiction": "Delaware, United States",
+    "registration_number": "TEST-REG-00037",
+    "registered_address": "206 Example Road, Test District, United States",
+    "tax_residence": "United States",
+    "tax_id": "TEST-TIN-00037",
+    "email": "entity037@example.org",
+    "notice_contact": "Lars Drummond, entity037@example.org",
+    "is_trustee": false,
+    "authorised_signatories": [
+      {
+        "name": "Lars Drummond",
+        "title": "Authorised signatory of the general partner"
+      },
+      {
+        "name": "Ximena Eberhardt",
+        "title": "Director"
+      }
+    ],
+    "controllers": [
+      {
+        "name": "Lars Drummond",
+        "role": "Authorised signatory of the general partner",
+        "ownership_description": "None"
+      },
+      {
+        "name": "Ximena Eberhardt",
+        "role": "Director",
+        "ownership_description": "None"
+      },
+      {
+        "name": "Paloma Ishikawa",
+        "role": "Beneficial owner",
+        "ownership_description": "46% of the voting shares"
+      }
+    ],
+    "kyc": {
+      "completed_date": "2026-07-20"
+    }
+  },
+  {
+    "id": "pty_038",
+    "type": "entity",
+    "legal_name": "Pemberton Growth Fund II LP",
+    "entity_type": "limited_partnership",
+    "jurisdiction": "England and Wales",
+    "registration_number": "TEST-REG-00038",
+    "registered_address": "207 Example Road, Test District, England and Wales",
+    "tax_residence": "England and Wales",
+    "tax_id": "TEST-TIN-00038",
+    "email": "entity038@example.org",
+    "notice_contact": "Mei Castellanos, entity038@example.org",
+    "is_trustee": false,
+    "authorised_signatories": [
+      {
+        "name": "Mei Castellanos",
+        "title": "Authorised signatory of the general partner"
+      }
+    ],
+    "controllers": [
+      {
+        "name": "Mei Castellanos",
+        "role": "Authorised signatory of the general partner",
+        "ownership_description": "None"
+      },
+      {
+        "name": "Quentin Thorvaldsen",
+        "role": "Beneficial owner",
+        "ownership_description": "47% of the voting shares"
+      }
+    ],
+    "kyc": {
+      "completed_date": "2026-08-20"
+    }
+  },
+  {
+    "id": "pty_039",
+    "type": "entity",
+    "legal_name": "Wexley Opportunities LP",
+    "entity_type": "limited_partnership",
+    "jurisdiction": "Ontario, Canada",
+    "registration_number": "TEST-REG-00039",
+    "registered_address": "208 Example Road, Test District, Canada",
+    "tax_residence": "Canada",
+    "tax_id": "TEST-TIN-00039",
+    "email": "entity039@example.org",
+    "notice_contact": "Nikolai Fairweather, entity039@example.org",
+    "is_trustee": false,
+    "authorised_signatories": [
+      {
+        "name": "Nikolai Fairweather",
+        "title": "Authorised signatory of the general partner"
+      }
+    ],
+    "controllers": [
+      {
+        "name": "Nikolai Fairweather",
+        "role": "Authorised signatory of the general partner",
+        "ownership_description": "None"
+      },
+      {
+        "name": "Rania Achterberg",
+        "role": "Beneficial owner",
+        "ownership_description": "48% of the voting shares"
+      }
+    ],
+    "kyc": {
+      "completed_date": "2026-09-20"
+    }
+  },
+  {
+    "id": "pty_040",
+    "type": "entity",
+    "legal_name": "Example Trustees (Jersey) Limited as trustee of the Valcourt Family Trust",
+    "entity_type": "trust",
+    "jurisdiction": "Jersey",
+    "registration_number": "TEST-REG-00040",
+    "registered_address": "209 Example Road, Test District, Jersey",
+    "tax_residence": "Jersey",
+    "tax_id": "TEST-TIN-00040",
+    "email": "entity040@example.org",
+    "notice_contact": "Oluwaseun Ishikawa, entity040@example.org",
+    "is_trustee": true,
+    "trust_name": "Valcourt Family Trust",
+    "authorised_signatories": [
+      {
+        "name": "Oluwaseun Ishikawa",
+        "title": "Director"
+      },
+      {
+        "name": "Arjun Thorvaldsen",
+        "title": "Director"
+      }
+    ],
+    "controllers": [
+      {
+        "name": "Oluwaseun Ishikawa",
+        "role": "Director",
+        "ownership_description": "None"
+      },
+      {
+        "name": "Arjun Thorvaldsen",
+        "role": "Director",
+        "ownership_description": "None"
+      },
+      {
+        "name": "Sione Lindqvist",
+        "role": "Beneficial owner",
+        "ownership_description": "Settlor and beneficiary of the trust"
+      }
+    ],
+    "kyc": {
+      "completed_date": "2026-01-20"
+    }
+  },
+  {
+    "id": "pty_041",
+    "type": "entity",
+    "legal_name": "Example Fiduciary (Singapore) Ltd as trustee of the Drummond Settlement",
+    "entity_type": "trust",
+    "jurisdiction": "Singapore",
+    "registration_number": "TEST-REG-00041",
+    "registered_address": "210 Example Road, Test District, Singapore",
+    "tax_residence": "Singapore",
+    "tax_id": "TEST-TIN-00041",
+    "email": "entity041@example.org",
+    "notice_contact": "Paloma Lindqvist, entity041@example.org",
+    "is_trustee": true,
+    "trust_name": "Drummond Settlement",
+    "authorised_signatories": [
+      {
+        "name": "Paloma Lindqvist",
+        "title": "Director"
+      }
+    ],
+    "controllers": [
+      {
+        "name": "Paloma Lindqvist",
+        "role": "Director",
+        "ownership_description": "None"
+      },
+      {
+        "name": "Tomasz Wexley",
+        "role": "Beneficial owner",
+        "ownership_description": "Settlor and beneficiary of the trust"
+      }
+    ],
+    "kyc": {
+      "completed_date": "2026-02-20"
+    }
+  },
+  {
+    "id": "pty_042",
+    "type": "individual",
+    "full_name": "Dilnoza Fairweather",
+    "date_of_birth": "1970-03-10",
+    "nationality": "British",
+    "residential_address": "400 Example Road, Test District, United Kingdom",
+    "tax_residence": "United Kingdom",
+    "tax_id": "TEST-TIN-00042",
+    "email": "investor042@example.com",
+    "kyc": {
+      "completed_date": "2026-08-01"
+    }
+  },
+  {
+    "id": "pty_043",
+    "type": "individual",
+    "full_name": "Callum Szabo",
+    "date_of_birth": "1974-04-11",
+    "nationality": "Emirati",
+    "residential_address": "401 Example Road, Test District, United Arab Emirates",
+    "tax_residence": "United Arab Emirates",
+    "tax_id": "TEST-TIN-00043",
+    "email": "investor043@example.com",
+    "kyc": {
+      "completed_date": "2026-08-02"
+    }
+  },
+  {
+    "id": "pty_044",
+    "type": "individual",
+    "full_name": "Beatriz Brightwater",
+    "date_of_birth": "1978-05-12",
+    "nationality": "Swiss",
+    "residential_address": "402 Example Road, Test District, Switzerland",
+    "tax_residence": "Switzerland",
+    "tax_id": "TEST-TIN-00044",
+    "email": "investor044@example.com",
+    "kyc": {
+      "completed_date": "2026-08-03"
+    }
+  }
+]
