@@ -1,0 +1,12 @@
+{
+  "name": "docsmart-template-pack",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Generates the first-pass BVI SPC document templates and the template pack guide.",
+  "scripts": {
+    "build": "node build.js out && node guide.js out && python3 fix_borders.py out"
+  },
+  "dependencies": {
+    "docx": "^9.6.1"
+  }
+}
