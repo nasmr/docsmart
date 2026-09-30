@@ -5,9 +5,10 @@ One file per decision. A decision starts as **Proposed**, becomes **Accepted** o
 | # | Decision | Status | Needs |
 |---|---|---|---|
 | [0001](0001-ready-for-submission-state.md) | Add a `READY_FOR_SUBMISSION` state to the document lifecycle | Proposed | Founder |
-| [0002](0002-technology-stack.md) | Technology stack for the first build slice | Proposed | Founder, engineering lead |
+| [0002](0002-technology-stack.md) | Technology stack for the first build slice | Accepted | — |
 | [0003](0003-contracting-wording-and-portfolio-names.md) | Contracting-party wording and portfolio naming | Proposed | BVI counsel |
 | [0004](0004-first-three-document-types.md) | First three document types | Proposed | Founder, design partner |
+| [0005](0005-m1-tooling-and-libraries.md) | Tooling and libraries for milestone M1 | Accepted | — |
 
 ## Format
 

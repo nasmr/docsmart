@@ -33,7 +33,7 @@ Each field has one origin, which says who or what provides its value:
 
 ## Gaps found
 
-These came up while building the catalogue. Each needs a decision before the build step shown. None has been resolved here.
+These came up while building the catalogue. Each needs a decision before the build step shown. G9 has since been resolved by decision 0005.
 
 | # | Gap | Affects | Needs |
 |---|---|---|---|
@@ -45,7 +45,7 @@ These came up while building the catalogue. Each needs a decision before the bui
 | G6 | Five fields are known only at signing (`*.signed_date`, `subscription.accepted_date`, `meeting.minutes_signed_date`), and `resolution.date` may be too. The gate's condition 2, "every required slot is filled" (build plan §4), must exclude them, or no document could pass. | B6, B9 | Engineering |
 | G7 | Fields that fit no entity in the addendum: `Offer.minimum_close_amount`, `Offer.funding_deadline`, the per-transaction director interests (held on the document, not the director), and `formed_for_investment` (held on the subscription, because it is specific to the portfolio). | B2 | Engineering |
 | G8 | D12-A says the asset is bought "from `{{asset.seller_name}}`" even for a primary round, where the seller is the issuer. The fixtures set the seller to the issuer; counsel may prefer different wording. | Template | BVI counsel |
-| G9 | Three values are calculated: `asset.total_consideration`, `asset.markup_pct` and `subscription.shares`. D12 needs `total_consideration` in M1. The build plan has no block for the calculation service (SVC-CALC), and CLAUDE.md says numbers come only from records or that service. | Build plan | Engineering |
+| G9 | Three values are calculated: `asset.total_consideration`, `asset.markup_pct` and `subscription.shares`. D12 needs `total_consideration` in M1. The build plan has no block for the calculation service (SVC-CALC), and CLAUDE.md says numbers come only from records or that service. **Resolved for this slice by decision 0005:** a `packages/calc` package. | Build plan | Engineering (done) |
 | G10 | `subscription.allocated_amount` is a calculated value in the data model, but build plan B4 has it typed in for this slice. The catalogue records it as calculated and notes the exception. | B4 | None (noted) |
 | G11 | D1-SP needs a frozen U3 (subscription terms version and hash), but U3 isn't drafted (decision 0004). This slice also ends at `READY_FOR_SUBMISSION`, not `CLEARED`, so the "required state" for referenced U3 and D13 versions (gate condition 8) needs defining. | B5, B9 | Founder; counsel |
 

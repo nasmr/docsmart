@@ -1,14 +1,14 @@
 # 0002 Technology stack for the first build slice
 
-Status: Proposed
-Date: 30 September 2026
-Decided by: (founder, engineering lead)
+Status: Accepted
+Date: 30 September 2026 (accepted 1 October 2026)
+Decided by: nas
 
 ## Context
 
 Build plan §7 recommends a stack, to be confirmed in milestone M0. See also `docs/spec/open-source-libraries.md`.
 
-## Decision (proposed)
+## Decision
 
 | Area | Choice |
 |---|---|
@@ -28,5 +28,5 @@ Build plan §7 recommends a stack, to be confirmed in milestone M0. See also `do
 
 ## Open points
 
-- Package manager and workspace tool.
+- Package manager and workspace tool: decided in 0005 (pnpm workspaces), with the other M1 tooling.
 - Hosting and data residency, which depend on where tenants are (spec §11).

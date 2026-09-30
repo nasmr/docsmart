@@ -6,7 +6,7 @@ The Document Factory: sponsor-side assembly of BVI segregated portfolio company 
 
 ## Current phase
 
-Pre-build (milestone M0 in `docs/spec/build-plan-drafting-to-submission.md`). The stack is proposed, not confirmed: see `docs/decisions/0002-technology-stack.md`. Do not scaffold tooling for a stack until that decision is accepted.
+Pre-build (milestone M0 in `docs/spec/build-plan-drafting-to-submission.md`). The stack is accepted: see `docs/decisions/0002-technology-stack.md` and, for M1 tooling and libraries, `docs/decisions/0005-m1-tooling-and-libraries.md`. Use those choices; don't add tooling or libraries outside them without a new decision. The canonical template format is still open until the M0 spike.
 
 ## Rules that must hold in every change
 
