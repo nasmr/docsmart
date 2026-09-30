@@ -1,0 +1,14 @@
+{
+  "name": "@docsmart/platform",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Audit log, evidence store, policy store and identity stub (B1).",
+  "type": "module",
+  "exports": {
+    ".": {
+      "development": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "identities": [
+    {
+      "name": "docsmart-local",
+      "credentials": [{ "accessKey": "docsmart", "secretKey": "docsmart-local-only" }],
+      "actions": ["Admin", "Read", "Write", "List", "Tagging"]
+    }
+  ]
+}

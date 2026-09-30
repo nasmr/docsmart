@@ -10,6 +10,7 @@ One file per decision. A decision starts as **Proposed**, becomes **Accepted** o
 | [0004](0004-first-three-document-types.md) | First three document types | Proposed | Founder, design partner |
 | [0005](0005-m1-tooling-and-libraries.md) | Tooling and libraries for milestone M1 | Accepted | — |
 | [0006](0006-word-rendering.md) | Render Word documents from the canonical content | Accepted | — |
+| [0007](0007-node-24-and-seaweedfs.md) | Node 24, and SeaweedFS for local object storage | Accepted | — |
 
 ## Format
 

@@ -1,6 +1,6 @@
 # 0005 Tooling and libraries for milestone M1
 
-Status: Accepted
+Status: Accepted (Node version and MinIO superseded by 0007)
 Date: 1 October 2026
 Decided by: nas
 

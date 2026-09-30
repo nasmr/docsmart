@@ -1,0 +1,36 @@
+# Local services for development (decisions 0005 and 0007). Local-only credentials.
+services:
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: docsmart
+      POSTGRES_PASSWORD: docsmart
+      POSTGRES_DB: docsmart
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U docsmart -d docsmart"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+
+  # S3-compatible object storage for the evidence store (SVC-EVID).
+  seaweedfs:
+    image: chrislusf/seaweedfs:4.48
+    command: server -dir=/data -s3 -s3.config=/etc/seaweedfs/s3.json
+    ports:
+      - "127.0.0.1:8333:8333"
+    volumes:
+      - seaweedfs:/data
+      - ./infra/seaweedfs/s3.json:/etc/seaweedfs/s3.json:ro
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:8333/healthz || exit 1"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+
+volumes:
+  postgres:
+  seaweedfs:

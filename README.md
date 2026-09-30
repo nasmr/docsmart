@@ -2,7 +2,7 @@
 
 The Singularity **Document Factory** (Tool 2): a counsel-in-the-loop workflow that assembles fund documents for sponsors running a BVI segregated portfolio company, routes every draft to a qualified lawyer for clearance, and turns executed documents into structured records.
 
-> **Status:** Pre-build. The repository currently holds the specification, architecture, build plan, portal design notes and first-pass document templates. No application code has been written yet; the first build milestone (M0) confirms the stack and template format.
+> **Status:** Pre-build (milestone M0). The stack is decided (`docs/decisions/` 0002, 0005 to 0007) and the workspace is set up, but no application code has been written yet. The canonical template format is still open until the M0 spike.
 
 ## Where to start
 
@@ -17,6 +17,31 @@ The Singularity **Document Factory** (Tool 2): a counsel-in-the-loop workflow th
 
 The full reading order and an index of every document is in [`docs/README.md`](docs/README.md).
 
+## Development
+
+You need nvm, Docker with Compose, and corepack (it ships with Node).
+
+```
+nvm use                  # Node 24, from .nvmrc
+corepack enable          # provides pnpm at the version in package.json
+pnpm install
+cp .env.example .env
+pnpm db:up               # Postgres 18 and SeaweedFS (S3), waits until healthy
+pnpm build               # tsc -b over all packages
+pnpm typecheck           # packages and the web app
+pnpm test                # Vitest
+pnpm lint                # Biome
+pnpm --filter @docsmart/web run dev
+pnpm db:down
+```
+
+Workspace conventions:
+
+- Each package exports its TypeScript source under the `development` condition, so tests and the web app use source directly; `pnpm build` writes `dist/`.
+- A package that depends on another adds it to `dependencies` as `"workspace:*"` and to `references` in its `tsconfig.json`.
+- pnpm refuses versions published in the last day. Don't add exemptions to `pnpm-workspace.yaml`; widen the version range instead.
+- `templates/generator` is a separate npm project and is not part of the workspace.
+
 ## Repository layout
 
 ```
@@ -25,8 +50,10 @@ templates/     First-pass document templates (Word) and the script that generate
 apps/web/      Sponsor workspace, counsel review room, investor signing (not started)
 services/api/  API and document state machine host (not started)
 packages/      Shared building blocks: platform services, domain model, template
-               library, assembly, checks, AI drafting (not started)
-evals/         Test sets for checks and AI drafting (not started)
+               library, assembly, checks, AI drafting, calculation, shared schemas
+               (not started)
+infra/         Configuration for local services
+evals/         Test sets for checks and AI drafting
 fixtures/      Test documents and records; real design-partner material stays out of git
 ```
 

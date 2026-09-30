@@ -1,0 +1,14 @@
+{
+  "name": "@docsmart/ai-drafting",
+  "version": "0.0.0",
+  "private": true,
+  "description": "AI drafting in marked zones (B8).",
+  "type": "module",
+  "exports": {
+    ".": {
+      "development": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  }
+}

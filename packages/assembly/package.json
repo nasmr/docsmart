@@ -1,0 +1,14 @@
+{
+  "name": "@docsmart/assembly",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Deterministic assembly and rendering (B5).",
+  "type": "module",
+  "exports": {
+    ".": {
+      "development": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  }
+}
