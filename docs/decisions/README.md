@@ -11,6 +11,7 @@ One file per decision. A decision starts as **Proposed**, becomes **Accepted** o
 | [0005](0005-m1-tooling-and-libraries.md) | Tooling and libraries for milestone M1 | Accepted | — |
 | [0006](0006-word-rendering.md) | Render Word documents from the canonical content | Accepted | — |
 | [0007](0007-node-24-and-seaweedfs.md) | Node 24, and SeaweedFS for local object storage | Accepted | — |
+| [0008](0008-canonical-template-format.md) | Canonical template format: our own clause tree | Proposed | nas |
 
 ## Format
 

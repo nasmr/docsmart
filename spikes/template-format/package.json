@@ -1,0 +1,16 @@
+{
+  "name": "@docsmart/spike-template-format",
+  "version": "0.0.0",
+  "private": true,
+  "description": "M0 spike: canonical template format (own clause tree vs Accord TemplateMark). Throwaway code.",
+  "type": "module",
+  "dependencies": {
+    "@accordproject/concerto-core": "^5.0.0",
+    "@accordproject/markdown-template": "^1.1.0",
+    "@accordproject/template-engine": "^5.1.0",
+    "canonicalize": "^5.1.0",
+    "docx": "^9.8.1",
+    "fast-xml-parser": "^5.11.2",
+    "jszip": "^3.10.2"
+  }
+}
