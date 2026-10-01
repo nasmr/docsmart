@@ -1,8 +1,8 @@
 # 0001 Add a READY_FOR_SUBMISSION state
 
-Status: Proposed
-Date: 30 September 2026
-Decided by: (founder)
+Status: Accepted
+Date: 30 September 2026 (accepted 1 October 2026)
+Decided by: nas
 
 ## Context
 

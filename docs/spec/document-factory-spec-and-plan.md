@@ -213,6 +213,8 @@ Each class lists: template source in v1, input model, whether the agent may draf
      └───────────────────────┴────────────────────────────┴──────────── withdraw (GP) ───────────────────────────────────────────────────────┘
 ```
 
+**Amended by decision 0001 (accepted 1 October 2026):** a `READY_FOR_SUBMISSION` state sits between `ASSEMBLED` and `SUBMITTED`. A document enters it when one version passes the submission gate (build plan §4); that version is frozen as a submission package. Any change creates a new version back in `ASSEMBLED`. `SUBMITTED` is entered from `READY_FOR_SUBMISSION` when an order is placed. The diagram above predates the decision.
+
 **Enforced invariants (API-level, tested):**
 
 - `INV-1` No transition into `CLEARED` without a `Clearance` row whose lawyer has a verified admission matching the document's governing-law jurisdiction. (DF-P1)
