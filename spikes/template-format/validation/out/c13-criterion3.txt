@@ -1,0 +1,3 @@
+1. same markdown parsed twice gives the same DOM hash: true (df66bf082668); after DOM -> markdown -> DOM: true
+2. markdown-docx 0.16.26 on D12-B_Creation_Resolution_Written_Sponsor_Asset.docx: {"sameHashTwice":true,"nodes":251,"tables":0,"templateNodes":0,"literalFieldTokens":38,"literalBlockTokens":18,"bookmarks":false}
+2. markdown-docx 0.16.26 on D13-B_Supplement_Sponsor_Secondary.docx: {"sameHashTwice":true,"nodes":391,"tables":0,"templateNodes":0,"literalFieldTokens":72,"literalBlockTokens":13,"bookmarks":false}

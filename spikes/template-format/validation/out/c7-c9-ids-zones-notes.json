@@ -1,0 +1,201 @@
+{
+  "C7.1/contract": {
+    "label": "#clause whose name is not a model property",
+    "kind": "contract",
+    "parse": "Unknown property: c_9_9 File text/grammar.tem.md line -1 column -1"
+  },
+  "C7.1/clause": {
+    "label": "#clause whose name is not a model property",
+    "kind": "clause",
+    "parse": "ok",
+    "idInDom": true,
+    "idInMarkdownBack": true,
+    "reparse": "ok",
+    "domStable": true,
+    "md2": "{{#clause c_9_9}}\nA segregated portfolio be created.\n{{/clause}}",
+    "generate": "ok",
+    "idInOutput": true,
+    "text": ""
+  },
+  "C7.2/contract": {
+    "label": "#clause over an empty concept property per clause",
+    "kind": "contract",
+    "parse": "ok",
+    "idInDom": true,
+    "idInMarkdownBack": true,
+    "reparse": "ok",
+    "domStable": true,
+    "md2": "{{#clause c_2_1}}\n2.1 A segregated portfolio of the Company be created.\n{{/clause}}",
+    "generate": "ok",
+    "idInOutput": true,
+    "text": "2.1 A segregated portfolio of the Company be created."
+  },
+  "C7.2b/contract": {
+    "label": "#clause per clause: root field inside it",
+    "kind": "contract",
+    "parse": "Unknown property: umbrella File text/grammar.tem.md line -1 column -1"
+  },
+  "C7.3/contract": {
+    "label": "id in an HTML comment before the paragraph",
+    "kind": "contract",
+    "parse": "ok",
+    "idInDom": true,
+    "idInMarkdownBack": true,
+    "reparse": "ok",
+    "domStable": true,
+    "md2": "<!-- id: c_2_1 -->\n\n2.1 A segregated portfolio of the Company be created.",
+    "generate": "ok",
+    "idInOutput": true,
+    "text": "2.1 A segregated portfolio of the Company be created."
+  },
+  "C7.3b/contract": {
+    "label": "id in an inline HTML comment inside the paragraph",
+    "kind": "contract",
+    "parse": "ok",
+    "idInDom": true,
+    "idInMarkdownBack": true,
+    "reparse": "ok",
+    "domStable": true,
+    "md2": "2.1 <!-- id: c_2_1 -->A segregated portfolio of the Company be created.",
+    "generate": "ok",
+    "idInOutput": true,
+    "text": "2.1 A segregated portfolio of the Company be created."
+  },
+  "C7.4/contract": {
+    "label": "id carried by heading text",
+    "kind": "contract",
+    "parse": "ok",
+    "idInDom": true,
+    "idInMarkdownBack": true,
+    "reparse": "ok",
+    "domStable": true,
+    "md2": "2 Creation of the Portfolio {#c_2}\n----\n\nBody.",
+    "generate": "ok",
+    "idInOutput": true,
+    "text": "2 Creation of the Portfolio {#c_2}\nBody."
+  },
+  "C7.5": {
+    "propertyDecoratorInDom": false,
+    "conceptDecoratorInDom": true,
+    "conceptDecoratorInOutput": true,
+    "conceptDecoratorArgInDom": true
+  },
+  "C7.6": {
+    "serialiser": "rejected: Unexpected properties for type org.accordproject.commonmark@0.5.0.Heading: id",
+    "toMarkdownTemplate": "failed: Unexpected properties for type org.accordproject.commonmark@0.5.0.Heading: id",
+    "generate": "rejected: Generated invalid agreement: ValidationException: Unexpected properties for type org.accordproject.commonmark@0.5.0.Heading: id: {"
+  },
+  "C7.7/contract": {
+    "label": "table inside a #clause",
+    "kind": "contract",
+    "parse": "ok",
+    "idInDom": true,
+    "idInMarkdownBack": true,
+    "reparse": "ok",
+    "domStable": true,
+    "md2": "{{#clause c_2_1}}\n| Term | Value |\n|---------|---------|\n| Name | Atlas |\n\n{{/clause}}",
+    "generate": "ok",
+    "idInOutput": true,
+    "text": "Term | Value |\nName | Atlas |"
+  },
+  "C8.1/contract": {
+    "label": "AI zone as a #clause over a Zone concept (text supplied as data)",
+    "kind": "contract",
+    "parse": "ok",
+    "idInDom": true,
+    "idInMarkdownBack": true,
+    "reparse": "ok",
+    "domStable": true,
+    "md2": "{{#clause issuer_description}}\n{{text}}\n{{/clause}}",
+    "generate": "ok",
+    "idInOutput": true,
+    "text": "Kestrel Grid Systems Limited designs grid-scale battery controllers."
+  },
+  "C8.2/contract": {
+    "label": "locked designation as a #clause over a Locked concept",
+    "kind": "contract",
+    "parse": "ok",
+    "idInDom": true,
+    "idInMarkdownBack": true,
+    "reparse": "ok",
+    "domStable": true,
+    "md2": "{{#clause contracting_party}}\n**{{umbrella_name}} for and on behalf of {{portfolio_name}}**\n{{/clause}}",
+    "generate": "ok",
+    "idInOutput": true,
+    "text": "Meridian Horizon SPC Limited for and on behalf of Atlas Segregated Portfolio"
+  },
+  "C8.3/contract": {
+    "label": "locked designation as two #with blocks (inline)",
+    "kind": "contract",
+    "parse": "ok",
+    "idInDom": true,
+    "idInMarkdownBack": true,
+    "reparse": "ok",
+    "domStable": true,
+    "md2": "**{{#with umbrella}}{{legal_name}}{{/with}} for and on behalf of {{#with portfolio}}{{legal_name}}{{/with}}**",
+    "generate": "ok",
+    "idInOutput": true,
+    "text": "Meridian Horizon SPC Limited for and on behalf of Atlas Segregated Portfolio"
+  },
+  "C8.4/contract": {
+    "label": "locked designation as a formula (code)",
+    "kind": "contract",
+    "parse": "ok",
+    "idInDom": true,
+    "idInMarkdownBack": false,
+    "reparse": "ok",
+    "domStable": false,
+    "md2": "{{%Resource {id=org.accordproject.templatemark@0.5.0.Code}%}}",
+    "generate": "ok",
+    "idInOutput": true,
+    "text": "\"Meridian Horizon SPC Limited for and on behalf of Atlas Segregated Portfolio\""
+  },
+  "C8.5": {
+    "parse": "ok",
+    "generate": true,
+    "text": "Meridian Horizon SPC Limited acting for Atlas Segregated Portfolio"
+  },
+  "C9.1/contract": {
+    "label": "counsel note as an HTML block comment",
+    "kind": "contract",
+    "parse": "ok",
+    "idInDom": true,
+    "idInMarkdownBack": true,
+    "reparse": "ok",
+    "domStable": true,
+    "md2": "Text before.\n\n<!-- COUNSEL NOTE n_1: which article permits written resolutions? -->\n\nText after.",
+    "generate": "ok",
+    "idInOutput": true,
+    "text": "Text before.\nText after."
+  },
+  "C9.2/contract": {
+    "label": "counsel note inside a #clause",
+    "kind": "contract",
+    "parse": "ok",
+    "idInDom": true,
+    "idInMarkdownBack": true,
+    "reparse": "ok",
+    "domStable": true,
+    "md2": "{{#clause c_2_1}}\nText.\n\n<!-- COUNSEL NOTE n_2: confirm the wording -->\n{{/clause}}",
+    "generate": "ok",
+    "idInOutput": true,
+    "text": "Text."
+  },
+  "C9.3/contract": {
+    "label": "counsel note inline in a paragraph",
+    "kind": "contract",
+    "parse": "ok",
+    "idInDom": true,
+    "idInMarkdownBack": true,
+    "reparse": "ok",
+    "domStable": true,
+    "md2": "Text <!-- COUNSEL NOTE n_3: check --> after.",
+    "generate": "ok",
+    "idInOutput": true,
+    "text": "Text after."
+  },
+  "C9.4": {
+    "before": true,
+    "after": false
+  }
+}

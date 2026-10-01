@@ -1,0 +1,32 @@
+C7.1 #clause whose name is not a model property [contract]: PARSE-ERR Unknown property: c_9_9 File text/grammar.tem.md line -1 column -1
+C7.1 #clause whose name is not a model property [clause]: parse ok, id in DOM true, md->DOM->md keeps id true, reparse ok, DOM hash stable true, generate ok, id in output true
+      text: ""
+C7.2 #clause over an empty concept property per clause [contract]: parse ok, id in DOM true, md->DOM->md keeps id true, reparse ok, DOM hash stable true, generate ok, id in output true
+      text: "2.1 A segregated portfolio of the Company be created."
+C7.2b #clause per clause: root field inside it [contract]: PARSE-ERR Unknown property: umbrella File text/grammar.tem.md line -1 column -1
+C7.3 id in an HTML comment before the paragraph [contract]: parse ok, id in DOM true, md->DOM->md keeps id true, reparse ok, DOM hash stable true, generate ok, id in output true
+      text: "2.1 A segregated portfolio of the Company be created."
+C7.3b id in an inline HTML comment inside the paragraph [contract]: parse ok, id in DOM true, md->DOM->md keeps id true, reparse ok, DOM hash stable true, generate ok, id in output true
+      text: "2.1 A segregated portfolio of the Company be created."
+C7.4 id carried by heading text [contract]: parse ok, id in DOM true, md->DOM->md keeps id true, reparse ok, DOM hash stable true, generate ok, id in output true
+      text: "2 Creation of the Portfolio {#c_2}\nBody."
+C7.5 decorators: on the property (@ClauseId) reaches the #clause node false; on the concept (@Id("c_2_1")) reaches the node true, survives generation true
+C7.6 extra "id" property on Paragraph/Heading DOM nodes: {"serialiser":"rejected: Unexpected properties for type org.accordproject.commonmark@0.5.0.Heading: id","toMarkdownTemplate":"failed: Unexpected properties for type org.accordproject.commonmark@0.5.0.Heading: id","generate":"rejected: Generated invalid agreement: ValidationException: Unexpected properties for type org.accordproject.commonmark@0.5.0.Heading: id: {"}
+C7.7 table inside a #clause [contract]: parse ok, id in DOM true, md->DOM->md keeps id true, reparse ok, DOM hash stable true, generate ok, id in output true
+      text: "Term | Value |\nName | Atlas |"
+C8.1 AI zone as a #clause over a Zone concept (text supplied as data) [contract]: parse ok, id in DOM true, md->DOM->md keeps id true, reparse ok, DOM hash stable true, generate ok, id in output true
+      text: "Kestrel Grid Systems Limited designs grid-scale battery controllers."
+C8.2 locked designation as a #clause over a Locked concept [contract]: parse ok, id in DOM true, md->DOM->md keeps id true, reparse ok, DOM hash stable true, generate ok, id in output true
+      text: "Meridian Horizon SPC Limited for and on behalf of Atlas Segregated Portfolio"
+C8.3 locked designation as two #with blocks (inline) [contract]: parse ok, id in DOM true, md->DOM->md keeps id true, reparse ok, DOM hash stable true, generate ok, id in output true
+      text: "Meridian Horizon SPC Limited for and on behalf of Atlas Segregated Portfolio"
+C8.4 locked designation as a formula (code) [contract]: parse ok, id in DOM true, md->DOM->md keeps id false, reparse ok, DOM hash stable false, generate ok, id in output true
+      text: "\"Meridian Horizon SPC Limited for and on behalf of Atlas Segregated Portfolio\""
+C8.5 locked wording edited ("acting for"): parse ok, generate ok: "Meridian Horizon SPC Limited acting for Atlas Segregated Portfolio"
+C9.1 counsel note as an HTML block comment [contract]: parse ok, id in DOM true, md->DOM->md keeps id true, reparse ok, DOM hash stable true, generate ok, id in output true
+      text: "Text before.\nText after."
+C9.2 counsel note inside a #clause [contract]: parse ok, id in DOM true, md->DOM->md keeps id true, reparse ok, DOM hash stable true, generate ok, id in output true
+      text: "Text."
+C9.3 counsel note inline in a paragraph [contract]: parse ok, id in DOM true, md->DOM->md keeps id true, reparse ok, DOM hash stable true, generate ok, id in output true
+      text: "Text after."
+C9.4 strip Html nodes from output: note present before true, after false

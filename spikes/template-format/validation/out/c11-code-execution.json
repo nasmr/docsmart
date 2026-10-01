@@ -1,0 +1,65 @@
+{
+  "hostPid": 467582,
+  "parseOnly": {
+    "parse": "ok",
+    "markerWritten": false
+  },
+  "inProcess": {
+    "generate": "ok",
+    "markerWritten": true,
+    "marker": "formula ran in pid 467582"
+  },
+  "childProcess": {
+    "generate": "ok",
+    "markerWritten": true,
+    "marker": "formula ran in pid 467593"
+  },
+  "disabled": {
+    "generate": "JavaScript evaluation is disabled.",
+    "markerWritten": false
+  },
+  "disabledDataOnly": {
+    "generate": "ok",
+    "text": "Name Atlas. Kestrel."
+  },
+  "conditionIf": {
+    "parse": "ok",
+    "generate": "ok",
+    "markerWritten": true
+  },
+  "conditionClause": {
+    "parse": "ok",
+    "generate": "ok",
+    "markerWritten": true
+  },
+  "formulaInFalseClause": {
+    "generate": "ok",
+    "markerWritten": true,
+    "text": ""
+  },
+  "codeFieldsInModel": [
+    "FormulaDefinition.code",
+    "ClauseDefinition.condition",
+    "ConditionalDefinition.condition",
+    "ConditionalBlockDefinition.condition"
+  ],
+  "staticCheck": {
+    "data-only": [],
+    "formula": [
+      "/nodes/0/nodes/0/nodes/1: FormulaDefinition",
+      "/nodes/0/nodes/0/nodes/1/code: Code"
+    ],
+    "#if condition=": [
+      "/nodes/0/nodes/0/nodes/1/condition: Code"
+    ],
+    "#clause condition=": [
+      "/nodes/0/nodes/0/condition: Code"
+    ]
+  },
+  "jsonpathName": {
+    "generate": "obj needs to be an object",
+    "staticCheck": [
+      "/nodes/0/nodes/0/nodes/1: bad name \"name'][(@['length']>0 ? 'x' : 'y')]['z\""
+    ]
+  }
+}

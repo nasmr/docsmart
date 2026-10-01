@@ -1,0 +1,459 @@
+[
+  {
+    "id": "C2.1",
+    "name": "inline, field inside #if, inside #with",
+    "kind": "contract",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C2.1",
+    "name": "inline, field inside #if, inside #with",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C2.2",
+    "name": "\"block\" form (lines inside #with)",
+    "kind": "contract",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C2.2",
+    "name": "\"block\" form (lines inside #with)",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C2.3",
+    "name": "top-level field inside #if (no #with)",
+    "kind": "contract",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C2.3",
+    "name": "top-level field inside #if (no #with)",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C2.4",
+    "name": "field in the else branch",
+    "kind": "contract",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C2.4",
+    "name": "field in the else branch",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C2.5",
+    "name": "#with inside #if",
+    "kind": "contract",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "currentModel.getOwnProperty is not a function"
+  },
+  {
+    "id": "C2.5",
+    "name": "#with inside #if",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "currentModel.getOwnProperty is not a function"
+  },
+  {
+    "id": "C2.6",
+    "name": "#if inside #clause",
+    "kind": "contract",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C2.6",
+    "name": "#if inside #clause",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C2.7a",
+    "name": "#optional over an optional concept, present",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "VariableDefinition",
+      "OptionalDefinition"
+    ],
+    "actual": "15% of profits plus a return of 8% a year.",
+    "md": "toMarkdown failed: URI malformed",
+    "expected": "15% of profits plus a return of 8% a year.",
+    "match": true
+  },
+  {
+    "id": "C2.7a",
+    "name": "#optional over an optional concept, present",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "VariableDefinition",
+      "OptionalDefinition"
+    ],
+    "actual": "15% of profits plus a return of 8% a year.",
+    "md": "toMarkdown failed: URI malformed",
+    "expected": "15% of profits plus a return of 8% a year.",
+    "match": true
+  },
+  {
+    "id": "C2.7b",
+    "name": "#optional over an optional concept, absent",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "VariableDefinition",
+      "OptionalDefinition"
+    ],
+    "actual": "15% of profits.",
+    "md": "toMarkdown failed: URI malformed",
+    "expected": "15% of profits.",
+    "match": true
+  },
+  {
+    "id": "C2.7b",
+    "name": "#optional over an optional concept, absent",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "VariableDefinition",
+      "OptionalDefinition"
+    ],
+    "actual": "15% of profits.",
+    "md": "toMarkdown failed: URI malformed",
+    "expected": "15% of profits.",
+    "match": true
+  },
+  {
+    "id": "C2.7c",
+    "name": "#optional with else, absent",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "VariableDefinition",
+      "OptionalDefinition"
+    ],
+    "actual": "15% of profits (no hurdle).",
+    "md": "toMarkdown failed: URI malformed",
+    "expected": "15% of profits (no hurdle).",
+    "match": true
+  },
+  {
+    "id": "C2.7c",
+    "name": "#optional with else, absent",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "VariableDefinition",
+      "OptionalDefinition"
+    ],
+    "actual": "15% of profits (no hurdle).",
+    "md": "toMarkdown failed: URI malformed",
+    "expected": "15% of profits (no hurdle).",
+    "match": true
+  },
+  {
+    "id": "C2.7d",
+    "name": "#optional inside #with (nested concept), present",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "WithDefinition",
+      "VariableDefinition",
+      "OptionalDefinition"
+    ],
+    "actual": "on subscribed capital plus 8%.",
+    "md": "toMarkdown failed: URI malformed",
+    "expected": "on subscribed capital plus 8%.",
+    "match": true
+  },
+  {
+    "id": "C2.7d",
+    "name": "#optional inside #with (nested concept), present",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "WithDefinition",
+      "VariableDefinition",
+      "OptionalDefinition"
+    ],
+    "actual": "on subscribed capital plus 8%.",
+    "md": "toMarkdown failed: URI malformed",
+    "expected": "on subscribed capital plus 8%.",
+    "match": true
+  },
+  {
+    "id": "C2.8a",
+    "name": "#optional over an optional scalar, {{this}}, present",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "VariableDefinition",
+      "OptionalDefinition"
+    ],
+    "actual": "15% of profits plus a return of 8% a year.",
+    "md": "toMarkdown failed: URI malformed",
+    "expected": "15% of profits plus a return of 8% a year.",
+    "match": true
+  },
+  {
+    "id": "C2.8a",
+    "name": "#optional over an optional scalar, {{this}}, present",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "VariableDefinition",
+      "OptionalDefinition"
+    ],
+    "actual": "15% of profits plus a return of 8% a year.",
+    "md": "toMarkdown failed: URI malformed",
+    "expected": "15% of profits plus a return of 8% a year.",
+    "match": true
+  },
+  {
+    "id": "C2.8b",
+    "name": "#optional over an optional scalar, {{this}}, absent",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "VariableDefinition",
+      "OptionalDefinition"
+    ],
+    "actual": "15% of profits.",
+    "md": "toMarkdown failed: URI malformed",
+    "expected": "15% of profits.",
+    "match": true
+  },
+  {
+    "id": "C2.8b",
+    "name": "#optional over an optional scalar, {{this}}, absent",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "VariableDefinition",
+      "OptionalDefinition"
+    ],
+    "actual": "15% of profits.",
+    "md": "toMarkdown failed: URI malformed",
+    "expected": "15% of profits.",
+    "match": true
+  },
+  {
+    "id": "C2.9a",
+    "name": "#clause over an optional concept (block), present",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "VariableDefinition",
+      "ClauseDefinition"
+    ],
+    "actual": "15% of profits.\nInvestors first receive a return of 8% a year.",
+    "md": "toMarkdown failed: URI malformed",
+    "expected": "15% of profits.\nInvestors first receive a return of 8% a year.",
+    "match": true
+  },
+  {
+    "id": "C2.9a",
+    "name": "#clause over an optional concept (block), present",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: rate File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C2.9b",
+    "name": "#clause over an optional concept (block), absent",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "VariableDefinition",
+      "ClauseDefinition"
+    ],
+    "actual": "15% of profits.",
+    "md": "toMarkdown failed: URI malformed",
+    "expected": "15% of profits.",
+    "match": true
+  },
+  {
+    "id": "C2.9b",
+    "name": "#clause over an optional concept (block), absent",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: rate File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C2.10",
+    "name": "formula inside #if (code)",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ERROR",
+    "types": [
+      "ContractDefinition",
+      "VariableDefinition",
+      "ConditionalDefinition",
+      "FormulaDefinition"
+    ],
+    "genErr": "Generated invalid agreement: ValidationException: The instance \"org.accordproject.ciceromark@0.6.0.Formula\" is missing the required field \"value\".: {"
+  },
+  {
+    "id": "C2.10",
+    "name": "formula inside #if (code)",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ERROR",
+    "types": [
+      "ClauseDefinition",
+      "VariableDefinition",
+      "ConditionalDefinition",
+      "FormulaDefinition"
+    ],
+    "genErr": "Generated invalid agreement: ValidationException: The instance \"org.accordproject.ciceromark@0.6.0.Formula\" is missing the required field \"value\".: {"
+  },
+  {
+    "id": "C2.10b",
+    "name": "control: the same formula outside any block",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "VariableDefinition",
+      "FormulaDefinition"
+    ],
+    "actual": "15% of profits plus a return of \"8%\" a year.",
+    "md": "toMarkdown failed: URI malformed",
+    "expected": "15% of profits plus a return of 8% a year.",
+    "match": false
+  },
+  {
+    "id": "C2.10b",
+    "name": "control: the same formula outside any block",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "VariableDefinition",
+      "FormulaDefinition"
+    ],
+    "actual": "15% of profits plus a return of \"8%\" a year.",
+    "md": "toMarkdown failed: URI malformed",
+    "expected": "15% of profits plus a return of 8% a year.",
+    "match": false
+  },
+  {
+    "id": "C2.10c",
+    "name": "formula inside #optional",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ERROR",
+    "types": [
+      "ContractDefinition",
+      "VariableDefinition",
+      "OptionalDefinition",
+      "FormulaDefinition"
+    ],
+    "genErr": "Generated invalid agreement: ValidationException: The instance \"org.accordproject.ciceromark@0.6.0.Formula\" is missing the required field \"value\".: {"
+  },
+  {
+    "id": "C2.10c",
+    "name": "formula inside #optional",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ERROR",
+    "types": [
+      "ClauseDefinition",
+      "VariableDefinition",
+      "OptionalDefinition",
+      "FormulaDefinition"
+    ],
+    "genErr": "Generated invalid agreement: ValidationException: The instance \"org.accordproject.ciceromark@0.6.0.Formula\" is missing the required field \"value\".: {"
+  },
+  {
+    "id": "C2.10d",
+    "name": "formula inside #clause (block)",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ClauseDefinition",
+      "FormulaDefinition"
+    ],
+    "actual": "A return of \"8%\" a year.",
+    "md": "toMarkdown failed: URI malformed",
+    "expected": "A return of 8% a year.",
+    "match": false
+  },
+  {
+    "id": "C2.10d",
+    "name": "formula inside #clause (block)",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "FormulaDefinition"
+    ],
+    "actual": "A return of \"8%\" a year.",
+    "md": "toMarkdown failed: URI malformed",
+    "expected": "A return of 8% a year.",
+    "match": false
+  }
+]

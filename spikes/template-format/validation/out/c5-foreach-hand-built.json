@@ -1,0 +1,5 @@
+{
+  "ok": false,
+  "err": "Generated invalid agreement: TypeNotFoundException: Type \"ForeachDefinition\" is not defined in namespace \"org.accordproject.templatemark@0.5.0\".: {",
+  "match": false
+}

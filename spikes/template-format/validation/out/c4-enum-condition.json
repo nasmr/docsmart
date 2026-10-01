@@ -1,0 +1,512 @@
+[
+  {
+    "id": "C4.1",
+    "name": "probe form {{#if condition=\"...\"}} (no property name)",
+    "kind": "contract",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: condition File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C4.1",
+    "name": "probe form {{#if condition=\"...\"}} (no property name)",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: condition File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C4.2a",
+    "name": "idiomatic {{#if asset condition=\"return ...\"}}, gp_sourced",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "A. The valuation was tabled.",
+    "md": "A. The valuation was tabled.",
+    "expected": "A. The valuation was tabled.",
+    "match": true
+  },
+  {
+    "id": "C4.2a",
+    "name": "idiomatic {{#if asset condition=\"return ...\"}}, gp_sourced",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "A. The valuation was tabled.",
+    "md": "A. The valuation was tabled.",
+    "expected": "A. The valuation was tabled.",
+    "match": true
+  },
+  {
+    "id": "C4.2b",
+    "name": "idiomatic {{#if asset condition=\"return ...\"}}, issuer_primary",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "A.",
+    "md": "A.",
+    "expected": "A.",
+    "match": true
+  },
+  {
+    "id": "C4.2b",
+    "name": "idiomatic {{#if asset condition=\"return ...\"}}, issuer_primary",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "A.",
+    "md": "A.",
+    "expected": "A.",
+    "match": true
+  },
+  {
+    "id": "C4.2c",
+    "name": "idiomatic, with else",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "A. No valuation.",
+    "md": "A. No valuation.",
+    "expected": "A. No valuation.",
+    "match": true
+  },
+  {
+    "id": "C4.2c",
+    "name": "idiomatic, with else",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "A. No valuation.",
+    "md": "A. No valuation.",
+    "expected": "A. No valuation.",
+    "match": true
+  },
+  {
+    "id": "C4.2d",
+    "name": "idiomatic, inside #with asset",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "WithDefinition",
+      "VariableDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "Kestrel Grid Systems Limited. The valuation was tabled.",
+    "md": "Kestrel Grid Systems Limited. The valuation was tabled.",
+    "expected": "Kestrel Grid Systems Limited. The valuation was tabled.",
+    "match": true
+  },
+  {
+    "id": "C4.2d",
+    "name": "idiomatic, inside #with asset",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "WithDefinition",
+      "VariableDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "Kestrel Grid Systems Limited. The valuation was tabled.",
+    "md": "Kestrel Grid Systems Limited. The valuation was tabled.",
+    "expected": "Kestrel Grid Systems Limited. The valuation was tabled.",
+    "match": true
+  },
+  {
+    "id": "C4.2e",
+    "name": "idiomatic, field inside the code condition body",
+    "kind": "contract",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: valuer_name File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C4.2e",
+    "name": "idiomatic, field inside the code condition body",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: valuer_name File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C4.3a",
+    "name": "{{#clause asset condition=\"return ...\"}} block, gp_sourced",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ClauseDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "5.2 The valuation by Northgate Valuation Advisers LLP was tabled.\n5.3 The Independent Directors approved it.",
+    "md": "5.2 The valuation by Northgate Valuation Advisers LLP was tabled.\n\n5.3 The Independent Directors approved it.",
+    "expected": "5.2 The valuation by Northgate Valuation Advisers LLP was tabled.\n5.3 The Independent Directors approved it.",
+    "match": true
+  },
+  {
+    "id": "C4.3a",
+    "name": "{{#clause asset condition=\"return ...\"}} block, gp_sourced",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: valuer_name File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C4.3b",
+    "name": "{{#clause asset condition=\"return ...\"}} block, issuer_primary",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ClauseDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "",
+    "md": "toMarkdown failed: Model violation in the \"org.accordproject.commonmark@0.5.0.Paragraph\" instance. The field \"nodes\" has a value of \"undefined\" (type of value: \"undefined\"). Expected type of value: \"Node[]\".",
+    "expected": "",
+    "match": true
+  },
+  {
+    "id": "C4.3b",
+    "name": "{{#clause asset condition=\"return ...\"}} block, issuer_primary",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: valuer_name File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C4.4",
+    "name": "formula returning text",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "FormulaDefinition"
+    ],
+    "actual": "A.\" The valuation was tabled.\"",
+    "md": "A.\" The valuation was tabled.\"",
+    "expected": "A. The valuation was tabled.",
+    "match": false
+  },
+  {
+    "id": "C4.4",
+    "name": "formula returning text",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "FormulaDefinition"
+    ],
+    "actual": "A.\" The valuation was tabled.\"",
+    "md": "A.\" The valuation was tabled.\"",
+    "expected": "A. The valuation was tabled.",
+    "match": false
+  },
+  {
+    "id": "C4.5a",
+    "name": "data: derived Boolean asset_is_gp_sourced, true",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "A. The valuation was tabled.",
+    "md": "A. The valuation was tabled.",
+    "expected": "A. The valuation was tabled.",
+    "match": true
+  },
+  {
+    "id": "C4.5a",
+    "name": "data: derived Boolean asset_is_gp_sourced, true",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "A. The valuation was tabled.",
+    "md": "A. The valuation was tabled.",
+    "expected": "A. The valuation was tabled.",
+    "match": true
+  },
+  {
+    "id": "C4.5b",
+    "name": "data: derived Boolean asset_is_gp_sourced, false",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "A.",
+    "md": "A.",
+    "expected": "A.",
+    "match": true
+  },
+  {
+    "id": "C4.5b",
+    "name": "data: derived Boolean asset_is_gp_sourced, false",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "A.",
+    "md": "A.",
+    "expected": "A.",
+    "match": true
+  },
+  {
+    "id": "C4.6a",
+    "name": "data: optional concept gp_sourced as a block with fields, present",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ClauseDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "5.2 The valuation by Northgate Valuation Advisers LLP was tabled.",
+    "md": "5.2 The valuation by Northgate Valuation Advisers LLP was tabled.",
+    "expected": "5.2 The valuation by Northgate Valuation Advisers LLP was tabled.",
+    "match": true
+  },
+  {
+    "id": "C4.6a",
+    "name": "data: optional concept gp_sourced as a block with fields, present",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: valuer_name File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C4.6b",
+    "name": "data: optional concept gp_sourced as a block with fields, absent",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ClauseDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "",
+    "md": "toMarkdown failed: Model violation in the \"org.accordproject.commonmark@0.5.0.Paragraph\" instance. The field \"nodes\" has a value of \"undefined\" (type of value: \"undefined\"). Expected type of value: \"Node[]\".",
+    "expected": "",
+    "match": true
+  },
+  {
+    "id": "C4.6b",
+    "name": "data: optional concept gp_sourced as a block with fields, absent",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: valuer_name File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C4.7",
+    "name": "enum value printed as a variable",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "WithDefinition",
+      "EnumVariableDefinition"
+    ],
+    "actual": "Source: gp_sourced.",
+    "md": "Source: gp_sourced.",
+    "expected": "Source: gp_sourced.",
+    "match": true
+  },
+  {
+    "id": "C4.7",
+    "name": "enum value printed as a variable",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "WithDefinition",
+      "EnumVariableDefinition"
+    ],
+    "actual": "Source: gp_sourced.",
+    "md": "Source: gp_sourced.",
+    "expected": "Source: gp_sourced.",
+    "match": true
+  },
+  {
+    "id": "C4.8a",
+    "name": "aggregate, code: {{#if directors condition=\"return directors.some(...)\"}}",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "Interests. Declared.",
+    "md": "Interests. Declared.",
+    "expected": "Interests. Declared.",
+    "match": true
+  },
+  {
+    "id": "C4.8a",
+    "name": "aggregate, code: {{#if directors condition=\"return directors.some(...)\"}}",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "Interests. Declared.",
+    "md": "Interests. Declared.",
+    "expected": "Interests. Declared.",
+    "match": true
+  },
+  {
+    "id": "C4.8b",
+    "name": "aggregate, data: derived Boolean any_director_interested",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "Interests. None.",
+    "md": "Interests. None.",
+    "expected": "Interests. None.",
+    "match": true
+  },
+  {
+    "id": "C4.8b",
+    "name": "aggregate, data: derived Boolean any_director_interested",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "Interests. None.",
+    "md": "Interests. None.",
+    "expected": "Interests. None.",
+    "match": true
+  },
+  {
+    "id": "C4.8c",
+    "name": "aggregate, data: optional concept with the interested list, present",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ClauseDefinition",
+      "ListBlockDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Henrik Solberg declared an interest.",
+    "md": "-  Henrik Solberg declared an interest.",
+    "expected": "Henrik Solberg declared an interest.",
+    "match": true
+  },
+  {
+    "id": "C4.8c",
+    "name": "aggregate, data: optional concept with the interested list, present",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: interested File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C4.8d",
+    "name": "aggregate, data: optional concept, absent (else branch needs a second concept)",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ERROR",
+    "types": [
+      "ContractDefinition",
+      "ClauseDefinition",
+      "ListBlockDefinition",
+      "VariableDefinition"
+    ],
+    "genErr": "No values found for path '$['interests']['interested']' in data {\"$class\":\"org.docsmart.v@1.0.0.D\",\"asset\":{\"$class\":\"org.docsmart.v@1.0.0.ProjectAsset\",\"issuer_name\":\"Kestrel Grid Systems Limited\",\"acquisition_source\":\"issuer_primary\",\"valuer_name\":\"Northgate Valuation Advisers LLP\"},\"directors\":[{"
+  },
+  {
+    "id": "C4.8d",
+    "name": "aggregate, data: optional concept, absent (else branch needs a second concept)",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: interested File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C4.8e",
+    "name": "aggregate, data: optional concept guarded by #clause, absent, list moved out of the clause",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ClauseDefinition"
+    ],
+    "actual": "After.",
+    "md": "toMarkdown failed: Model violation in the \"org.accordproject.commonmark@0.5.0.Paragraph\" instance. The field \"nodes\" has a value of \"undefined\" (type of value: \"undefined\"). Expected type of value: \"Node[]\".",
+    "expected": "After.",
+    "match": true
+  },
+  {
+    "id": "C4.8e",
+    "name": "aggregate, data: optional concept guarded by #clause, absent, list moved out of the clause",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition"
+    ],
+    "actual": "After.",
+    "md": "toMarkdown failed: Model violation in the \"org.accordproject.commonmark@0.5.0.Document\" instance. The field \"nodes\" has a value of \"undefined\" (type of value: \"undefined\"). Expected type of value: \"Node[]\".",
+    "expected": "After.",
+    "match": true
+  }
+]

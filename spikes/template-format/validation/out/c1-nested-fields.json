@@ -1,0 +1,317 @@
+[
+  {
+    "id": "C1.1",
+    "name": "dotted path {{umbrella.legal_name}}",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition"
+    ],
+    "actual": "The Company is {{umbrella.legal_name}}.",
+    "md": "The Company is {{umbrella.legal_name}}.",
+    "expected": "The Company is Meridian Horizon SPC Limited.",
+    "match": false
+  },
+  {
+    "id": "C1.1",
+    "name": "dotted path {{umbrella.legal_name}}",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition"
+    ],
+    "actual": "The Company is {{umbrella.legal_name}}.",
+    "md": "The Company is {{umbrella.legal_name}}.",
+    "expected": "The Company is Meridian Horizon SPC Limited.",
+    "match": false
+  },
+  {
+    "id": "C1.2",
+    "name": "dotted path with spaces {{ umbrella.legal_name }}",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition"
+    ],
+    "actual": "The Company is {{ umbrella.legal_name }}.",
+    "md": "The Company is {{ umbrella.legal_name }}.",
+    "expected": "The Company is Meridian Horizon SPC Limited.",
+    "match": false
+  },
+  {
+    "id": "C1.2",
+    "name": "dotted path with spaces {{ umbrella.legal_name }}",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition"
+    ],
+    "actual": "The Company is {{ umbrella.legal_name }}.",
+    "md": "The Company is {{ umbrella.legal_name }}.",
+    "expected": "The Company is Meridian Horizon SPC Limited.",
+    "match": false
+  },
+  {
+    "id": "C1.3",
+    "name": "#with umbrella",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "WithDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "The Company is Meridian Horizon SPC Limited.",
+    "md": "The Company is Meridian Horizon SPC Limited.",
+    "expected": "The Company is Meridian Horizon SPC Limited.",
+    "match": true
+  },
+  {
+    "id": "C1.3",
+    "name": "#with umbrella",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "WithDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "The Company is Meridian Horizon SPC Limited.",
+    "md": "The Company is Meridian Horizon SPC Limited.",
+    "expected": "The Company is Meridian Horizon SPC Limited.",
+    "match": true
+  },
+  {
+    "id": "C1.4",
+    "name": "nested #with (umbrella > om)",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "WithDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Offering memorandum dated 15 September 2026.",
+    "md": "Offering memorandum dated \n\n\n\n15 September 2026.",
+    "expected": "Offering memorandum dated 15 September 2026.",
+    "match": true
+  },
+  {
+    "id": "C1.4",
+    "name": "nested #with (umbrella > om)",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "WithDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Offering memorandum dated 15 September 2026.",
+    "md": "Offering memorandum dated \n\n\n\n15 September 2026.",
+    "expected": "Offering memorandum dated 15 September 2026.",
+    "match": true
+  },
+  {
+    "id": "C1.5",
+    "name": "two #with in one sentence (locked wording)",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "WithDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Meridian Horizon SPC Limited for and on behalf of Atlas Segregated Portfolio",
+    "md": "Meridian Horizon SPC Limited for and on behalf of \n\nAtlas Segregated Portfolio",
+    "expected": "Meridian Horizon SPC Limited for and on behalf of Atlas Segregated Portfolio",
+    "match": true
+  },
+  {
+    "id": "C1.5",
+    "name": "two #with in one sentence (locked wording)",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "WithDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Meridian Horizon SPC Limited for and on behalf of Atlas Segregated Portfolio",
+    "md": "Meridian Horizon SPC Limited for and on behalf of \n\nAtlas Segregated Portfolio",
+    "expected": "Meridian Horizon SPC Limited for and on behalf of Atlas Segregated Portfolio",
+    "match": true
+  },
+  {
+    "id": "C1.6",
+    "name": "#clause umbrella as a block scope",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ClauseDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "The Company is Meridian Horizon SPC Limited.\nA second paragraph naming Meridian Horizon SPC Limited again.",
+    "md": "The Company is Meridian Horizon SPC Limited.\n\nA second paragraph naming Meridian Horizon SPC Limited again.",
+    "expected": "The Company is Meridian Horizon SPC Limited.\nA second paragraph naming Meridian Horizon SPC Limited again.",
+    "match": true
+  },
+  {
+    "id": "C1.6",
+    "name": "#clause umbrella as a block scope",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "The Company is Meridian Horizon SPC Limited.\nA second paragraph naming Meridian Horizon SPC Limited again.",
+    "md": "The Company is Meridian Horizon SPC Limited.\n\nA second paragraph naming Meridian Horizon SPC Limited again.",
+    "expected": "The Company is Meridian Horizon SPC Limited.\nA second paragraph naming Meridian Horizon SPC Limited again.",
+    "match": true
+  },
+  {
+    "id": "C1.7",
+    "name": "nested #clause (umbrella > om)",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ClauseDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Dated 15 September 2026.",
+    "md": "Dated 15 September 2026.",
+    "expected": "Dated 15 September 2026.",
+    "match": true
+  },
+  {
+    "id": "C1.7",
+    "name": "nested #clause (umbrella > om)",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: date File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C1.8",
+    "name": "control: misspelt plain variable {{legal_nmae}}",
+    "kind": "contract",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: legal_nmae File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C1.8",
+    "name": "control: misspelt plain variable {{legal_nmae}}",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: legal_nmae File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C1.9",
+    "name": "control: misspelt variable inside #with",
+    "kind": "contract",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: legal_nmae File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C1.9",
+    "name": "control: misspelt variable inside #with",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: legal_nmae File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C1.10",
+    "name": "misspelt dotted path {{umbrela.legal_name}}",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition"
+    ],
+    "actual": "Name: {{umbrela.legal_name}}.",
+    "md": "Name: {{umbrela.legal_name}}.",
+    "expected": "(an error is the desired result)",
+    "match": false
+  },
+  {
+    "id": "C1.10",
+    "name": "misspelt dotted path {{umbrela.legal_name}}",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition"
+    ],
+    "actual": "Name: {{umbrela.legal_name}}.",
+    "md": "Name: {{umbrela.legal_name}}.",
+    "expected": "(an error is the desired result)",
+    "match": false
+  },
+  {
+    "id": "C1.11",
+    "name": "single-letter variable {{x}} (identifier needs 2+ chars)",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition"
+    ],
+    "actual": "Name: {{x}}.",
+    "md": "Name: {{x}}.",
+    "expected": "(an error is the desired result)",
+    "match": false
+  },
+  {
+    "id": "C1.11",
+    "name": "single-letter variable {{x}} (identifier needs 2+ chars)",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition"
+    ],
+    "actual": "Name: {{x}}.",
+    "md": "Name: {{x}}.",
+    "expected": "(an error is the desired result)",
+    "match": false
+  },
+  {
+    "id": "C1.12",
+    "name": "clause kind: #clause does not change the typing scope, but does change the data scope",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ERROR",
+    "types": [
+      "ClauseDefinition",
+      "VariableDefinition"
+    ],
+    "genErr": "No values found for path '$['umbrella']['only_top']' in data {\"$class\":\"org.docsmart.v@1.0.0.D\",\"umbrella\":{\"$class\":\"org.docsmart.v@1.0.0.Umbrella\",\"legal_name\":\"Meridian Horizon SPC Limited\",\"om\":{\"$class\":\"org.docsmart.v@1.0.0.Om\",\"date\":\"15 September 2026\"}},\"portfolio\":{\"$class\":\"org.docsmart.v"
+  },
+  {
+    "id": "C1.13",
+    "name": "contract kind: same template",
+    "kind": "contract",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: only_top File text/grammar.tem.md line -1 column -1"
+  }
+]

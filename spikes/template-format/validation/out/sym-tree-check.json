@@ -1,0 +1,9 @@
+{
+  "distinctConditions": 16,
+  "grammarRejects": [],
+  "unboundAliasSlots": [
+    "D12-C: {{director.name}} (bound aliases: none)",
+    "D12-C: {{director.interest_description}} (bound aliases: none)"
+  ],
+  "catalogueFieldCount": 121
+}

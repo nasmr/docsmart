@@ -1,0 +1,68 @@
+MATCH     | C3.1a  | contract | one-paragraph #if/else on separate lines, true
+MATCH     | C3.1a  | clause   | one-paragraph #if/else on separate lines, true
+MATCH     | C3.1b  | contract | one-paragraph #if/else on separate lines, false
+MATCH     | C3.1b  | clause   | one-paragraph #if/else on separate lines, false
+MISMATCH  | C3.2   | contract | #if containing two paragraphs (blank line inside)
+            expected: "Apply to the Financial Services Commission for approval. No shares are issued until approval."
+            actual:   "Apply to the Financial Services Commission for approval. No shares are issued until approval. {{/if}}"
+            markdown: "Apply to the Financial Services Commission for approval.\n\nNo shares are issued until approval.\n{{/if}}"
+MISMATCH  | C3.2   | clause   | #if containing two paragraphs (blank line inside)
+            expected: "Apply to the Financial Services Commission for approval. No shares are issued until approval."
+            actual:   "Apply to the Financial Services Commission for approval. No shares are issued until approval. {{/if}}"
+            markdown: "Apply to the Financial Services Commission for approval.\n\nNo shares are issued until approval.\n{{/if}}"
+MISMATCH  | C3.2b  | contract | #if containing two paragraphs, condition FALSE
+            expected: ""
+            actual:   "No shares are issued until approval. {{/if}}"
+            markdown: "No shares are issued until approval.\n{{/if}}"
+MISMATCH  | C3.2b  | clause   | #if containing two paragraphs, condition FALSE
+            expected: ""
+            actual:   "No shares are issued until approval. {{/if}}"
+            markdown: "No shares are issued until approval.\n{{/if}}"
+MISMATCH  | C3.3   | contract | #if containing a heading
+            expected: "3 Regulatory approval Body."
+            actual:   "3 Regulatory approval {{/if}} Body."
+            markdown: "3 Regulatory approval\n----\n\n{{/if}}\n\nBody."
+MISMATCH  | C3.3   | clause   | #if containing a heading
+            expected: "3 Regulatory approval Body."
+            actual:   "3 Regulatory approval {{/if}} Body."
+            markdown: "3 Regulatory approval\n----\n\n{{/if}}\n\nBody."
+MISMATCH  | C3.4   | contract | #if containing a list
+            expected: "first second"
+            actual:   "first second {{/if}}"
+            markdown: "-  first\n-  second\n   {{/if}}"
+MISMATCH  | C3.4   | clause   | #if containing a list
+            expected: "first second"
+            actual:   "first second {{/if}}"
+            markdown: "-  first\n-  second\n   {{/if}}"
+PARSE-ERR | C3.5   | contract | nested #if (inline)
+            parse: currentModel.getOwnProperty is not a function
+PARSE-ERR | C3.5   | clause   | nested #if (inline)
+            parse: currentModel.getOwnProperty is not a function
+MISMATCH  | C3.6   | contract | named #clause inside #if
+            expected: "Apply to the Financial Services Commission."
+            actual:   "Apply to the Financial Services Commission. {{/if}}"
+            markdown: "Apply to the Financial Services Commission.\n\n{{/if}}"
+PARSE-ERR | C3.6   | clause   | named #clause inside #if
+            parse: Unknown property: approver File text/grammar.tem.md line -1 column -1
+MATCH     | C3.7a  | contract | two #clause blocks over optional concepts, regulated
+PARSE-ERR | C3.7a  | clause   | two #clause blocks over optional concepts, regulated
+            parse: Unknown property: approver File text/grammar.tem.md line -1 column -1
+MATCH     | C3.7b  | contract | two #clause blocks over optional concepts, unregulated
+PARSE-ERR | C3.7b  | clause   | two #clause blocks over optional concepts, unregulated
+            parse: Unknown property: approver File text/grammar.tem.md line -1 column -1
+MATCH     | C3.7c  | contract | #if nested inside a #clause block
+PARSE-ERR | C3.7c  | clause   | #if nested inside a #clause block
+            parse: Unknown property: approver File text/grammar.tem.md line -1 column -1
+PARSE-ERR | C3.7d  | contract | root list used inside a #clause block (no parent access)
+            parse: Unknown property: items File text/grammar.tem.md line -1 column -1
+            note: items is a property of the template concept, not of Regulated
+PARSE-ERR | C3.7d  | clause   | root list used inside a #clause block (no parent access)
+            parse: Unknown property: approver File text/grammar.tem.md line -1 column -1
+            note: items is a property of the template concept, not of Regulated
+MATCH     | C3.8a  | contract | #clause with condition= (code), true
+PARSE-ERR | C3.8a  | clause   | #clause with condition= (code), true
+            parse: Unknown property: approver File text/grammar.tem.md line -1 column -1
+PARSE-ERR | C3.9   | contract | root field used inside a #clause block (no parent access)
+            parse: Unknown property: has_hurdle File text/grammar.tem.md line -1 column -1
+PARSE-ERR | C3.9   | clause   | root field used inside a #clause block (no parent access)
+            parse: Unknown property: approver File text/grammar.tem.md line -1 column -1

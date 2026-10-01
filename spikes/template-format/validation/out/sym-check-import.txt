@@ -1,0 +1,10 @@
+ok   D12-A   records  35/35  headings 7 clauses 17 tables 0 notes 3 hash-stable true 158194f158de
+ok   D12-B   records  46/46  headings 8 clauses 21 tables 0 notes 4 hash-stable true 7b27fcb82335
+ok   D12-C   records  46/46  headings 11 clauses 15 tables 1 notes 3 hash-stable true 855a1f05986a
+ok   D13-A   records  63/63  headings 12 clauses 19 tables 1 notes 3 hash-stable true 6946361c8e75
+ok   D13-B   records  79/79  headings 12 clauses 25 tables 1 notes 4 hash-stable true 6ecb725b4ad7
+ok   D13-C   records  64/64  headings 12 clauses 21 tables 1 notes 3 hash-stable true 1a28eeb4b65b
+ok   D1SP-A  records  47/47  headings 14 clauses 17 tables 2 notes 6 hash-stable true 69695cde728c
+ok   D1SP-B  records  60/60  headings 15 clauses 19 tables 3 notes 6 hash-stable true a58e914cd475
+ok   D1SP-C  records  47/47  headings 8 clauses 14 tables 2 notes 3 hash-stable true 4684e3149613
+all templates round-trip

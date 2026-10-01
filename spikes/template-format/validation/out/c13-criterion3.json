@@ -1,0 +1,30 @@
+{
+  "domHash": {
+    "first": "df66bf082668298059016900c20985866a690c1fe4f2f7a487322eb6cbfc76e4",
+    "second": "df66bf082668298059016900c20985866a690c1fe4f2f7a487322eb6cbfc76e4",
+    "same": true,
+    "afterMarkdownRoundTrip": "df66bf082668298059016900c20985866a690c1fe4f2f7a487322eb6cbfc76e4",
+    "sameAfterRoundTrip": true
+  },
+  "docx": {
+    "version": "0.16.26",
+    "D12-B_Creation_Resolution_Written_Sponsor_Asset.docx": {
+      "sameHashTwice": true,
+      "nodes": 251,
+      "tables": 0,
+      "templateNodes": 0,
+      "literalFieldTokens": 38,
+      "literalBlockTokens": 18,
+      "bookmarks": false
+    },
+    "D13-B_Supplement_Sponsor_Secondary.docx": {
+      "sameHashTwice": true,
+      "nodes": 391,
+      "tables": 0,
+      "templateNodes": 0,
+      "literalFieldTokens": 72,
+      "literalBlockTokens": 13,
+      "bookmarks": false
+    }
+  }
+}

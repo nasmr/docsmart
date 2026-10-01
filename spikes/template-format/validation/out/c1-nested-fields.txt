@@ -1,0 +1,58 @@
+MISMATCH  | C1.1   | contract | dotted path {{umbrella.legal_name}}
+            expected: "The Company is Meridian Horizon SPC Limited."
+            actual:   "The Company is {{umbrella.legal_name}}."
+            markdown: "The Company is {{umbrella.legal_name}}."
+MISMATCH  | C1.1   | clause   | dotted path {{umbrella.legal_name}}
+            expected: "The Company is Meridian Horizon SPC Limited."
+            actual:   "The Company is {{umbrella.legal_name}}."
+            markdown: "The Company is {{umbrella.legal_name}}."
+MISMATCH  | C1.2   | contract | dotted path with spaces {{ umbrella.legal_name }}
+            expected: "The Company is Meridian Horizon SPC Limited."
+            actual:   "The Company is {{ umbrella.legal_name }}."
+            markdown: "The Company is {{ umbrella.legal_name }}."
+MISMATCH  | C1.2   | clause   | dotted path with spaces {{ umbrella.legal_name }}
+            expected: "The Company is Meridian Horizon SPC Limited."
+            actual:   "The Company is {{ umbrella.legal_name }}."
+            markdown: "The Company is {{ umbrella.legal_name }}."
+MATCH     | C1.3   | contract | #with umbrella
+MATCH     | C1.3   | clause   | #with umbrella
+MATCH     | C1.4   | contract | nested #with (umbrella > om)
+MATCH     | C1.4   | clause   | nested #with (umbrella > om)
+MATCH     | C1.5   | contract | two #with in one sentence (locked wording)
+MATCH     | C1.5   | clause   | two #with in one sentence (locked wording)
+MATCH     | C1.6   | contract | #clause umbrella as a block scope
+MATCH     | C1.6   | clause   | #clause umbrella as a block scope
+MATCH     | C1.7   | contract | nested #clause (umbrella > om)
+PARSE-ERR | C1.7   | clause   | nested #clause (umbrella > om)
+            parse: Unknown property: date File text/grammar.tem.md line -1 column -1
+PARSE-ERR | C1.8   | contract | control: misspelt plain variable {{legal_nmae}}
+            parse: Unknown property: legal_nmae File text/grammar.tem.md line -1 column -1
+PARSE-ERR | C1.8   | clause   | control: misspelt plain variable {{legal_nmae}}
+            parse: Unknown property: legal_nmae File text/grammar.tem.md line -1 column -1
+PARSE-ERR | C1.9   | contract | control: misspelt variable inside #with
+            parse: Unknown property: legal_nmae File text/grammar.tem.md line -1 column -1
+PARSE-ERR | C1.9   | clause   | control: misspelt variable inside #with
+            parse: Unknown property: legal_nmae File text/grammar.tem.md line -1 column -1
+MISMATCH  | C1.10  | contract | misspelt dotted path {{umbrela.legal_name}}
+            expected: "(an error is the desired result)"
+            actual:   "Name: {{umbrela.legal_name}}."
+            markdown: "Name: {{umbrela.legal_name}}."
+MISMATCH  | C1.10  | clause   | misspelt dotted path {{umbrela.legal_name}}
+            expected: "(an error is the desired result)"
+            actual:   "Name: {{umbrela.legal_name}}."
+            markdown: "Name: {{umbrela.legal_name}}."
+MISMATCH  | C1.11  | contract | single-letter variable {{x}} (identifier needs 2+ chars)
+            expected: "(an error is the desired result)"
+            actual:   "Name: {{x}}."
+            markdown: "Name: {{x}}."
+MISMATCH  | C1.11  | clause   | single-letter variable {{x}} (identifier needs 2+ chars)
+            expected: "(an error is the desired result)"
+            actual:   "Name: {{x}}."
+            markdown: "Name: {{x}}."
+GEN-ERR   | C1.12  | clause   | clause kind: #clause does not change the typing scope, but does change the data scope
+            generate: No values found for path '$['umbrella']['only_top']' in data {"$class":"org.docsmart.v@1.0.0.D","umbrella":{"$class":"org.docsmart.v@1.0.0.Umbrella","legal_name":"Meridian Horizon SPC Limited","om":{"$class":"org.docsmart.v@1.0.0.Om","date":"15 September 2026"}},"portfolio":{"$class":"org.docsmart.v
+PARSE-ERR | C1.13  | contract | contract kind: same template
+            parse: Unknown property: only_top File text/grammar.tem.md line -1 column -1
+
+C1.1 DOM node types: Document, ContractDefinition, Paragraph, Text
+cases whose generated text contains literal "{{": C1.1/contract, C1.1/clause, C1.2/contract, C1.2/clause, C1.10/contract, C1.10/clause, C1.11/contract, C1.11/clause

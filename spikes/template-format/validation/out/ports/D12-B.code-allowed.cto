@@ -1,0 +1,21 @@
+
+namespace org.docsmart.d12b@1.0.0
+concept Director { o String name  o Boolean is_interested  o String interest_description optional  o String signed_date }
+concept Umbrella {
+  o String legal_name  o String company_number  o Boolean is_regulated_fund  o String fund_category  o String om_date
+  o Boolean om_requires_related_party_consent  o String related_party_consent_clause  o Director[] directors
+}
+concept Sponsor { o String legal_name }
+concept Portfolio {
+  o String legal_name  o String share_class_name  o String share_par_value  o String subscription_price
+  o String min_subscription  o String max_offer  o String offer_open_date  o String offer_close_date
+  o String allocation_method_description  o String minimum_close_amount
+}
+concept ProjectAsset {
+  o String instrument  o String issuer_name  o String seller_name  o String sponsor_acquisition_date
+  o String sponsor_cost_per_share  o String price_per_share  o String markup_pct  o String valuer_name
+  o String valuation_date  o String max_quantity  o String total_consideration
+}
+concept Resolution { o String date  o String effective_date  o Boolean effective_date_differs }
+@template
+concept D12B { o Umbrella umbrella  o Sponsor sponsor  o Portfolio portfolio  o ProjectAsset asset  o Resolution resolution }

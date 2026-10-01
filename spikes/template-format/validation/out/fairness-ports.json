@@ -1,0 +1,133 @@
+{
+  "D12-B data-only": {
+    "invented": [
+      "umbrella.regulated { fund_category } — optional concept standing for [[IF umbrella.is_regulated_fund]] with a field inside (1.1)",
+      "umbrella.related_party_consent { clause } — optional concept standing for [[IF umbrella.om_requires_related_party_consent]] with a field inside (5.5)",
+      "resolution.later_effective_date — optional scalar standing for [[IF resolution.effective_date_differs]] with a field inside (signing paragraph)",
+      "interested_directors — pre-filtered list standing for [[FOR EACH director IN umbrella.directors WHERE director.is_interested]]",
+      "contracting_party.designation — the locked wording, built by our code, so it is data not template text"
+    ],
+    "inventedCount": 5,
+    "codeNodes": 0,
+    "staticCheck": "pass",
+    "clauseIds": 2,
+    "treeIdBlocks": 46,
+    "atlas": {
+      "match": true,
+      "expectedLines": 49,
+      "actualLines": 49,
+      "diff": [],
+      "leakedBraces": []
+    },
+    "flipped": {
+      "match": true,
+      "expectedLines": 47,
+      "actualLines": 47,
+      "diff": [],
+      "leakedBraces": []
+    }
+  },
+  "D12-B code-allowed": {
+    "invented": [],
+    "inventedCount": 0,
+    "codeNodes": 7,
+    "staticCheck": "reject",
+    "clauseIds": 2,
+    "treeIdBlocks": 46,
+    "atlas": {
+      "match": false,
+      "expectedLines": 49,
+      "actualLines": 49,
+      "diff": [
+        "- tree: 1.1 The Company is a segregated portfolio company and is recognised as a private_investment_fund under the Securities and Investment Business Act (Revised Edition 2020).",
+        "+ tmk:  1.1 The Company is a segregated portfolio company\" and is recognised as a private_investment_fund under the Securities and Investment Business Act (Revised Edition 2020)\".",
+        "- tree: Henrik Solberg has declared to the other directors that they are interested in the acquisition as a director and shareholder of the general partner of the Seller.",
+        "+ tmk:  \"Henrik Solberg has declared to the other directors that they are interested in the acquisition as a director and shareholder of the general partner of the Seller.\"",
+        "- tree: These resolutions are passed by the directors signing below and take effect when the last director signs or on 2027-01-04 if later.",
+        "+ tmk:  These resolutions are passed by the directors signing below and take effect when the last director signs\" or on 2027-01-04 if later\"."
+      ],
+      "leakedBraces": []
+    },
+    "flipped": {
+      "match": false,
+      "expectedLines": 47,
+      "actualLines": 48,
+      "diff": [
+        "- tree: 1.1 The Company is a segregated portfolio company.",
+        "+ tmk:  1.1 The Company is a segregated portfolio company\"\".",
+        "+ tmk:  \"\"",
+        "- tree: These resolutions are passed by the directors signing below and take effect when the last director signs.",
+        "+ tmk:  These resolutions are passed by the directors signing below and take effect when the last director signs\"\"."
+      ],
+      "leakedBraces": []
+    }
+  },
+  "D13-B data-only": {
+    "invented": [
+      "portfolio.hurdle_rate_if_any — optional scalar standing for [[IF portfolio.has_hurdle]] with a field inside (table row and 5.2)",
+      "asset.retained_quantity — optional scalar standing for [[IF asset.sponsor_retains_shares]] with a field inside (4.4)",
+      "umbrella.related_party_consent_clause (optional form) — standing for [[IF umbrella.om_requires_related_party_consent]] with a field inside (10.6)",
+      "umbrella.pif_investor_basis — optional scalar standing for the enum test [[IF umbrella.fund_category = private_investment_fund]] with a field inside (11.1)",
+      "contracting_party.designation — the locked wording, built by our code, so it is data not template text",
+      "issuer_description { text } — holder for the AI zone, so the zone can be a #clause",
+      "project_risk_factors { text } — holder for the AI zone, so the zone can be a #clause"
+    ],
+    "inventedCount": 7,
+    "codeNodes": 0,
+    "staticCheck": "pass",
+    "clauseIds": 3,
+    "treeIdBlocks": 67,
+    "atlas": {
+      "match": true,
+      "expectedLines": 81,
+      "actualLines": 81,
+      "diff": [],
+      "leakedBraces": []
+    },
+    "flipped": {
+      "match": true,
+      "expectedLines": 78,
+      "actualLines": 78,
+      "diff": [],
+      "leakedBraces": []
+    }
+  },
+  "D13-B code-allowed": {
+    "invented": [
+      "issuer_description { text } — holder for the AI zone, so the zone can be a #clause",
+      "project_risk_factors { text } — holder for the AI zone, so the zone can be a #clause"
+    ],
+    "inventedCount": 2,
+    "codeNodes": 7,
+    "staticCheck": "reject",
+    "clauseIds": 5,
+    "treeIdBlocks": 67,
+    "atlas": {
+      "match": false,
+      "expectedLines": 81,
+      "actualLines": 81,
+      "diff": [
+        "- tree: Performance fee 0.15 of profits after investors have received back their subscribed capital",
+        "+ tmk:  Performance fee 0.15 of profits after investors have received back their subscribed capital \"\"",
+        "- tree: 5.2 Performance fee. On each distribution, the Sponsor is entitled to 0.15 of the amount by which cumulative distributions exceed investors’ subscribed capital. The calculation is made by the Company’s calculation service and shown on each distribution notice.",
+        "+ tmk:  5.2 Performance fee. On each distribution, the Sponsor is entitled to 0.15 of the amount by which cumulative distributions exceed investors’ subscribed capital\"\". The calculation is made by the Company’s calculation service and shown on each distribution notice."
+      ],
+      "leakedBraces": []
+    },
+    "flipped": {
+      "match": false,
+      "expectedLines": 78,
+      "actualLines": 78,
+      "diff": [
+        "- tree: Performance fee 0.15 of profits after investors have received back their subscribed capital and a return of 0.08 [synthetic] a year",
+        "+ tmk:  Performance fee 0.15 of profits after investors have received back their subscribed capital \" and a return of 0.08 [synthetic] a year\"",
+        "- tree: 5.2 Performance fee. On each distribution, the Sponsor is entitled to 0.15 of the amount by which cumulative distributions exceed investors’ subscribed capital plus a return of 0.08 [synthetic] a year. The calculation is made by the Company’s calculation service and shown on each distribution notice.",
+        "+ tmk:  5.2 Performance fee. On each distribution, the Sponsor is entitled to 0.15 of the amount by which cumulative distributions exceed investors’ subscribed capital\" plus a return of 0.08 [synthetic] a year\". The calculation is made by the Company’s calculation service and shown on each distribution notice."
+      ],
+      "leakedBraces": []
+    }
+  },
+  "negativeControl": {
+    "diffLines": 10
+  }
+}

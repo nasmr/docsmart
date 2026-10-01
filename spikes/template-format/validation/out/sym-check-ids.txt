@@ -1,0 +1,34 @@
+ok   D12-A: tree → Word → tree gives the same hash
+ok   D12-B: tree → Word → tree gives the same hash
+ok   D12-C: tree → Word → tree gives the same hash
+ok   D13-A: tree → Word → tree gives the same hash
+ok   D13-B: tree → Word → tree gives the same hash
+ok   D13-C: tree → Word → tree gives the same hash
+ok   D1SP-A: tree → Word → tree gives the same hash
+ok   D1SP-B: tree → Word → tree gives the same hash
+ok   D1SP-C: tree → Word → tree gives the same hash
+ok   D12-A: arbitrary ids survive the trip through Word
+ok   D12-B: arbitrary ids survive the trip through Word
+ok   D12-C: arbitrary ids survive the trip through Word
+ok   D13-A: arbitrary ids survive the trip through Word
+ok   D13-B: arbitrary ids survive the trip through Word
+ok   D13-C: arbitrary ids survive the trip through Word
+ok   D1SP-A: arbitrary ids survive the trip through Word
+ok   D1SP-B: arbitrary ids survive the trip through Word
+ok   D1SP-C: arbitrary ids survive the trip through Word
+ok   reworded clause keeps its id
+ok   every other id unchanged after rewording
+ok   inserted clause gets one new id
+ok   no existing id lost after an insertion
+ok   pasted copy with a duplicate bookmark does not duplicate an id
+ok   original keeps its id; the copy gets a new one
+ok   deleted clause disappears; nothing else changes
+ok   moved clauses keep their ids
+ok   moving changes order only
+ok   renumbered clause keeps its id
+ok   without its bookmark, a reworded clause first gets a new id
+ok   matching against the previous version recovers it
+ok   a clause rewritten beyond recognition is treated as new (delete + insert)
+info copy pasted above the original: without the previous version, the original loses its id
+ok   copy pasted above the original: matching against the previous version gives the id back to the original
+all id checks pass

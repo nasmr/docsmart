@@ -1,0 +1,14 @@
+1. parse only: ok; marker written: false
+2. generate, default options: ok; marker written: true (formula ran in pid 456202; host pid 456202)
+3. generate, childProcessJavaScriptEvaluation: ok; marker written: true (formula ran in pid 456210)
+4. generate, disableJavaScriptEvaluation: JavaScript evaluation is disabled.; marker written: false
+   a data-only template with evaluation disabled: ok "Name Atlas. Kestrel."
+5a. #if condition= : parse ok; generate ok; marker written: true
+5b. #clause condition= : parse ok; generate ok; marker written: true
+5c. formula inside a #clause whose condition is false: generate ok; marker written: true
+6. Code-typed fields in the TemplateMark model: FormulaDefinition.code, ClauseDefinition.condition, ConditionalDefinition.condition, ConditionalBlockDefinition.condition
+   static check, data-only: pass
+   static check, formula: REJECT /nodes/0/nodes/0/nodes/1: FormulaDefinition; /nodes/0/nodes/0/nodes/1/code: Code
+   static check, #if condition=: REJECT /nodes/0/nodes/0/nodes/1/condition: Code
+   static check, #clause condition=: REJECT /nodes/0/nodes/0/condition: Code
+7. crafted variable name reaching jsonpath: generate obj needs to be an object; static check: /nodes/0/nodes/0/nodes/1: bad name "name'][(@['length']>0 ? 'x' : 'y')]['z"

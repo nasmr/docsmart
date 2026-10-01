@@ -1,0 +1,68 @@
+PARSE-ERR | C2.1   | contract | inline, field inside #if, inside #with
+            parse: Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1
+PARSE-ERR | C2.1   | clause   | inline, field inside #if, inside #with
+            parse: Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1
+PARSE-ERR | C2.2   | contract | "block" form (lines inside #with)
+            parse: Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1
+PARSE-ERR | C2.2   | clause   | "block" form (lines inside #with)
+            parse: Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1
+PARSE-ERR | C2.3   | contract | top-level field inside #if (no #with)
+            parse: Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1
+PARSE-ERR | C2.3   | clause   | top-level field inside #if (no #with)
+            parse: Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1
+PARSE-ERR | C2.4   | contract | field in the else branch
+            parse: Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1
+PARSE-ERR | C2.4   | clause   | field in the else branch
+            parse: Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1
+PARSE-ERR | C2.5   | contract | #with inside #if
+            parse: currentModel.getOwnProperty is not a function
+PARSE-ERR | C2.5   | clause   | #with inside #if
+            parse: currentModel.getOwnProperty is not a function
+PARSE-ERR | C2.6   | contract | #if inside #clause
+            parse: Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1
+PARSE-ERR | C2.6   | clause   | #if inside #clause
+            parse: Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1
+MATCH     | C2.7a  | contract | #optional over an optional concept, present
+MATCH     | C2.7a  | clause   | #optional over an optional concept, present
+MATCH     | C2.7b  | contract | #optional over an optional concept, absent
+MATCH     | C2.7b  | clause   | #optional over an optional concept, absent
+MATCH     | C2.7c  | contract | #optional with else, absent
+MATCH     | C2.7c  | clause   | #optional with else, absent
+MATCH     | C2.7d  | contract | #optional inside #with (nested concept), present
+MATCH     | C2.7d  | clause   | #optional inside #with (nested concept), present
+MATCH     | C2.8a  | contract | #optional over an optional scalar, {{this}}, present
+MATCH     | C2.8a  | clause   | #optional over an optional scalar, {{this}}, present
+MATCH     | C2.8b  | contract | #optional over an optional scalar, {{this}}, absent
+MATCH     | C2.8b  | clause   | #optional over an optional scalar, {{this}}, absent
+MATCH     | C2.9a  | contract | #clause over an optional concept (block), present
+PARSE-ERR | C2.9a  | clause   | #clause over an optional concept (block), present
+            parse: Unknown property: rate File text/grammar.tem.md line -1 column -1
+MATCH     | C2.9b  | contract | #clause over an optional concept (block), absent
+PARSE-ERR | C2.9b  | clause   | #clause over an optional concept (block), absent
+            parse: Unknown property: rate File text/grammar.tem.md line -1 column -1
+GEN-ERR   | C2.10  | contract | formula inside #if (code)
+            generate: Generated invalid agreement: ValidationException: The instance "org.accordproject.ciceromark@0.6.0.Formula" is missing the required field "value".: {
+GEN-ERR   | C2.10  | clause   | formula inside #if (code)
+            generate: Generated invalid agreement: ValidationException: The instance "org.accordproject.ciceromark@0.6.0.Formula" is missing the required field "value".: {
+MISMATCH  | C2.10b | contract | control: the same formula outside any block
+            expected: "15% of profits plus a return of 8% a year."
+            actual:   "15% of profits plus a return of \"8%\" a year."
+            markdown: "toMarkdown failed: URI malformed"
+MISMATCH  | C2.10b | clause   | control: the same formula outside any block
+            expected: "15% of profits plus a return of 8% a year."
+            actual:   "15% of profits plus a return of \"8%\" a year."
+            markdown: "toMarkdown failed: URI malformed"
+GEN-ERR   | C2.10c | contract | formula inside #optional
+            generate: Generated invalid agreement: ValidationException: The instance "org.accordproject.ciceromark@0.6.0.Formula" is missing the required field "value".: {
+GEN-ERR   | C2.10c | clause   | formula inside #optional
+            generate: Generated invalid agreement: ValidationException: The instance "org.accordproject.ciceromark@0.6.0.Formula" is missing the required field "value".: {
+MISMATCH  | C2.10d | contract | formula inside #clause (block)
+            expected: "A return of 8% a year."
+            actual:   "A return of \"8%\" a year."
+            markdown: "toMarkdown failed: URI malformed"
+MISMATCH  | C2.10d | clause   | formula inside #clause (block)
+            expected: "A return of 8% a year."
+            actual:   "A return of \"8%\" a year."
+            markdown: "toMarkdown failed: URI malformed"
+C2.11 hand-built DOM, variable inside whenTrue, has_hurdle=true: MATCH
+C2.11 hand-built DOM, variable inside whenTrue, has_hurdle=false: MATCH

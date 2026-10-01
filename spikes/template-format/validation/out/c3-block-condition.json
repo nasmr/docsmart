@@ -1,0 +1,354 @@
+[
+  {
+    "id": "C3.1a",
+    "name": "one-paragraph #if/else on separate lines, true",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "Apply to the Financial Services Commission for approval.",
+    "md": "Apply to the Financial Services Commission for approval.",
+    "expected": "Apply to the Financial Services Commission for approval.",
+    "match": true
+  },
+  {
+    "id": "C3.1a",
+    "name": "one-paragraph #if/else on separate lines, true",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "Apply to the Financial Services Commission for approval.",
+    "md": "Apply to the Financial Services Commission for approval.",
+    "expected": "Apply to the Financial Services Commission for approval.",
+    "match": true
+  },
+  {
+    "id": "C3.1b",
+    "name": "one-paragraph #if/else on separate lines, false",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "Notify the Financial Services Commission within 14 days.",
+    "md": "Notify the Financial Services Commission within 14 days.",
+    "expected": "Notify the Financial Services Commission within 14 days.",
+    "match": true
+  },
+  {
+    "id": "C3.1b",
+    "name": "one-paragraph #if/else on separate lines, false",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "Notify the Financial Services Commission within 14 days.",
+    "md": "Notify the Financial Services Commission within 14 days.",
+    "expected": "Notify the Financial Services Commission within 14 days.",
+    "match": true
+  },
+  {
+    "id": "C3.2",
+    "name": "#if containing two paragraphs (blank line inside)",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "Apply to the Financial Services Commission for approval.\nNo shares are issued until approval. {{/if}}",
+    "md": "Apply to the Financial Services Commission for approval.\n\nNo shares are issued until approval.\n{{/if}}",
+    "expected": "Apply to the Financial Services Commission for approval.\nNo shares are issued until approval.",
+    "match": false
+  },
+  {
+    "id": "C3.2",
+    "name": "#if containing two paragraphs (blank line inside)",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "Apply to the Financial Services Commission for approval.\nNo shares are issued until approval. {{/if}}",
+    "md": "Apply to the Financial Services Commission for approval.\n\nNo shares are issued until approval.\n{{/if}}",
+    "expected": "Apply to the Financial Services Commission for approval.\nNo shares are issued until approval.",
+    "match": false
+  },
+  {
+    "id": "C3.2b",
+    "name": "#if containing two paragraphs, condition FALSE",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "No shares are issued until approval. {{/if}}",
+    "md": "No shares are issued until approval.\n{{/if}}",
+    "expected": "",
+    "match": false
+  },
+  {
+    "id": "C3.2b",
+    "name": "#if containing two paragraphs, condition FALSE",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "No shares are issued until approval. {{/if}}",
+    "md": "No shares are issued until approval.\n{{/if}}",
+    "expected": "",
+    "match": false
+  },
+  {
+    "id": "C3.3",
+    "name": "#if containing a heading",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "3 Regulatory approval\n{{/if}}\nBody.",
+    "md": "3 Regulatory approval\n----\n\n{{/if}}\n\nBody.",
+    "expected": "3 Regulatory approval\nBody.",
+    "match": false
+  },
+  {
+    "id": "C3.3",
+    "name": "#if containing a heading",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "3 Regulatory approval\n{{/if}}\nBody.",
+    "md": "3 Regulatory approval\n----\n\n{{/if}}\n\nBody.",
+    "expected": "3 Regulatory approval\nBody.",
+    "match": false
+  },
+  {
+    "id": "C3.4",
+    "name": "#if containing a list",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "first\nsecond {{/if}}",
+    "md": "-  first\n-  second\n   {{/if}}",
+    "expected": "first\nsecond",
+    "match": false
+  },
+  {
+    "id": "C3.4",
+    "name": "#if containing a list",
+    "kind": "clause",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ClauseDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "first\nsecond {{/if}}",
+    "md": "-  first\n-  second\n   {{/if}}",
+    "expected": "first\nsecond",
+    "match": false
+  },
+  {
+    "id": "C3.5",
+    "name": "nested #if (inline)",
+    "kind": "contract",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "currentModel.getOwnProperty is not a function"
+  },
+  {
+    "id": "C3.5",
+    "name": "nested #if (inline)",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "currentModel.getOwnProperty is not a function"
+  },
+  {
+    "id": "C3.6",
+    "name": "named #clause inside #if",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ConditionalDefinition",
+      "ClauseDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Apply to the Financial Services Commission.\n{{/if}}",
+    "md": "Apply to the Financial Services Commission.\n\n{{/if}}",
+    "expected": "Apply to the Financial Services Commission.",
+    "match": false
+  },
+  {
+    "id": "C3.6",
+    "name": "named #clause inside #if",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: approver File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C3.7a",
+    "name": "two #clause blocks over optional concepts, regulated",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ClauseDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "3 Regulatory approval\n3.1 Apply to the Financial Services Commission for approval.\nno shares issued before approval",
+    "md": "toMarkdown failed: Model violation in the \"org.accordproject.commonmark@0.5.0.Text\" instance. The field \"nodes\" has a value of \"undefined\" (type of value: \"undefined\"). Expected type of value: \"Node[]\".",
+    "expected": "3 Regulatory approval\n3.1 Apply to the Financial Services Commission for approval.\nno shares issued before approval",
+    "match": true
+  },
+  {
+    "id": "C3.7a",
+    "name": "two #clause blocks over optional concepts, regulated",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: approver File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C3.7b",
+    "name": "two #clause blocks over optional concepts, unregulated",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ClauseDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "3 Regulatory notification\n3.1 Notify the Financial Services Commission within 14 days.",
+    "md": "toMarkdown failed: Model violation in the \"org.accordproject.commonmark@0.5.0.Paragraph\" instance. The field \"nodes\" has a value of \"undefined\" (type of value: \"undefined\"). Expected type of value: \"Node[]\".",
+    "expected": "3 Regulatory notification\n3.1 Notify the Financial Services Commission within 14 days.",
+    "match": true
+  },
+  {
+    "id": "C3.7b",
+    "name": "two #clause blocks over optional concepts, unregulated",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: approver File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C3.7c",
+    "name": "#if nested inside a #clause block",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ClauseDefinition",
+      "VariableDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "Apply to the Financial Services Commission.\nFee plus a hurdle.",
+    "md": "Apply to the Financial Services Commission.\n\nFee plus a hurdle.",
+    "expected": "Apply to the Financial Services Commission.\nFee plus a hurdle.",
+    "match": true
+  },
+  {
+    "id": "C3.7c",
+    "name": "#if nested inside a #clause block",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: approver File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C3.7d",
+    "name": "root list used inside a #clause block (no parent access)",
+    "kind": "contract",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "note": "items is a property of the template concept, not of Regulated",
+    "parseErr": "Unknown property: items File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C3.7d",
+    "name": "root list used inside a #clause block (no parent access)",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "note": "items is a property of the template concept, not of Regulated",
+    "parseErr": "Unknown property: approver File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C3.8a",
+    "name": "#clause with condition= (code), true",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ClauseDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Apply to the Financial Services Commission.\nSecond paragraph.",
+    "md": "Apply to the Financial Services Commission.\n\nSecond paragraph.",
+    "expected": "Apply to the Financial Services Commission.\nSecond paragraph.",
+    "match": true
+  },
+  {
+    "id": "C3.8a",
+    "name": "#clause with condition= (code), true",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: approver File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C3.9",
+    "name": "root field used inside a #clause block (no parent access)",
+    "kind": "contract",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: has_hurdle File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C3.9",
+    "name": "root field used inside a #clause block (no parent access)",
+    "kind": "clause",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: approver File text/grammar.tem.md line -1 column -1"
+  }
+]

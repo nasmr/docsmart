@@ -1,0 +1,67 @@
+
+namespace org.docsmart.d13b@1.0.0
+concept Zone { o String text }
+enum FundCategory { o private_investment_fund  o none }
+concept Umbrella {
+  o String legal_name
+  o String om_date
+  o String administrator_name
+  o String cost_rule_ref
+  o Boolean om_requires_related_party_consent
+  o String related_party_consent_clause
+  o FundCategory fund_category
+  o String investor_basis_description
+}
+concept Portfolio {
+  o String supplement_number
+  o String legal_name
+  o String share_class_name
+  o String share_par_value
+  o String subscription_price
+  o String min_subscription
+  o String max_offer
+  o String minimum_close_amount
+  o String offer_open_date
+  o String offer_close_date
+  o String term_years
+  o String extension_years
+  o String mgmt_fee_rate
+  o String fee_basis
+  o String perf_fee_rate
+  o String org_expense_cap
+  o String base_currency
+  o String fee_frequency
+  o String allocation_method_description
+  o String funding_deadline
+  o Boolean has_hurdle
+  o String hurdle_rate
+}
+concept ProjectAsset {
+  o String issuer_name
+  o String max_quantity
+  o String instrument
+  o String seller_name
+  o String price_per_share
+  o String total_consideration
+  o String sponsor_cost_per_share
+  o String sponsor_acquisition_date
+  o String markup_pct
+  o String valuer_name
+  o String valuation_date
+  o String issuer_jurisdiction
+  o String consent_status
+  o String valuation_range
+  o Boolean sponsor_retains_shares
+  o String sponsor_retained_quantity
+}
+concept Dated { o String date }
+@template
+concept D13B {
+  o Umbrella umbrella
+  o Portfolio portfolio
+  o ProjectAsset asset
+  o Dated supplement
+  o Dated conflict_disclosure
+  o Zone issuer_description                       // invented: holder for the AI-drafted zone text
+  o Zone project_risk_factors                     // invented: holder for the AI-drafted zone text
+}

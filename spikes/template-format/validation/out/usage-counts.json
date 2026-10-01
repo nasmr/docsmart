@@ -1,0 +1,273 @@
+{
+  "templates": 9,
+  "records": 487,
+  "field_uses": 426,
+  "distinct_fields": 108,
+  "fields_inside_an_IF": {
+    "uses": 41,
+    "distinct": 24,
+    "by_template": {
+      "D12-A": 2,
+      "D12-B": 3,
+      "D12-C": 6,
+      "D13-A": 4,
+      "D13-B": 5,
+      "D13-C": 5,
+      "D1SP-A": 4,
+      "D1SP-B": 5,
+      "D1SP-C": 7
+    }
+  },
+  "fields_inside_an_IF_or_a_WHERE_loop": {
+    "uses": 43,
+    "distinct": 24
+  },
+  "fields_inside_a_loop": {
+    "uses": 18,
+    "distinct": 10
+  },
+  "conditions": {
+    "uses": 38,
+    "distinct": 16,
+    "list": [
+      [
+        "umbrella.is_regulated_fund",
+        8
+      ],
+      [
+        "portfolio.has_hurdle",
+        6
+      ],
+      [
+        "asset.acquisition_source = gp_sourced",
+        5
+      ],
+      [
+        "umbrella.fund_category = private_investment_fund",
+        3
+      ],
+      [
+        "resolution.effective_date_differs",
+        2
+      ],
+      [
+        "umbrella.om_requires_related_party_consent",
+        2
+      ],
+      [
+        "asset.has_placement_fee",
+        2
+      ],
+      [
+        "investor.type = entity",
+        2
+      ],
+      [
+        "director.is_interested",
+        1
+      ],
+      [
+        "any director.is_interested",
+        1
+      ],
+      [
+        "director.abstains",
+        1
+      ],
+      [
+        "portfolio.costs_deducted_on_lapse",
+        1
+      ],
+      [
+        "asset.sponsor_retains_shares",
+        1
+      ],
+      [
+        "investor.formed_for_investment",
+        1
+      ],
+      [
+        "investor.is_trustee",
+        1
+      ],
+      [
+        "investor.type = individual",
+        1
+      ]
+    ]
+  },
+  "enum_conditions": {
+    "uses": 11,
+    "distinct": 4,
+    "by_template": {
+      "D12-A": 0,
+      "D12-B": 0,
+      "D12-C": 2,
+      "D13-A": 1,
+      "D13-B": 1,
+      "D13-C": 1,
+      "D1SP-A": 2,
+      "D1SP-B": 2,
+      "D1SP-C": 2
+    },
+    "list": [
+      [
+        "asset.acquisition_source = gp_sourced",
+        5
+      ],
+      [
+        "umbrella.fund_category = private_investment_fund",
+        3
+      ],
+      [
+        "investor.type = entity",
+        2
+      ],
+      [
+        "investor.type = individual",
+        1
+      ]
+    ]
+  },
+  "aggregate_conditions": [
+    [
+      "any director.is_interested",
+      1
+    ]
+  ],
+  "nested_conditions": [
+    "D12-C: director.abstains (inside any director.is_interested)"
+  ],
+  "conditions_inside_a_loop": 0,
+  "distinct_lists": 4,
+  "loops": [
+    "D12-A: umbrella.directors",
+    "D12-B: umbrella.directors",
+    "D12-B: umbrella.directors",
+    "D12-C: meeting.attendees",
+    "D1SP-B: investor.authorised_signatories",
+    "D1SP-B: investor.controllers",
+    "D1SP-C: investor.authorised_signatories (inside NOT investor.type = individual)"
+  ],
+  "where_clauses": [
+    "D12-B: WHERE director.is_interested"
+  ],
+  "zones": [
+    "D13-A: issuer_description",
+    "D13-A: project_risk_factors",
+    "D13-B: issuer_description",
+    "D13-B: project_risk_factors",
+    "D13-C: issuer_description",
+    "D13-C: project_risk_factors"
+  ],
+  "locked": [
+    "D12-A: {{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
+    "D12-B: {{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
+    "D12-C: {{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
+    "D13-A: Issuer: {{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
+    "D13-B: Issuer: {{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
+    "D13-C: Issuer: {{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
+    "D1SP-A: {{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
+    "D1SP-B: {{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
+    "D1SP-C: {{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}"
+  ],
+  "errors": [],
+  "fields_inside_an_IF_list": [
+    [
+      "portfolio.hurdle_rate",
+      6
+    ],
+    [
+      "asset.price_per_share",
+      3
+    ],
+    [
+      "asset.sponsor_cost_per_share",
+      3
+    ],
+    [
+      "umbrella.investor_basis_description",
+      3
+    ],
+    [
+      "conflict_disclosure.date",
+      3
+    ],
+    [
+      "umbrella.fund_category",
+      2
+    ],
+    [
+      "resolution.effective_date",
+      2
+    ],
+    [
+      "umbrella.related_party_consent_clause",
+      2
+    ],
+    [
+      "asset.markup_pct",
+      2
+    ],
+    [
+      "director.name",
+      1
+    ],
+    [
+      "director.interest_description",
+      1
+    ],
+    [
+      "asset.valuer_name",
+      1
+    ],
+    [
+      "asset.valuation_date",
+      1
+    ],
+    [
+      "portfolio.lapse_cost_cap",
+      1
+    ],
+    [
+      "asset.sponsor_retained_quantity",
+      1
+    ],
+    [
+      "asset.placement_fee_description",
+      1
+    ],
+    [
+      "asset.placement_agent_name",
+      1
+    ],
+    [
+      "investor.trust_name",
+      1
+    ],
+    [
+      "investor.full_name",
+      1
+    ],
+    [
+      "investor.signed_date",
+      1
+    ],
+    [
+      "signatory.name",
+      1
+    ],
+    [
+      "signatory.title",
+      1
+    ],
+    [
+      "investor.legal_name",
+      1
+    ],
+    [
+      "signatory.signed_date",
+      1
+    ]
+  ]
+}

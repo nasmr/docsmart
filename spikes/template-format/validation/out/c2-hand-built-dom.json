@@ -1,0 +1,61 @@
+{
+  "dom": {
+    "$class": "org.accordproject.commonmark@0.5.0.Document",
+    "xmlns": "http://commonmark.org/xml/1.0",
+    "nodes": [
+      {
+        "$class": "org.accordproject.templatemark@0.5.0.ContractDefinition",
+        "name": "top",
+        "elementType": "org.docsmart.v@1.0.0.D",
+        "nodes": [
+          {
+            "$class": "org.accordproject.commonmark@0.5.0.Paragraph",
+            "nodes": [
+              {
+                "$class": "org.accordproject.templatemark@0.5.0.VariableDefinition",
+                "name": "perf_fee_rate",
+                "elementType": "String"
+              },
+              {
+                "$class": "org.accordproject.commonmark@0.5.0.Text",
+                "text": " of profits"
+              },
+              {
+                "$class": "org.accordproject.templatemark@0.5.0.ConditionalDefinition",
+                "whenTrue": [
+                  {
+                    "$class": "org.accordproject.commonmark@0.5.0.Text",
+                    "text": " plus a return of "
+                  },
+                  {
+                    "$class": "org.accordproject.templatemark@0.5.0.VariableDefinition",
+                    "name": "hurdle_rate",
+                    "elementType": "String"
+                  },
+                  {
+                    "$class": "org.accordproject.commonmark@0.5.0.Text",
+                    "text": " a year."
+                  }
+                ],
+                "whenFalse": [],
+                "name": "has_hurdle"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "results": {
+    "true": {
+      "ok": true,
+      "text": "15% of profits plus a return of 8% a year.",
+      "match": true
+    },
+    "false": {
+      "ok": true,
+      "text": "15% of profits",
+      "match": true
+    }
+  }
+}

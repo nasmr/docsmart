@@ -1,0 +1,63 @@
+MATCH     | C5.1   | contract | ulist at block level
+MATCH     | C5.2   | contract | olist at block level
+MISMATCH  | C5.3   | contract | join inline
+            expected: "Present: Amara Okafor, Henrik Solberg, Priya Raman."
+            actual:   "Present: [object Object], [object Object], [object Object]."
+            markdown: "Present: [object Object], [object Object], [object Object]."
+MATCH     | C5.3b  | contract | join of strings with {{this}}
+MATCH     | C5.4a  | contract | several paragraphs per item, list markers, no underscores
+MISMATCH  | C5.4c  | contract | several paragraphs per item, no list marker, no underscores
+            expected: "Signature line Amara Okafor Director Signature line Henrik Solberg Director Signature line Priya Raman Director"
+            actual:   "Signature line Signature line Signature line"
+            markdown: "-  Signature line\n-  Signature line\n-  Signature line"
+MISMATCH  | C5.4   | contract | several paragraphs per item (signature block, underscore rule as in the Word master)
+            expected: "______________________ Amara Okafor Director ______________________ Henrik Solberg Director ______________________ Priya Raman Director"
+            actual:   "Amara Okafor Director Henrik Solberg Director Priya Raman Director"
+            markdown: "-  ---\n   \n   Amara Okafor\n   \n   Director\n-  ---\n   \n   Henrik Solberg\n   \n   Director\n-  ---\n   \n   Priya Raman\n   \n   Director"
+MISMATCH  | C5.4b  | contract | several paragraphs per item, no list marker
+            expected: "______________________ Amara Okafor Director ______________________ Henrik Solberg Director ______________________ Priya Raman Director"
+            actual:   ""
+            markdown: "-  ---\n-  ---\n-  ---"
+MATCH     | C5.5   | contract | nested field of the item (#with inside item)
+MATCH     | C5.6   | contract | loop inside a condition (#clause over optional concept)
+MATCH     | C5.7a  | contract | condition inside a loop item, no field in the body
+PARSE-ERR | C5.7b  | contract | condition inside a loop item, field in the body (#if)
+            parse: Unknown property: interest_description File text/grammar.tem.md line -1 column -1
+MATCH     | C5.7c  | contract | condition inside a loop item, field in the body (#optional)
+MISMATCH  | C5.8   | contract | loop producing table rows
+            expected: "Name | Role | Ownership | Chen Oyelaran | Director | 60% | Ama Boateng | Shareholder | 40% |"
+            actual:   "Name | Role | Ownership | | Chen Oyelaran | Director | 60% | | Ama Boateng | Shareholder | 40% |"
+            markdown: "toMarkdown failed: URI malformed"
+MATCH     | C5.8b  | contract | control: a table with variables in cells, no loop
+PARSE-ERR | C5.9a  | contract | list through a nested path: {{#ulist umbrella.directors}}
+            parse: ListBlockDefinition template not on an array property: umbrella File text/grammar.tem.md line -1 column -1
+MATCH     | C5.9b  | contract | list through a nested path: #clause umbrella > #ulist directors
+MISMATCH  | C5.9c  | contract | list through a nested path, inline: #with umbrella > #join directors
+            expected: "Directors: Amara Okafor, Henrik Solberg, Priya Raman."
+            actual:   "Directors: [object Object], [object Object], [object Object]."
+            markdown: "Directors: \n\n[object Object], [object Object], [object Object]."
+PARSE-ERR | C5.10  | contract | {{#foreach}} block (in the TemplateMark model, upstream test skipped as "currently broken")
+            parse: Unknown property: name File text/grammar.tem.md line -1 column -1
+MISMATCH  | C6.1   | contract | ulist with where= attribute
+            expected: "Henrik Solberg declared an interest."
+            actual:   "Amara Okafor declared an interest. Henrik Solberg declared an interest. Priya Raman declared an interest."
+            markdown: "-  Amara Okafor declared an interest.\n-  Henrik Solberg declared an interest.\n-  Priya Raman declared an interest."
+MISMATCH  | C6.2   | contract | join with where= attribute
+            expected: "Interested: Henrik Solberg."
+            actual:   "Interested: [object Object], [object Object], [object Object]."
+            markdown: "Interested: [object Object], [object Object], [object Object]."
+PARSE-ERR | C6.3   | contract | filter by #if inside the item
+            parse: Unknown property: name File text/grammar.tem.md line -1 column -1
+MATCH     | C6.4   | contract | filter by #optional inside the item
+GEN-ERR   | C6.5   | contract | code: #if item condition= inside the item
+            generate: compile errors: [{"nodeId":"condition_nodes_0_nodes_0_nodes_0_nodes_0_nodes_0_nodes_1","code":"return data.is_interested","errors":[{"category":1,"code":2339,"length":13,"start":4781,"line":194,"character":15,"renderedMessage":"Property 'is_interested' does not exist on type 'ID'.","id":"err-2339-2813-13"}]}]
+MATCH     | C6.5b  | contract | code: #if item condition= inside the item, with a cast
+            note: still one bullet per director: a condition inside the item cannot drop the item
+MISMATCH  | C6.6   | contract | code: formula over the whole list
+            expected: "Interested: Henrik Solberg."
+            actual:   "Interested: \"Henrik Solberg\"."
+            markdown: "Interested: \"Henrik Solberg\"."
+MATCH     | C6.7a  | contract | data: pre-filtered list interested_directors
+MATCH     | C6.7b  | contract | data: pre-filtered list, empty
+C5.8 structure: TableRow nodes 1, List nodes 1, Item nodes 2 (2 data rows expected as TableRow; header row is 1)
+C5.11 hand-built ForeachDefinition: GEN-ERR Generated invalid agreement: TypeNotFoundException: Type "ForeachDefinition" is not defined in namespace "org.accordproject.templatemark@0.5.0".: {

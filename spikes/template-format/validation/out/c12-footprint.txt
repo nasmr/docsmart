@@ -1,0 +1,46 @@
+== a: markdown-template + concerto-core :: added 72 packages in 1s :: 30 MB on disk
+   packages with install scripts (not run): none
+== b: a + template-engine :: added 331 packages in 6s :: 286 MB on disk
+   present: typescript 5.9.3
+   present: @typescript/twoslash 3.2.13
+   present: @accordproject/cicero-core 2.2.0
+   present: @google/genai 2.25.0
+   present: @openrouter/sdk 0.13.67
+   present: openai 6.49.0
+   present: @anthropic-ai/sdk 0.100.1
+   present: @mistralai/mistralai 2.7.0
+   present: groq-sdk 1.6.0
+   packages with install scripts (not run): @google/genai, @openrouter/sdk, core-js-pure, protobufjs
+== b2: b with --omit=optional :: added 280 packages in 4s :: 164 MB on disk
+   present: typescript 5.9.3
+   present: @typescript/twoslash 3.2.13
+   present: @accordproject/cicero-core 2.2.0
+   packages with install scripts (not run): @google/genai, @openrouter/sdk, core-js-pure, protobufjs
+== c: the spike as declared :: added 348 packages in 6s :: 299 MB on disk
+   present: typescript 5.9.3
+   present: @typescript/twoslash 3.2.13
+   present: @accordproject/cicero-core 2.2.0
+   present: @google/genai 2.25.0
+   present: @openrouter/sdk 0.13.67
+   present: openai 6.49.0
+   present: @anthropic-ai/sdk 0.100.1
+   present: @mistralai/mistralai 2.7.0
+   present: groq-sdk 1.6.0
+   packages with install scripts (not run): @google/genai, @openrouter/sdk, core-js-pure, protobufjs
+== who pulls the AI SDKs and TypeScript (config c)
+@docsmart/spike-template-format@0.0.0 $SPIKE_SCRATCH/c12/c
+└─┬ @accordproject/template-engine@5.1.0
+  ├── @accordproject/cicero-core@2.2.0
+  ├── @anthropic-ai/sdk@0.100.1
+  ├── @google/genai@2.25.0
+  ├── @mistralai/mistralai@2.7.0
+  ├── @openrouter/sdk@0.13.67
+  ├─┬ @typescript/twoslash@3.2.13
+  │ ├─┬ @typescript/vfs@1.6.5
+  │ │ └── typescript@5.9.3 deduped
+  │ └── typescript@5.9.3 deduped
+  ├── groq-sdk@1.6.0
+  ├── openai@6.49.0
+  └── typescript@5.9.3
+
+== the spike's own install: 348 packages in /home/nmr/code/Singularity/docsmart/spikes/template-format/node_modules/.package-lock.json

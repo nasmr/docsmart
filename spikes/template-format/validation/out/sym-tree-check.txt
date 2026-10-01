@@ -1,0 +1,6 @@
+distinct conditions and WHERE filters in the imported trees: 16
+proposed grammar /^(any\s+)?[a-z_][a-z0-9_]*(\.[a-z_][a-z0-9_]*)+(\s*=\s*[a-z_][a-z0-9_]*)?$/ rejects: none
+loop aliases: director, signatory, person
+slots naming an alias that no enclosing FOR EACH binds (accepted silently by the importer): 2
+   D12-C: {{director.name}} (bound aliases: none)
+   D12-C: {{director.interest_description}} (bound aliases: none)

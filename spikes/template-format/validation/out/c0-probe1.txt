@@ -1,0 +1,14 @@
+[xmldom fatalError]	missing root element 
+@#[line:1,col:1]
+parsed | F1 nested field, dotted path | ContractDefinition
+parsed | F1 nested field, with block | ContractDefinition, WithDefinition, VariableDefinition
+ERROR  | F2 boolean condition, inline | Unknown property: fund_category File text/grammar.tem.md line -1 column -1
+parsed | F2 boolean condition with else, block | ContractDefinition, WithDefinition, ConditionalDefinition
+ERROR  | F3 enum equality condition | Unknown property: condition File text/grammar.tem.md line -1 column -1
+ERROR  | F4 loop over list | Unknown property: name File text/grammar.tem.md line -1 column -1
+ERROR  | F4 loop with filter (WHERE) | Unknown property: name File text/grammar.tem.md line -1 column -1
+ERROR  | F4 loop producing several paragraphs per item | Unknown property: directors File text/grammar.tem.md line -1 column -1
+ERROR  | F5 AI zone as a named clause | Unknown property: issuer_description File text/grammar.tem.md line -1 column -1
+parsed | F6 locked designation as a formula | ContractDefinition, FormulaDefinition
+parsed | F7 counsel note as an HTML comment | ContractDefinition, HtmlBlock
+ERROR  | F8 clause with an explicit id | Unknown property: c_2_1 File text/grammar.tem.md line -1 column -1

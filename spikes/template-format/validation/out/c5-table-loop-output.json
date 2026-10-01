@@ -1,0 +1,148 @@
+{
+  "$class": "org.accordproject.commonmark@0.5.0.Document",
+  "xmlns": "http://commonmark.org/xml/1.0",
+  "nodes": [
+    {
+      "$class": "org.accordproject.commonmark@0.5.0.Paragraph",
+      "nodes": [
+        {
+          "$class": "org.accordproject.commonmark@0.5.0.Table",
+          "nodes": [
+            {
+              "$class": "org.accordproject.commonmark@0.5.0.TableHead",
+              "nodes": [
+                {
+                  "$class": "org.accordproject.commonmark@0.5.0.TableRow",
+                  "nodes": [
+                    {
+                      "$class": "org.accordproject.commonmark@0.5.0.HeaderCell",
+                      "nodes": [
+                        {
+                          "$class": "org.accordproject.commonmark@0.5.0.Text",
+                          "text": "Name"
+                        }
+                      ]
+                    },
+                    {
+                      "$class": "org.accordproject.commonmark@0.5.0.HeaderCell",
+                      "nodes": [
+                        {
+                          "$class": "org.accordproject.commonmark@0.5.0.Text",
+                          "text": "Role"
+                        }
+                      ]
+                    },
+                    {
+                      "$class": "org.accordproject.commonmark@0.5.0.HeaderCell",
+                      "nodes": [
+                        {
+                          "$class": "org.accordproject.commonmark@0.5.0.Text",
+                          "text": "Ownership"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$class": "org.accordproject.commonmark@0.5.0.List",
+          "type": "bullet",
+          "tight": "true",
+          "nodes": [
+            {
+              "$class": "org.accordproject.commonmark@0.5.0.Item",
+              "nodes": [
+                {
+                  "$class": "org.accordproject.commonmark@0.5.0.Paragraph",
+                  "nodes": [
+                    {
+                      "$class": "org.accordproject.commonmark@0.5.0.Text",
+                      "text": "| "
+                    },
+                    {
+                      "$class": "org.accordproject.ciceromark@0.6.0.Variable",
+                      "value": "Chen Oyelaran",
+                      "name": "name",
+                      "elementType": "String"
+                    },
+                    {
+                      "$class": "org.accordproject.commonmark@0.5.0.Text",
+                      "text": " | "
+                    },
+                    {
+                      "$class": "org.accordproject.ciceromark@0.6.0.Variable",
+                      "value": "Director",
+                      "name": "role",
+                      "elementType": "String"
+                    },
+                    {
+                      "$class": "org.accordproject.commonmark@0.5.0.Text",
+                      "text": " | "
+                    },
+                    {
+                      "$class": "org.accordproject.ciceromark@0.6.0.Variable",
+                      "value": "60%",
+                      "name": "ownership",
+                      "elementType": "String"
+                    },
+                    {
+                      "$class": "org.accordproject.commonmark@0.5.0.Text",
+                      "text": " |"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "$class": "org.accordproject.commonmark@0.5.0.Item",
+              "nodes": [
+                {
+                  "$class": "org.accordproject.commonmark@0.5.0.Paragraph",
+                  "nodes": [
+                    {
+                      "$class": "org.accordproject.commonmark@0.5.0.Text",
+                      "text": "| "
+                    },
+                    {
+                      "$class": "org.accordproject.ciceromark@0.6.0.Variable",
+                      "value": "Ama Boateng",
+                      "name": "name",
+                      "elementType": "String"
+                    },
+                    {
+                      "$class": "org.accordproject.commonmark@0.5.0.Text",
+                      "text": " | "
+                    },
+                    {
+                      "$class": "org.accordproject.ciceromark@0.6.0.Variable",
+                      "value": "Shareholder",
+                      "name": "role",
+                      "elementType": "String"
+                    },
+                    {
+                      "$class": "org.accordproject.commonmark@0.5.0.Text",
+                      "text": " | "
+                    },
+                    {
+                      "$class": "org.accordproject.ciceromark@0.6.0.Variable",
+                      "value": "40%",
+                      "name": "ownership",
+                      "elementType": "String"
+                    },
+                    {
+                      "$class": "org.accordproject.commonmark@0.5.0.Text",
+                      "text": " |"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

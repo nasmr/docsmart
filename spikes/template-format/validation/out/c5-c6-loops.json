@@ -1,0 +1,425 @@
+[
+  {
+    "id": "C5.1",
+    "name": "ulist at block level",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ListBlockDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Amara Okafor\nHenrik Solberg\nPriya Raman",
+    "md": "-  Amara Okafor\n-  Henrik Solberg\n-  Priya Raman",
+    "expected": "Amara Okafor\nHenrik Solberg\nPriya Raman",
+    "match": true
+  },
+  {
+    "id": "C5.2",
+    "name": "olist at block level",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ListBlockDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Amara Okafor\nHenrik Solberg\nPriya Raman",
+    "md": "1. Amara Okafor\n2. Henrik Solberg\n3. Priya Raman",
+    "expected": "Amara Okafor\nHenrik Solberg\nPriya Raman",
+    "match": true
+  },
+  {
+    "id": "C5.3",
+    "name": "join inline",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "JoinDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Present: [object Object], [object Object], [object Object].",
+    "md": "Present: [object Object], [object Object], [object Object].",
+    "expected": "Present: Amara Okafor, Henrik Solberg, Priya Raman.",
+    "match": false
+  },
+  {
+    "id": "C5.3b",
+    "name": "join of strings with {{this}}",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "JoinDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Present: Amara Okafor and Henrik Solberg.",
+    "md": "Present: Amara Okafor and Henrik Solberg.",
+    "expected": "Present: Amara Okafor and Henrik Solberg.",
+    "match": true
+  },
+  {
+    "id": "C5.4a",
+    "name": "several paragraphs per item, list markers, no underscores",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ListBlockDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Signature line\nAmara Okafor\nDirector\nSignature line\nHenrik Solberg\nDirector\nSignature line\nPriya Raman\nDirector",
+    "md": "-  Signature line\n   \n   Amara Okafor\n   \n   Director\n-  Signature line\n   \n   Henrik Solberg\n   \n   Director\n-  Signature line\n   \n   Priya Raman\n   \n   Director",
+    "expected": "Signature line\nAmara Okafor\nDirector\nSignature line\nHenrik Solberg\nDirector\nSignature line\nPriya Raman\nDirector",
+    "match": true
+  },
+  {
+    "id": "C5.4c",
+    "name": "several paragraphs per item, no list marker, no underscores",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ListBlockDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Signature line\nSignature line\nSignature line",
+    "md": "-  Signature line\n-  Signature line\n-  Signature line",
+    "expected": "Signature line\nAmara Okafor\nDirector\nSignature line\nHenrik Solberg\nDirector\nSignature line\nPriya Raman\nDirector",
+    "match": false
+  },
+  {
+    "id": "C5.4",
+    "name": "several paragraphs per item (signature block, underscore rule as in the Word master)",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ListBlockDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Amara Okafor\nDirector\nHenrik Solberg\nDirector\nPriya Raman\nDirector",
+    "md": "-  ---\n   \n   Amara Okafor\n   \n   Director\n-  ---\n   \n   Henrik Solberg\n   \n   Director\n-  ---\n   \n   Priya Raman\n   \n   Director",
+    "expected": "______________________\nAmara Okafor\nDirector\n______________________\nHenrik Solberg\nDirector\n______________________\nPriya Raman\nDirector",
+    "match": false
+  },
+  {
+    "id": "C5.4b",
+    "name": "several paragraphs per item, no list marker",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ListBlockDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "",
+    "md": "-  ---\n-  ---\n-  ---",
+    "expected": "______________________\nAmara Okafor\nDirector\n______________________\nHenrik Solberg\nDirector\n______________________\nPriya Raman\nDirector",
+    "match": false
+  },
+  {
+    "id": "C5.5",
+    "name": "nested field of the item (#with inside item)",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ListBlockDefinition",
+      "VariableDefinition",
+      "WithDefinition"
+    ],
+    "actual": "Amara Okafor, of Road Town\nHenrik Solberg, of Road Town\nPriya Raman, of Road Town",
+    "md": "-  Amara Okafor, of \n   \n   Road Town\n-  Henrik Solberg, of \n   \n   Road Town\n-  Priya Raman, of \n   \n   Road Town",
+    "expected": "Amara Okafor, of Road Town\nHenrik Solberg, of Road Town\nPriya Raman, of Road Town",
+    "match": true
+  },
+  {
+    "id": "C5.6",
+    "name": "loop inside a condition (#clause over optional concept)",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ClauseDefinition",
+      "ListBlockDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Signed for the entity by:\nChen Oyelaran, Director",
+    "md": "Signed for the entity by:\n-  Chen Oyelaran, Director",
+    "expected": "Signed for the entity by:\nChen Oyelaran, Director",
+    "match": true
+  },
+  {
+    "id": "C5.7a",
+    "name": "condition inside a loop item, no field in the body",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ListBlockDefinition",
+      "VariableDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "Amara Okafor\nHenrik Solberg (did not vote)\nPriya Raman",
+    "md": "-  Amara Okafor\n-  Henrik Solberg (did not vote)\n-  Priya Raman",
+    "expected": "Amara Okafor\nHenrik Solberg (did not vote)\nPriya Raman",
+    "match": true
+  },
+  {
+    "id": "C5.7b",
+    "name": "condition inside a loop item, field in the body (#if)",
+    "kind": "contract",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: interest_description File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C5.7c",
+    "name": "condition inside a loop item, field in the body (#optional)",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ListBlockDefinition",
+      "VariableDefinition",
+      "OptionalDefinition"
+    ],
+    "actual": "Amara Okafor\nHenrik Solberg, interested as a director of the Seller\nPriya Raman",
+    "md": "-  Amara Okafor\n-  Henrik Solberg, interested as a director of the Seller\n-  Priya Raman",
+    "expected": "Amara Okafor\nHenrik Solberg, interested as a director of the Seller\nPriya Raman",
+    "match": true
+  },
+  {
+    "id": "C5.8",
+    "name": "loop producing table rows",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ListBlockDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Name | Role | Ownership |\n| Chen Oyelaran | Director | 60% |\n| Ama Boateng | Shareholder | 40% |",
+    "md": "toMarkdown failed: URI malformed",
+    "expected": "Name | Role | Ownership |\nChen Oyelaran | Director | 60% |\nAma Boateng | Shareholder | 40% |",
+    "match": false
+  },
+  {
+    "id": "C5.8b",
+    "name": "control: a table with variables in cells, no loop",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "WithDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Name | City |\nMeridian Horizon SPC Limited | Road Town |",
+    "md": "| Name | City |\n|---------|---------|\n| \n\nMeridian Horizon SPC Limited | Road Town |",
+    "expected": "Name | City |\nMeridian Horizon SPC Limited | Road Town |",
+    "match": true
+  },
+  {
+    "id": "C5.9a",
+    "name": "list through a nested path: {{#ulist umbrella.directors}}",
+    "kind": "contract",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "ListBlockDefinition template not on an array property: umbrella File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C5.9b",
+    "name": "list through a nested path: #clause umbrella > #ulist directors",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ClauseDefinition",
+      "ListBlockDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Amara Okafor\nHenrik Solberg\nPriya Raman",
+    "md": "-  Amara Okafor\n-  Henrik Solberg\n-  Priya Raman",
+    "expected": "Amara Okafor\nHenrik Solberg\nPriya Raman",
+    "match": true
+  },
+  {
+    "id": "C5.9c",
+    "name": "list through a nested path, inline: #with umbrella > #join directors",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "WithDefinition",
+      "JoinDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Directors: [object Object], [object Object], [object Object].",
+    "md": "Directors: \n\n[object Object], [object Object], [object Object].",
+    "expected": "Directors: Amara Okafor, Henrik Solberg, Priya Raman.",
+    "match": false
+  },
+  {
+    "id": "C5.10",
+    "name": "{{#foreach}} block (in the TemplateMark model, upstream test skipped as \"currently broken\")",
+    "kind": "contract",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: name File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C6.1",
+    "name": "ulist with where= attribute",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ListBlockDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Amara Okafor declared an interest.\nHenrik Solberg declared an interest.\nPriya Raman declared an interest.",
+    "md": "-  Amara Okafor declared an interest.\n-  Henrik Solberg declared an interest.\n-  Priya Raman declared an interest.",
+    "expected": "Henrik Solberg declared an interest.",
+    "match": false
+  },
+  {
+    "id": "C6.2",
+    "name": "join with where= attribute",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "JoinDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Interested: [object Object], [object Object], [object Object].",
+    "md": "Interested: [object Object], [object Object], [object Object].",
+    "expected": "Interested: Henrik Solberg.",
+    "match": false
+  },
+  {
+    "id": "C6.3",
+    "name": "filter by #if inside the item",
+    "kind": "contract",
+    "parse": "ERROR",
+    "generate": "skipped",
+    "parseErr": "Unknown property: name File text/grammar.tem.md line -1 column -1"
+  },
+  {
+    "id": "C6.4",
+    "name": "filter by #optional inside the item",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ListBlockDefinition",
+      "OptionalDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Interest: a director of the Seller.",
+    "md": "-  \n-  Interest: a director of the Seller.\n-",
+    "expected": "Interest: a director of the Seller.",
+    "match": true
+  },
+  {
+    "id": "C6.5",
+    "name": "code: #if item condition= inside the item",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ERROR",
+    "types": [
+      "ContractDefinition",
+      "ListBlockDefinition",
+      "VariableDefinition",
+      "ConditionalDefinition"
+    ],
+    "genErr": "compile errors: [{\"nodeId\":\"condition_nodes_0_nodes_0_nodes_0_nodes_0_nodes_0_nodes_1\",\"code\":\"return data.is_interested\",\"errors\":[{\"category\":1,\"code\":2339,\"length\":13,\"start\":4781,\"line\":194,\"character\":15,\"renderedMessage\":\"Property 'is_interested' does not exist on type 'ID'.\",\"id\":\"err-2339-2813-13\"}]}]"
+  },
+  {
+    "id": "C6.5b",
+    "name": "code: #if item condition= inside the item, with a cast",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "note": "still one bullet per director: a condition inside the item cannot drop the item",
+    "types": [
+      "ContractDefinition",
+      "ListBlockDefinition",
+      "VariableDefinition",
+      "ConditionalDefinition"
+    ],
+    "actual": "Amara Okafor.\nHenrik Solberg declared an interest.\nPriya Raman.",
+    "md": "-  Amara Okafor.\n-  Henrik Solberg declared an interest.\n-  Priya Raman.",
+    "expected": "Amara Okafor.\nHenrik Solberg declared an interest.\nPriya Raman.",
+    "match": true
+  },
+  {
+    "id": "C6.6",
+    "name": "code: formula over the whole list",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "FormulaDefinition"
+    ],
+    "actual": "Interested: \"Henrik Solberg\".",
+    "md": "Interested: \"Henrik Solberg\".",
+    "expected": "Interested: Henrik Solberg.",
+    "match": false
+  },
+  {
+    "id": "C6.7a",
+    "name": "data: pre-filtered list interested_directors",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ListBlockDefinition",
+      "VariableDefinition",
+      "OptionalDefinition"
+    ],
+    "actual": "Henrik Solberg declared an interest as a director of the Seller.",
+    "md": "-  Henrik Solberg declared an interest as a director of the Seller.",
+    "expected": "Henrik Solberg declared an interest as a director of the Seller.",
+    "match": true
+  },
+  {
+    "id": "C6.7b",
+    "name": "data: pre-filtered list, empty",
+    "kind": "contract",
+    "parse": "ok",
+    "generate": "ok",
+    "types": [
+      "ContractDefinition",
+      "ListBlockDefinition",
+      "VariableDefinition"
+    ],
+    "actual": "Before.\nAfter.",
+    "md": "Before.\n\nAfter.",
+    "expected": "Before.\nAfter.",
+    "match": true
+  }
+]

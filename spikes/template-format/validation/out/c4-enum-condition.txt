@@ -1,0 +1,55 @@
+PARSE-ERR | C4.1   | contract | probe form {{#if condition="..."}} (no property name)
+            parse: Unknown property: condition File text/grammar.tem.md line -1 column -1
+PARSE-ERR | C4.1   | clause   | probe form {{#if condition="..."}} (no property name)
+            parse: Unknown property: condition File text/grammar.tem.md line -1 column -1
+MATCH     | C4.2a  | contract | idiomatic {{#if asset condition="return ..."}}, gp_sourced
+MATCH     | C4.2a  | clause   | idiomatic {{#if asset condition="return ..."}}, gp_sourced
+MATCH     | C4.2b  | contract | idiomatic {{#if asset condition="return ..."}}, issuer_primary
+MATCH     | C4.2b  | clause   | idiomatic {{#if asset condition="return ..."}}, issuer_primary
+MATCH     | C4.2c  | contract | idiomatic, with else
+MATCH     | C4.2c  | clause   | idiomatic, with else
+MATCH     | C4.2d  | contract | idiomatic, inside #with asset
+MATCH     | C4.2d  | clause   | idiomatic, inside #with asset
+PARSE-ERR | C4.2e  | contract | idiomatic, field inside the code condition body
+            parse: Unknown property: valuer_name File text/grammar.tem.md line -1 column -1
+PARSE-ERR | C4.2e  | clause   | idiomatic, field inside the code condition body
+            parse: Unknown property: valuer_name File text/grammar.tem.md line -1 column -1
+MATCH     | C4.3a  | contract | {{#clause asset condition="return ..."}} block, gp_sourced
+PARSE-ERR | C4.3a  | clause   | {{#clause asset condition="return ..."}} block, gp_sourced
+            parse: Unknown property: valuer_name File text/grammar.tem.md line -1 column -1
+MATCH     | C4.3b  | contract | {{#clause asset condition="return ..."}} block, issuer_primary
+PARSE-ERR | C4.3b  | clause   | {{#clause asset condition="return ..."}} block, issuer_primary
+            parse: Unknown property: valuer_name File text/grammar.tem.md line -1 column -1
+MISMATCH  | C4.4   | contract | formula returning text
+            expected: "A. The valuation was tabled."
+            actual:   "A.\" The valuation was tabled.\""
+            markdown: "A.\" The valuation was tabled.\""
+MISMATCH  | C4.4   | clause   | formula returning text
+            expected: "A. The valuation was tabled."
+            actual:   "A.\" The valuation was tabled.\""
+            markdown: "A.\" The valuation was tabled.\""
+MATCH     | C4.5a  | contract | data: derived Boolean asset_is_gp_sourced, true
+MATCH     | C4.5a  | clause   | data: derived Boolean asset_is_gp_sourced, true
+MATCH     | C4.5b  | contract | data: derived Boolean asset_is_gp_sourced, false
+MATCH     | C4.5b  | clause   | data: derived Boolean asset_is_gp_sourced, false
+MATCH     | C4.6a  | contract | data: optional concept gp_sourced as a block with fields, present
+PARSE-ERR | C4.6a  | clause   | data: optional concept gp_sourced as a block with fields, present
+            parse: Unknown property: valuer_name File text/grammar.tem.md line -1 column -1
+MATCH     | C4.6b  | contract | data: optional concept gp_sourced as a block with fields, absent
+PARSE-ERR | C4.6b  | clause   | data: optional concept gp_sourced as a block with fields, absent
+            parse: Unknown property: valuer_name File text/grammar.tem.md line -1 column -1
+MATCH     | C4.7   | contract | enum value printed as a variable
+MATCH     | C4.7   | clause   | enum value printed as a variable
+MATCH     | C4.8a  | contract | aggregate, code: {{#if directors condition="return directors.some(...)"}}
+MATCH     | C4.8a  | clause   | aggregate, code: {{#if directors condition="return directors.some(...)"}}
+MATCH     | C4.8b  | contract | aggregate, data: derived Boolean any_director_interested
+MATCH     | C4.8b  | clause   | aggregate, data: derived Boolean any_director_interested
+MATCH     | C4.8c  | contract | aggregate, data: optional concept with the interested list, present
+PARSE-ERR | C4.8c  | clause   | aggregate, data: optional concept with the interested list, present
+            parse: Unknown property: interested File text/grammar.tem.md line -1 column -1
+GEN-ERR   | C4.8d  | contract | aggregate, data: optional concept, absent (else branch needs a second concept)
+            generate: No values found for path '$['interests']['interested']' in data {"$class":"org.docsmart.v@1.0.0.D","asset":{"$class":"org.docsmart.v@1.0.0.ProjectAsset","issuer_name":"Kestrel Grid Systems Limited","acquisition_source":"issuer_primary","valuer_name":"Northgate Valuation Advisers LLP"},"directors":[{
+PARSE-ERR | C4.8d  | clause   | aggregate, data: optional concept, absent (else branch needs a second concept)
+            parse: Unknown property: interested File text/grammar.tem.md line -1 column -1
+MATCH     | C4.8e  | contract | aggregate, data: optional concept guarded by #clause, absent, list moved out of the clause
+MATCH     | C4.8e  | clause   | aggregate, data: optional concept guarded by #clause, absent, list moved out of the clause

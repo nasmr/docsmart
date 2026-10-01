@@ -1,0 +1,42 @@
+
+namespace org.docsmart.d12b@1.0.0
+concept Regulated { o String fund_category }
+concept RelatedPartyConsent { o String clause }
+concept SigningDirector { o String name  o String signed_date }
+concept InterestedDirector { o String name  o String interest_description }
+concept Umbrella {
+  o String legal_name
+  o String company_number
+  o Boolean is_regulated_fund
+  o String om_date
+  o Regulated regulated optional                      // invented: present when is_regulated_fund
+  o RelatedPartyConsent related_party_consent optional // invented: present when om_requires_related_party_consent
+  o SigningDirector[] directors
+}
+concept Sponsor { o String legal_name }
+concept Portfolio {
+  o String legal_name  o String share_class_name  o String share_par_value  o String subscription_price
+  o String min_subscription  o String max_offer  o String offer_open_date  o String offer_close_date
+  o String allocation_method_description  o String minimum_close_amount
+}
+concept ProjectAsset {
+  o String instrument  o String issuer_name  o String seller_name  o String sponsor_acquisition_date
+  o String sponsor_cost_per_share  o String price_per_share  o String markup_pct  o String valuer_name
+  o String valuation_date  o String max_quantity  o String total_consideration
+}
+concept Resolution {
+  o String date
+  o String effective_date
+  o String later_effective_date optional               // invented: present when effective_date_differs
+}
+concept ContractingParty { o String designation }      // invented: wording built by our code from the records
+@template
+concept D12B {
+  o Umbrella umbrella
+  o Sponsor sponsor
+  o Portfolio portfolio
+  o ProjectAsset asset
+  o Resolution resolution
+  o InterestedDirector[] interested_directors          // invented: umbrella.directors WHERE is_interested
+  o ContractingParty contracting_party
+}

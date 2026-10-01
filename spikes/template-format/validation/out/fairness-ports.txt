@@ -1,0 +1,32 @@
+D12-B data-only: parse ok; static no-code check pass (0 code nodes); #clause nodes 2 vs 46 id-bearing blocks in the tree; invented view-model fields 5
+   atlas: TEXT MATCHES the clause-tree rendering (49 tree lines, 49 TemplateMark lines)
+   flipped: TEXT MATCHES the clause-tree rendering (47 tree lines, 47 TemplateMark lines)
+D12-B code-allowed: parse ok; static no-code check reject (7 code nodes); #clause nodes 2 vs 46 id-bearing blocks in the tree; invented view-model fields 0
+   atlas: TEXT DIFFERS (6 diff lines) (49 tree lines, 49 TemplateMark lines)
+      - tree: 1.1 The Company is a segregated portfolio company and is recognised as a private_investment_fund under the Securities and Investment Business Act (Revised Edition 2020).
+      + tmk:  1.1 The Company is a segregated portfolio company" and is recognised as a private_investment_fund under the Securities and Investment Business Act (Revised Edition 2020)".
+      - tree: Henrik Solberg has declared to the other directors that they are interested in the acquisition as a director and shareholder of the general partner of the Seller.
+      + tmk:  "Henrik Solberg has declared to the other directors that they are interested in the acquisition as a director and shareholder of the general partner of the Seller."
+      - tree: These resolutions are passed by the directors signing below and take effect when the last director signs or on 2027-01-04 if later.
+      + tmk:  These resolutions are passed by the directors signing below and take effect when the last director signs" or on 2027-01-04 if later".
+   flipped: TEXT DIFFERS (5 diff lines) (47 tree lines, 48 TemplateMark lines)
+      - tree: 1.1 The Company is a segregated portfolio company.
+      + tmk:  1.1 The Company is a segregated portfolio company"".
+      + tmk:  ""
+      - tree: These resolutions are passed by the directors signing below and take effect when the last director signs.
+      + tmk:  These resolutions are passed by the directors signing below and take effect when the last director signs"".
+D13-B data-only: parse ok; static no-code check pass (0 code nodes); #clause nodes 3 vs 67 id-bearing blocks in the tree; invented view-model fields 7
+   atlas: TEXT MATCHES the clause-tree rendering (81 tree lines, 81 TemplateMark lines)
+   flipped: TEXT MATCHES the clause-tree rendering (78 tree lines, 78 TemplateMark lines)
+D13-B code-allowed: parse ok; static no-code check reject (7 code nodes); #clause nodes 5 vs 67 id-bearing blocks in the tree; invented view-model fields 2
+   atlas: TEXT DIFFERS (4 diff lines) (81 tree lines, 81 TemplateMark lines)
+      - tree: Performance fee 0.15 of profits after investors have received back their subscribed capital
+      + tmk:  Performance fee 0.15 of profits after investors have received back their subscribed capital ""
+      - tree: 5.2 Performance fee. On each distribution, the Sponsor is entitled to 0.15 of the amount by which cumulative distributions exceed investors’ subscribed capital. The calculation is made by the Company’s calculation service and shown on each distribution
+      + tmk:  5.2 Performance fee. On each distribution, the Sponsor is entitled to 0.15 of the amount by which cumulative distributions exceed investors’ subscribed capital"". The calculation is made by the Company’s calculation service and shown on each distributi
+   flipped: TEXT DIFFERS (4 diff lines) (78 tree lines, 78 TemplateMark lines)
+      - tree: Performance fee 0.15 of profits after investors have received back their subscribed capital and a return of 0.08 [synthetic] a year
+      + tmk:  Performance fee 0.15 of profits after investors have received back their subscribed capital " and a return of 0.08 [synthetic] a year"
+      - tree: 5.2 Performance fee. On each distribution, the Sponsor is entitled to 0.15 of the amount by which cumulative distributions exceed investors’ subscribed capital plus a return of 0.08 [synthetic] a year. The calculation is made by the Company’s calculati
+      + tmk:  5.2 Performance fee. On each distribution, the Sponsor is entitled to 0.15 of the amount by which cumulative distributions exceed investors’ subscribed capital" plus a return of 0.08 [synthetic] a year". The calculation is made by the Company’s calcula
+negative control (atlas output vs flipped tree): 10 diff lines (must be > 0)

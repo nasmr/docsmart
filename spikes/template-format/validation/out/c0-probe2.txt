@@ -1,0 +1,7 @@
+parsed | dotted path makes a variable? | ContractDefinition
+ERROR  | variable inside a condition (block) | Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1
+ERROR  | variable inside a condition (inline) | Unknown property: hurdle_rate File text/grammar.tem.md line -1 column -1
+parsed | ulist at block level | ContractDefinition, ListBlockDefinition, VariableDefinition
+parsed | join (inline list) | ContractDefinition, JoinDefinition, VariableDefinition
+parsed | clause typed by a concept property | ContractDefinition, ClauseDefinition, VariableDefinition
+ERROR  | optional block | Optional template not on an optional property: legal_name File text/grammar.tem.md line -1 column -1
