@@ -144,7 +144,7 @@ describe('refusals', () => {
     });
   });
 
-  test('INPUTS_CHANGED is not accepted once READY: a change must come as a new version', () => {
+  test('INPUTS_CHANGED is not accepted once READY: the package stays frozen until a new version (decision 0009)', () => {
     const d = run([assembled(version(1)), ready(version(1))]);
     expect(applyEvent(d, { type: 'INPUTS_CHANGED' })).toEqual({
       ok: false,

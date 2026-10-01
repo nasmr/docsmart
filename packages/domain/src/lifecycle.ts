@@ -6,6 +6,9 @@
  *       └──── inputs changed ──────┘    └──── new version ────────┘
  *   withdraw from any state → WITHDRAWN (final)
  *
+ * A change to records does not move a ready document: its package stays frozen until a new
+ * version is assembled (decision 0009).
+ *
  * XState is used only as a pure transition function: the state lives in the database, and the
  * API applies an event to the stored state inside the same transaction that writes the audit row.
  */
