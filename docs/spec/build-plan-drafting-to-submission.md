@@ -1,7 +1,8 @@
 # Singularity — Tool 2 Build Plan: Drafting → Assembled → Ready for Submission
 ### What to build first, and in what order
 
-**Version:** 0.1 · 30 September 2026 (draft for founder and engineering review)
+**Version:** 0.2 · 1 October 2026 (draft for founder and engineering review)
+**Changes in 0.2:** the canonical template format is decided (decision 0008, after the M0 spike and its validation in `spikes/template-format/`). §3 (B2, B3, B5), §5, §6, §7 and §9 are updated to match.
 **Builds on:** `Singularity_Tool2_Document_Factory_Spec_and_Plan.md` (§5 data model and state machine, §6.1–6.3, §6.6), `Singularity_Tool2_BVI_SPC_Addendum.md` (umbrella/portfolio model, INV-9 to INV-12), `Singularity_Tool2_Jev_Integration_Proposal.md` (optional judgment layer)
 **Status:** Implementation plan. Technical choices marked **[decide in M0]** are recommendations to confirm in the first two weeks.
 
@@ -83,7 +84,7 @@ From the addendum §3 and base spec §5.1, only what this slice uses:
 | `PortfolioTerms` | Versioned; the slot source for D12, D13 and D1-SP. |
 | `Asset` | Includes acquisition source; `gp_sourced` adds required slots for the conflict section. |
 | `Party`, `Role`, `ConsentGrant` | Via the identity stub; roles and consent scoped to a portfolio (INV-14). |
-| `Template`, `TemplateVersion`, `Clause`, `SlotSchema`, `ZoneMap` | Content-addressed; only approved versions selectable. |
+| `Template`, `TemplateVersion`, `Clause`, `SlotSchema`, `ZoneMap` | Stored as the clause tree (decision 0008), in which every block has a stable id. Content-addressed; only approved versions selectable. Slot types come from the field catalogue. |
 | `DocumentInstance` | Class, scope (`umbrella` or `portfolio`), portfolio id, state. |
 | `DraftVersion` | Immutable (INV-3): content hash, slot snapshot, zone provenance, parent version, template version, referenced document hashes. |
 | `Finding`, `Disposition` | Check results and the sponsor's decision on each, with reason. |
@@ -93,12 +94,19 @@ From the addendum §3 and base spec §5.1, only what this slice uses:
 
 ### B3. Template library
 
-- **Import:** take a firm's Word master (the BVI counsel set: U3, D12, D13, D1-SP schedule), split it into a clause tree with stable clause IDs, detect candidate slots and free-text zones, and produce a slot schema.
+- **Import:** take a firm's Word master (the BVI counsel set: U3, D12, D13, D1-SP schedule) and turn it into the clause tree (decision 0008): blocks with stable ids, conditions and loops around blocks, inline text or table rows, and fields as named slots. Detect candidate slots and free-text zones. Slot types come from the field catalogue (`templates/fields/catalogue.json`), so a template can use only the fields the catalogue defines.
+- **Word features:** the importer reads automatic numbering, heading styles and tracked changes. Firms' masters use all three; the first-pass templates don't yet.
+- **Import rules:** a template is data, never code (DP-3). An import fails, naming the place, unless all of these hold:
+  - every condition and loop filter is a field path, optionally `= value` for an enum, optionally a leading `any` for a test over a list
+  - every field path is in the field catalogue, and every enum value is one the catalogue lists for that field
+  - every loop variable is used only inside the loop that binds it
+  - the locked contracting-party wording equals the wording generated from the umbrella and portfolio records (INV-9)
+- **Clause ids across edits:** each block's id travels in Word as a hidden bookmark and is read back on import. A block that comes back without its bookmark is matched against the previous version by its text. Ids therefore survive counsel's rewording, inserting, deleting, moving and pasting, and findings, decisions and diffs stay attached to the right clause.
 - **Structure review screen:** counsel or the platform's counsel of record confirms the parsed structure, slot types and which sections the AI may draft in.
 - **Approval record:** named approving lawyer, jurisdictions, document class, date, superseded version (DF-P2). In this slice this is a simple approval action; it moves onto the shared review queue in the next slice.
 - **Selection rules:** jurisdiction × entity type × document class × scope → one approved template version (in SVC-POLICY).
 
-*Done when:* the three first templates are imported, reviewed and approved, and selection picks the right one every time in tests.
+*Done when:* the three first templates are imported, reviewed and approved; selection picks the right one every time in tests; a template that breaks an import rule is rejected; and re-importing an edited master keeps the id of every clause that is still there.
 
 ### B4. Sponsor data entry
 
@@ -112,7 +120,8 @@ Forms for the umbrella, a portfolio and its terms, the asset, and (for D1-SP) th
 - **Contracting-party wording:** generated from the umbrella and portfolio records, locked in every template that needs it (DF-P10, DF-62). The wording itself comes from BVI counsel (addendum 13.11).
 - **Composition:** D1-SP is assembled from the frozen umbrella terms (U3), the frozen portfolio supplement (D13) and a per-investor schedule (addendum §4.2).
 - **Batch assembly:** one D1-SP per investor for a portfolio, all from the same template and supplement version.
-- **Rendering:** canonical structured content (for checks and diffs) plus a DOCX and PDF rendering for people to read. The hash is taken over the canonical content.
+- **Conditions and loops:** decided from records by a fixed evaluator that accepts only the forms the import rules allow (B3). Nothing written in a template is executed.
+- **Rendering:** canonical structured content (for checks and diffs) plus a DOCX and PDF rendering for people to read. The hash is taken over the canonical content. The Word renderer works from the canonical content (decision 0006) and writes each block's id as a hidden bookmark (decision 0008).
 
 *Done when:* the same inputs always produce byte-identical canonical content, and a slot-only document (D12) assembles with no AI involved.
 
@@ -195,8 +204,8 @@ Six milestones. Each ends with a demo on real design-partner data.
 
 | Milestone | Weeks | Build | Demo at the end |
 |---|---|---|---|
-| **M0 Decisions and fixtures** | 1–2 | Confirm stack (§7). One-week spike on the template format using the real BVI templates. Collect the design partner's U3, D12, D13 and D1-SP masters and one executed portfolio set as test fixtures. Agree check severities with counsel. Thin B1. | Template spike result and the decisions record. |
-| **M1 First document, no AI** | 3–5 | Data model (B2); template import, review and approval (B3) for D12; umbrella and portfolio forms (B4); assembly with slot filling and locked contracting-party wording (B5); document view with provenance (B7, read-only). | Sponsor creates Lumen SP and assembles its creation resolution. Re-running assembly gives the same hash. |
+| **M0 Decisions and fixtures** | 1–2 | Confirm stack (§7). One-week spike on the template format: done on the nine first-pass templates, and decided in 0008. Collect the design partner's U3, D12, D13 and D1-SP masters and one executed portfolio set as test fixtures, then repeat the spike's import and clause-id checks on those masters. Confirm in real Word that bookmarks survive counsel's edits; the spike only simulated the edits. Agree check severities with counsel. Thin B1. | Template spike result and the decisions record. |
+| **M1 First document, no AI** | 3–5 | Data model (B2); template import, review and approval (B3) for D12, with the import rules, the Word features and clause ids as bookmarks; the first-pass template generator moved to Word heading styles and automatic numbering, and the D12-C loop mistake fixed, so those templates pass the same import as a firm's master; umbrella and portfolio forms (B4); assembly with slot filling and locked contracting-party wording (B5); document view with provenance (B7, read-only). | Sponsor creates Lumen SP and assembles its creation resolution. Re-running assembly gives the same hash. |
 | **M2 Checks and submission gate** | 6–7 | Checks engine (B6); checks panel and decisions (B7); version history and diff; submission gate and package (B9). | A seeded mistake (another portfolio's name in D12) blocks submission; after the fix, the document reaches ready for submission and the package downloads. |
 | **M3 Composed and repeated documents** | 8–10 | Import and approve D13 and D1-SP templates; asset and investor data entry; composition of D1-SP from frozen U3 and D13; batch assembly for all investors in a portfolio; the D13 conflict section for sponsor-supplied assets. | 41 subscription agreements for Atlas SP assembled from one supplement; each shows its own investor schedule and the same frozen references. |
 | **M4 AI-drafted sections** | 11–13 | Drafting service, guardrail checks and source checks (B8); comments and re-drafts; switch-off behaviour. | D13 project description and risk factors drafted from the sponsor's facts; an unsupported claim is flagged; switching the AI off still lets the sponsor reach ready for submission. |
@@ -212,6 +221,7 @@ Six milestones. Each ends with a demo on real design-partner data.
 |---|---|---|
 | Invariant tests | No `DraftVersion` update is possible (INV-3); no document without correct contracting-party wording reaches ready (INV-9); no cross-portfolio reference reaches ready (INV-10); no open blocking finding reaches ready. Enforced at the API and database, not only the UI. | M1–M2 |
 | Golden documents | Each template with fixed inputs produces the same canonical content and hash every time. | M1 onward |
+| Template import tests | Templates that break an import rule are rejected: a condition outside the allowed forms, a field not in the catalogue, a loop variable used outside its loop, edited contracting-party wording. Clause ids survive a round trip through Word and each kind of counsel edit. | M1 onward |
 | Check test sets | Per check, seeded documents that must trigger it and must not. The cross-portfolio set includes near-duplicate portfolio names and shared words. | M2 |
 | Guardrail evaluation set | About 200 prompts and drafts designed to produce legal conclusions or return promises; pass = none reach storage. | Built M2–M3, run M4 |
 | Source-check evaluation set | Drafted statements with known support, contradiction or no support in the source; recall on unsupported statements ≥ 0.95. | Built M2–M3, run M4 |
@@ -227,8 +237,8 @@ Six milestones. Each ends with a demo on real design-partner data.
 | Main service language | TypeScript on Node | Matches the template and state-machine libraries found in the earlier research, and the front end. |
 | Database | PostgreSQL | Relational model with strict immutability rules; row-level tenancy. |
 | State machine | XState v5 (pinned) inside the service | Declarative transitions and guards, with generated path tests for the invariants. Durable waiting (Temporal or DBOS) isn't needed until the counsel slice introduces multi-day waits. |
-| Canonical template format | Own clause-tree JSON with stable clause IDs, and typed slot schemas (Accord Project Concerto is the candidate for slot types). Word stays the import and export format. | Checks, diffs and the cross-portfolio match need stable clause IDs, which Word doesn't provide. The M0 spike tests whether TemplateMark can serve as the canonical format instead. |
-| DOCX rendering | docxtemplater core (MIT) or a Python renderer behind an internal service | Rendering is replaceable; the canonical content and its hash are what matter. |
+| Canonical template format | **Decided (0008).** Own clause-tree JSON with a stable id on every block. Slot types come from the field catalogue as Zod schemas. Word stays the import and export format. Accord TemplateMark and Concerto are not adopted. | Checks, diffs and the cross-portfolio match need stable ids on every block, which neither Word nor TemplateMark provides. The M0 spike found that TemplateMark can express the two templates ported to it without code, but it has no Word import or export, and it prints wrong text with no error in several cases. |
+| DOCX rendering | **Decided (0006).** The `docx` library, rendering from the canonical content. | What people read is exactly what was checked and hashed. The renderer also carries the clause ids into Word as bookmarks (0008). |
 | AI drafting | A generative model behind the internal model interface (B8), with zero data retention and no training on customer data | Keeps the Jev option open and meets the data-handling conditions in the Jev proposal §5. |
 | Front end | The portal design canvas as the visual reference; component library chosen by the front-end engineer | The design is exploratory; build to its structure, not pixel-exact. |
 
@@ -251,7 +261,8 @@ Counsel time is the scarcest input. Book it for M0, M1 (D12 approval), M3 (D13 a
 | Risk | Effect | Mitigation |
 |---|---|---|
 | BVI counsel answers (addendum §9, especially 13.11 on contracting-party wording) arrive late | Templates can't be approved; M1 slips | Raise them in week 1. Build against a clearly labelled placeholder wording, and block anything leaving the platform until counsel confirms it. |
-| Firm templates parse badly | Import and review take much longer than planned | M0 spike on the real templates; accept manual clause marking in the review screen for the first templates. |
+| Firm templates parse badly | Import and review take much longer than planned | The M0 spike imported only our own first-pass templates. Test the importer on the design partner's masters as soon as they arrive. Build automatic numbering, heading styles and tracked changes into the importer in M1. Accept manual clause marking in the review screen for the first templates. |
+| Clause ids don't survive real editing in Word (bookmarks lost, split or duplicated on cut and paste) | Findings, decisions and diffs attach to the wrong clause or to none | Test with real Word editing in M0. Matching against the previous version by text is the fallback when a bookmark is lost; tune its threshold on real edits. Show unmatched clauses in the structure review screen for counsel to confirm. |
 | Cross-portfolio check produces too many false positives (shared words, similar names) | Sponsors learn to ignore it | Match on registry identifiers and exact names first; tune with counsel on the test set; keep it blocking, but make the reason clear. |
 | AI drafting quality is poor on fund documents | M4 needs more time | M4 is last and optional for the first release; the product is usable after M3. |
 | Scope creep into the counsel slice | Dates slip | The submission package is the handoff; anything needing a lawyer's action waits for the next slice. |

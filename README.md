@@ -2,7 +2,7 @@
 
 The Singularity **Document Factory** (Tool 2): a counsel-in-the-loop workflow that assembles fund documents for sponsors running a BVI segregated portfolio company, routes every draft to a qualified lawyer for clearance, and turns executed documents into structured records.
 
-> **Status:** Pre-build (milestone M0). The stack is decided (`docs/decisions/` 0002, 0005 to 0007) and the workspace is set up, but no application code has been written yet. The canonical template format is still open until the M0 spike.
+> **Status:** Pre-build (milestone M0). The stack is decided (`docs/decisions/` 0002, 0005 to 0008) and the workspace is set up, but no application code has been written yet. The canonical template format is our own clause tree (0008).
 
 ## Where to start
 
