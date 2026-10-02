@@ -30,8 +30,9 @@
     "@types/pg": "^8.23.1"
   },
   "scripts": {
-    "migrate": "node src/db/migrate.ts",
+    "migrate": "node --env-file-if-exists=../../.env src/db/migrate.ts",
+    "seed": "pnpm --dir ../.. run build && node --env-file-if-exists=../../.env dist/dev/seed.js",
     "start": "node dist/main.js",
-    "dev": "pnpm --dir ../.. run build && node dist/main.js"
+    "dev": "pnpm --dir ../.. run build && node --env-file-if-exists=../../.env dist/main.js"
   }
 }

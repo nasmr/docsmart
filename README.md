@@ -28,12 +28,14 @@ pnpm install
 cp .env.example .env
 pnpm db:up               # Postgres 18 and SeaweedFS (S3), waits until healthy
 pnpm db:migrate          # apply the SQL migrations (needs DATABASE_URL from .env)
+pnpm db:seed             # local data: Meridian Horizon fixtures, approved first-pass templates
 pnpm build               # tsc -b over all packages
 pnpm typecheck           # packages and the web app
 pnpm test                # unit tests (no database needed)
 pnpm test:integration    # against Postgres and SeaweedFS (needs pnpm db:up)
 pnpm lint                # Biome
-pnpm --filter @docsmart/web run dev
+pnpm api                 # the API on :3000 (builds first)
+pnpm web                 # the sponsor workspace on http://localhost:5173 (calls the API through /api)
 pnpm db:down
 ```
 
@@ -49,7 +51,7 @@ Workspace conventions:
 ```
 docs/          Specification, architecture, build plan, design notes, decisions
 templates/     First-pass document templates (Word) and the script that generates them
-apps/web/      Sponsor workspace, counsel review room, investor signing (not started)
+apps/web/      Sponsor workspace (records, documents); counsel and investor surfaces later
 services/api/  API and document state machine host (not started)
 packages/      Shared building blocks: platform services, domain model, template
                library, assembly, checks, AI drafting, calculation, shared schemas

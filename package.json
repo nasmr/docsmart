@@ -15,7 +15,10 @@
     "db:up": "docker compose up -d --wait",
     "db:down": "docker compose down",
     "test:integration": "vitest run --config vitest.integration.config.ts",
-    "db:migrate": "pnpm --filter @docsmart/api run migrate"
+    "db:migrate": "pnpm --filter @docsmart/api run migrate",
+    "db:seed": "pnpm --filter @docsmart/api run seed",
+    "api": "pnpm --filter @docsmart/api run dev",
+    "web": "pnpm --filter @docsmart/web run dev"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.14",

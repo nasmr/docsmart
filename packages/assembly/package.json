@@ -14,6 +14,11 @@
       "development": "./src/test/fixtures.ts",
       "types": "./dist/test/fixtures.d.ts",
       "default": "./dist/test/fixtures.js"
+    },
+    "./format": {
+      "development": "./src/format.ts",
+      "types": "./dist/format.d.ts",
+      "default": "./dist/format.js"
     }
   },
   "dependencies": {

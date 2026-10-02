@@ -117,6 +117,21 @@ describe('the first slice over HTTP', () => {
     );
   });
 
+  test('records: listed at their current version, all or by portfolio', async () => {
+    const lumen = fx('portfolios/lumen.json');
+    await call('PUT', '/records/portfolio/pf_lumen', SPONSOR, lumen.portfolio);
+    const portfolios = (await call('GET', '/records/portfolio', SPONSOR)).json().records;
+    expect(portfolios).toEqual([{ entity: 'portfolio', id: 'pf_lumen', version: 2, data: lumen.portfolio }]);
+    // Terms and the subscription account are kept under the portfolio's id; the offer and asset name it.
+    for (const entity of ['portfolio_terms', 'offer', 'asset', 'subscription_account']) {
+      const records = (await call('GET', `/records/${entity}?portfolio_id=pf_lumen`, SPONSOR)).json().records;
+      expect(records).toHaveLength(1);
+      expect((await call('GET', `/records/${entity}?portfolio_id=pf_other`, SPONSOR)).json().records).toEqual([]);
+    }
+    expect((await call('GET', '/records/portfolio', SPONSOR_SPOKE)).json().records).toEqual([]);
+    expect((await call('GET', '/records/nonsense', SPONSOR)).statusCode).toBe(400);
+  });
+
   test('templates: imported from Word, approved only by counsel', async () => {
     const imported = await call(
       'POST',
@@ -248,6 +263,18 @@ describe('the first slice over HTTP', () => {
     });
   });
 
+  test('documents: listed, all or by scope and portfolio', async () => {
+    const ids = async (query: string) =>
+      (await call('GET', `/documents${query}`, SPONSOR)).json().documents.map((d: { id: string }) => d.id);
+    expect(await ids('')).toEqual(['lumen_d12', 'lumen_d12_b']);
+    expect(await ids('?portfolio_id=pf_lumen&scope=portfolio')).toEqual(['lumen_d12', 'lumen_d12_b']);
+    expect(await ids('?scope=umbrella')).toEqual([]);
+    expect(await ids('?portfolio_id=pf_atlas')).toEqual([]);
+    const listed = (await call('GET', '/documents', SPONSOR)).json().documents[0];
+    expect(listed).toEqual((await call('GET', '/documents/lumen_d12', SPONSOR)).json());
+    expect((await call('GET', '/documents', SPONSOR_SPOKE)).json().documents).toEqual([]);
+  });
+
   test('withdrawn: nothing more is accepted', async () => {
     expect(
       (await call('POST', '/documents/lumen_d12_b/withdraw', SPONSOR, { reason: 'Started again.' })).statusCode,
@@ -294,6 +321,7 @@ describe('the OpenAPI contract', () => {
       '/documents/{id}/withdraw',
       '/findings/{id}/disposition',
       '/policies/{key}',
+      '/records/{entity}',
       '/records/{entity}/{id}',
       '/templates',
       '/templates/{id}/approve',

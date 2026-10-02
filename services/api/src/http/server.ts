@@ -12,6 +12,7 @@ import {
   AssembleRequest,
   CreateDocument,
   DispositionRequest,
+  DocumentList,
   DocumentParams,
   DocumentResponse,
   ErrorResponse,
@@ -19,9 +20,13 @@ import {
   FindingsResponse,
   ImportedTemplate,
   ImportTemplateQuery,
+  ListDocumentsQuery,
+  ListRecordsParams,
+  ListRecordsQuery,
   PolicyChange,
   PolicyParams,
   PolicyVersion,
+  RecordList,
   RecordParams,
   RecordResponse,
   SavedRecord,
@@ -62,7 +67,7 @@ import {
   WORD_MEDIA_TYPE,
   withdraw,
 } from '../documents.js';
-import { currentRecord, InvalidRecord, saveRecord } from '../records.js';
+import { currentRecord, InvalidRecord, listRecords, saveRecord } from '../records.js';
 import { approveTemplate, storeTemplate, templateVersions } from '../templates.js';
 import { assemblyInput, NotFound } from './assembly-input.js';
 import { AuthError, authenticate, type Principal, requireRole } from './auth.js';
@@ -200,6 +205,22 @@ export async function buildServer(deps: ServerDeps): Promise<FastifyInstance> {
     },
   );
 
+  app.get(
+    '/records/:entity',
+    {
+      schema: {
+        tags: ['records'],
+        params: ListRecordsParams,
+        querystring: ListRecordsQuery,
+        response: { 200: RecordList, ...Errors },
+      },
+    },
+    async (req) => {
+      const rows = await tenant(req, (tx) => listRecords(tx, req.params.entity, req.query.portfolio_id));
+      return { records: rows.map((r) => ({ entity: req.params.entity, ...r })) };
+    },
+  );
+
   // ---------- templates ----------
 
   app.post(
@@ -319,6 +340,22 @@ export async function buildServer(deps: ServerDeps): Promise<FastifyInstance> {
       requireRole(req.principal, 'sponsor');
       await tenant(req, (tx) => createDocument(tx, who(req), req.body));
       return reply.status(201).send(documentView(await loadDocument(req, req.body.id)));
+    },
+  );
+
+  app.get(
+    '/documents',
+    {
+      schema: { tags: ['documents'], querystring: ListDocumentsQuery, response: { 200: DocumentList, ...Errors } },
+    },
+    async (req) => {
+      const rows = await tenant(req, (tx) => {
+        let q = tx.selectFrom('documents').selectAll();
+        if (req.query.scope) q = q.where('scope', '=', req.query.scope);
+        if (req.query.portfolio_id) q = q.where('portfolio_id', '=', req.query.portfolio_id);
+        return q.orderBy('id').execute();
+      });
+      return { documents: rows.map(documentView) };
     },
   );
 

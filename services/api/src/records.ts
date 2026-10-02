@@ -114,3 +114,24 @@ export async function portfolioRecords(tx: Tx, portfolioId: string): Promise<Por
   if (!portfolio || !terms || !offer || !asset || !subscription_account) return undefined;
   return { portfolio, terms, offer, asset, subscription_account };
 }
+
+/**
+ * The current version of every record of an entity, by id. With a portfolio, only the records that
+ * belong to it: those whose portfolio_id is the portfolio, and those kept under its id.
+ */
+export async function listRecords(
+  tx: Tx,
+  entity: RecordEntity,
+  portfolioId?: string,
+): Promise<Array<{ id: string; version: number; data: Record<string, unknown> }>> {
+  let q = tx
+    .selectFrom('record_versions')
+    .distinctOn('id')
+    .select(['id', 'version', 'data'])
+    .where('entity', '=', entity);
+  if (portfolioId) {
+    q = q.where((eb) => eb.or([eb(sql`data->>'portfolio_id'`, '=', portfolioId), eb('id', '=', portfolioId)]));
+  }
+  const rows = await q.orderBy('id').orderBy('version', 'desc').execute();
+  return rows.map((r) => ({ id: r.id, version: r.version, data: r.data as Record<string, unknown> }));
+}
