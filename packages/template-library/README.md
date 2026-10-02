@@ -25,22 +25,19 @@ Writing Word files, and the ids as bookmarks, belongs to `packages/assembly` (de
 
 The clause tree's `if` blocks have `then` and `else` branches. Biome's `noThenProperty` rule, which guards against objects being mistaken for promises, is switched off for this package and `packages/assembly` in `biome.json`. The branches are arrays, never functions, so `await` never treats a block as a promise.
 
-## The first-pass templates as drafted
+## The first-pass templates
 
-| Template | Import | Import rules |
-|---|---|---|
-| D12-A, D12-B, D1SP-A, D1SP-C | Imports | Passes |
-| D12-C | Imports | Fails: `any director` is ambiguous (two lists use the item name `director`), and three director fields are outside a loop |
-| D13-A, D13-B, D13-C | Imports | Fails: “Issuer:” is inside the locked wording |
-| D1SP-B | Fails: `[[Counsel wording on trustee limitation of liability]]` in clause 6.3 | — |
+All nine import and pass the import rules. They use Word heading styles and automatic numbering, as a firm's master would (build plan M1).
 
-These are drafting problems in the generator, to fix in M1 (build plan §5).
+The importer and rules first found three drafting problems, since fixed in the generator: D12-C's declarations of interest, D1SP-B's `[[…]]` placeholder, and the label inside D13's locked wording. See `templates/fields/README.md`.
+
+Where a condition offers alternative clauses, Word numbers both (D12 section 3 shows 3.1 and 3.2). Assembly renumbers after it evaluates the conditions.
 
 ## Tests
 
-`pnpm exec vitest run packages/template-library` runs 110 tests:
+`pnpm exec vitest run packages/template-library` runs 114 tests:
 
-- The eight importable first-pass templates come back with every field, condition, loop, zone and locked wording, with the same nesting, compared with `templates/fields/usage.json`. Each also imports deterministically.
+- All nine first-pass templates come back with every field, condition, loop, zone and locked wording, with the same nesting, compared with `templates/fields/usage.json`. Each also imports deterministically, and passes the import rules.
 - Word features are tested on files built with the `docx` library: heading styles, multi-level numbering with letters and Roman numerals, restarts, bullets, hyperlinks, bookmarks and tracked changes.
 - Each import rule is tested in both directions.
 - Clause ids are tested under every kind of counsel edit.

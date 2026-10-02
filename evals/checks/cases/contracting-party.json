@@ -62,7 +62,7 @@
       "base": { "document": "doc_atlas_d13" },
       "changes": [],
       "expect": [],
-      "why": "D13 shows “Issuer: Meridian Horizon SPC Limited for and on behalf of Atlas Segregated Portfolio”. The label is outside the designation."
+      "why": "D13 has the label “Issuer” as its own paragraph above the locked wording, which holds only the designation."
     },
     {
       "id": "CP-N2", "kind": "must_not_trigger",

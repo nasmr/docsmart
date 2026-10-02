@@ -1,15 +1,13 @@
-// The nine first-pass templates: what each imports to, and which import rules each breaks as drafted.
+// The nine first-pass templates: each imports with everything the generator put in, and passes the
+// import rules (the drafting problems found earlier are fixed in the generator).
 import { describe, expect, test } from 'vitest';
 import { contentHash, idBlocks } from './format.js';
 import { checkImportRules } from './rules.js';
 import { catalogue, FIRST_PASS, firstPassFile, generatorUsage, keys, treeUsage } from './test/first-pass.js';
 import { importWord } from './word/import.js';
-import { ImportFailure } from './word/problems.js';
-
-const IMPORTS = FIRST_PASS.filter((id) => id !== 'D1SP-B');
 
 describe('import', () => {
-  test.each(IMPORTS)(
+  test.each(FIRST_PASS)(
     '%s keeps every field, condition, loop, zone and locked wording, with the same nesting',
     async (id) => {
       const { tree } = await importWord(firstPassFile(id), id);
@@ -17,45 +15,56 @@ describe('import', () => {
     },
   );
 
-  test.each(IMPORTS)('%s gives the same tree and ids every time', async (id) => {
+  test.each(FIRST_PASS)('%s gives the same tree and ids every time', async (id) => {
     const [a, b] = [await importWord(firstPassFile(id), id), await importWord(firstPassFile(id), id)];
     expect(contentHash(a.tree)).toBe(contentHash(b.tree));
     expect(a.ids.derived.length).toBe([...idBlocks(a.tree.body)].length); // no bookmarks in the first-pass files
   });
 
-  test('D1SP-B fails: its trustee clause uses [[…]] for text counsel is to write', async () => {
-    const r = importWord(firstPassFile('D1SP-B'), 'D1SP-B');
-    await expect(r).rejects.toBeInstanceOf(ImportFailure);
-    await expect(r).rejects.toMatchObject({
-      problems: [
-        {
-          code: 'unknown_marker',
-          at: expect.stringMatching(/^paragraph \d+ \(“6\.3 The Investor enters into this agreement as tru/),
-        },
-      ],
-    });
-  });
-});
-
-describe('import rules on the templates as drafted', () => {
-  const rulesFor = async (id: string) => checkImportRules((await importWord(firstPassFile(id), id)).tree, catalogue);
-
-  test.each(['D12-A', 'D12-B', 'D1SP-A', 'D1SP-C'])('%s breaks none', async (id) => {
-    expect(await rulesFor(id)).toEqual([]);
-  });
-
-  test('D12-C: an ambiguous “any director”, and director fields outside a loop', async () => {
-    const problems = await rulesFor('D12-C');
-    expect(problems.map((p) => `${p.rule}: ${p.message}`)).toEqual([
-      'condition_form: “any director” could mean umbrella.directors or meeting.attendees; use FOR EACH … WHERE instead',
-      'unbound_variable: Field director.name uses “director” outside a loop that binds it',
-      'unbound_variable: Field director.interest_description uses “director” outside a loop that binds it',
-      'unbound_variable: Condition director.abstains uses “director” outside a loop that binds it',
+  test('numbers come from Word automatic numbering, including both alternatives of a condition', async () => {
+    const { tree } = await importWord(firstPassFile('D12-A'), 'D12-A');
+    const numbers = [...idBlocks(tree.body)]
+      .filter((b) => b.t === 'heading' || b.t === 'clause')
+      .map((b) => ('number' in b ? b.number : undefined));
+    // Section 3 offers two alternative clauses; Word numbers both, and assembly renumbers.
+    expect(numbers).toEqual([
+      '1',
+      '1.1',
+      '1.2',
+      '1.3',
+      '2',
+      '2.1',
+      '2.2',
+      '2.3',
+      '3',
+      '3.1',
+      '3.2',
+      '4',
+      '4.1',
+      '4.2',
+      '4.3',
+      '4.4',
+      '5',
+      '5.1',
+      '5.2',
+      '6',
+      '6.1',
+      '7',
+      '7.1',
+      '7.2',
     ]);
   });
 
-  test.each(['D13-A', 'D13-B', 'D13-C'])('%s: “Issuer:” is inside the locked wording', async (id) => {
-    const problems = await rulesFor(id);
-    expect(problems.map((p) => p.rule)).toEqual(['locked_wording']);
+  test('headings come from Word heading styles', async () => {
+    const { tree } = await importWord(firstPassFile('D13-A'), 'D13-A');
+    const headings = [...idBlocks(tree.body)].filter((b) => b.t === 'heading');
+    expect(headings.length).toBeGreaterThan(10);
+    expect(headings.every((h) => h.t === 'heading' && h.level === 1)).toBe(true);
+  });
+});
+
+describe('import rules', () => {
+  test.each(FIRST_PASS)('%s breaks none', async (id) => {
+    expect(checkImportRules((await importWord(firstPassFile(id), id)).tree, catalogue)).toEqual([]);
   });
 });

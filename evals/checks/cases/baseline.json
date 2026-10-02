@@ -9,8 +9,7 @@
     { "id": "BL-04", "base": { "document": "doc_atlas_d13" }, "template": "D13-B",
       "expect": [{ "check": "defined_terms", "severity": "review", "case": "DT-05" }] },
     { "id": "BL-05", "base": { "document": "doc_atlas2_d12" }, "template": "D12-C",
-      "expect": [{ "check": "defined_terms", "severity": "review", "case": "DT-06" }],
-      "note": "D12-C also has the unbound {{director.name}} in its declarations of interest (catalogue template issue). The assembler should refuse the template before any check runs; this entry assumes the template is fixed." },
+      "expect": [{ "check": "defined_terms", "severity": "review", "case": "DT-06" }] },
     { "id": "BL-06", "base": { "document": "doc_atlas2_d13" }, "template": "D13-C", "expect": [] },
     { "id": "BL-07", "base": { "document": "batch_atlas_d1sp", "party": "D1SP-A investors" }, "template": "D1SP-A",
       "expect": [
@@ -21,8 +20,7 @@
       "expect": [
         { "check": "defined_terms", "severity": "review", "case": "DT-08" },
         { "check": "reference_state", "severity": "blocks", "case": "RF-02", "note": "Until U3 exists." }
-      ],
-      "note": "The trustee clause 6.3 placeholder ([[Counsel wording …]]) must be replaced before this template can be imported." },
+      ] },
     { "id": "BL-09", "base": { "document": "batch_atlas_d1sp", "party": "D1SP-C investors" }, "template": "D1SP-C",
       "expect": [
         { "check": "defined_terms", "severity": "review", "case": "DT-08" },

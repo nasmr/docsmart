@@ -484,28 +484,46 @@
    },
    {
     "kind": "condition",
-    "name": "any director.is_interested",
+    "name": "resolution.interest_declared",
     "context": []
+   },
+   {
+    "kind": "list",
+    "name": "meeting.attendees",
+    "context": [
+     "resolution.interest_declared"
+    ]
+   },
+   {
+    "kind": "condition",
+    "name": "director.is_interested",
+    "context": [
+     "resolution.interest_declared",
+     "EACH director IN meeting.attendees"
+    ]
    },
    {
     "kind": "field",
     "name": "director.name",
     "context": [
-     "any director.is_interested"
+     "resolution.interest_declared",
+     "EACH director IN meeting.attendees WHERE director.is_interested"
     ]
    },
    {
     "kind": "field",
     "name": "director.interest_description",
     "context": [
-     "any director.is_interested"
+     "resolution.interest_declared",
+     "EACH director IN meeting.attendees WHERE director.is_interested"
     ]
    },
    {
     "kind": "condition",
     "name": "director.abstains",
     "context": [
-     "any director.is_interested"
+     "resolution.interest_declared",
+     "EACH director IN meeting.attendees WHERE director.is_interested"
     ]
    },
    {
@@ -715,7 +733,7 @@
    },
    {
     "kind": "locked",
-    "name": "Issuer: {{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
+    "name": "{{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
     "context": []
    },
    {
@@ -1040,7 +1058,7 @@
    },
    {
     "kind": "locked",
-    "name": "Issuer: {{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
+    "name": "{{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
     "context": []
    },
    {
@@ -1447,7 +1465,7 @@
    },
    {
     "kind": "locked",
-    "name": "Issuer: {{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
+    "name": "{{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
     "context": []
    },
    {
@@ -2128,13 +2146,6 @@
    {
     "kind": "field",
     "name": "investor.trust_name",
-    "context": [
-     "investor.is_trustee"
-    ]
-   },
-   {
-    "kind": "placeholder",
-    "name": "Counsel wording on trustee limitation of liability",
     "context": [
      "investor.is_trustee"
     ]

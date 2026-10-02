@@ -9,7 +9,7 @@ function operative(lead, opts = {}) {
   const b = [];
   b.push(P(lead));
   b.push(H('2 Creation of the Portfolio'));
-  b.push(P('2.1 A segregated portfolio of the Company be created and named {{portfolio.legal_name}} (the “Portfolio”), with effect from {{resolution.effective_date}} [[IF umbrella.is_regulated_fund]] or, if later, the date on which the Financial Services Commission approves the creation of the Portfolio [[END IF]].', 1));
+  b.push(P('2.1 A segregated portfolio of the Company be created and named {{portfolio.legal_name}} (the “Portfolio”), with effect from {{resolution.effective_date}}[[IF umbrella.is_regulated_fund]] or, if later, the date on which the Financial Services Commission approves the creation of the Portfolio[[END IF]].', 1));
   b.push(P('2.2 The assets and liabilities attributable to the Portfolio be held and recorded separately from the general assets of the Company and from the assets of every other segregated portfolio of the Company, and the directors establish and maintain procedures for that purpose.', 1));
   b.push(P('2.3 A class of shares linked to the Portfolio be designated as {{portfolio.share_class_name}}, each with a par value of {{portfolio.share_par_value}}, carrying the rights set out in the Company’s articles of association and the Supplement (the “Portfolio Shares”), and every Portfolio Share be recorded in the register of members as linked to the Portfolio.', 1));
   b.push(H('3 Regulatory approval or notification'));
@@ -55,7 +55,7 @@ function header(kind) {
 
 function directorSigs() {
   return [
-    P('These resolutions are passed by the directors signing below and take effect when the last director signs [[IF resolution.effective_date_differs]] or on {{resolution.effective_date}} if later [[END IF]].'),
+    P('These resolutions are passed by the directors signing below and take effect when the last director signs[[IF resolution.effective_date_differs]] or on {{resolution.effective_date}} if later[[END IF]].'),
     COND('[[FOR EACH director IN umbrella.directors]]'),
     ...SIG('{{director.name}}', ['Director', 'Date: {{director.signed_date}}']),
     COND('[[END FOR EACH]]'),
@@ -80,7 +80,7 @@ const A = {
     ...header('WRITTEN RESOLUTIONS OF THE DIRECTORS'),
     P('Passed in writing on {{resolution.date}} in accordance with the Company’s articles of association and the BVI Business Companies Act (Revised Edition 2020) (the “Act”).'),
     H('1 Background'),
-    P('1.1 The Company is a segregated portfolio company [[IF umbrella.is_regulated_fund]] and is recognised as a {{umbrella.fund_category}} under the Securities and Investment Business Act (Revised Edition 2020) [[END IF]].', 1),
+    P('1.1 The Company is a segregated portfolio company[[IF umbrella.is_regulated_fund]] and is recognised as a {{umbrella.fund_category}} under the Securities and Investment Business Act (Revised Edition 2020)[[END IF]].', 1),
     P('1.2 The directors propose to create a new segregated portfolio to hold the Company’s investment in {{asset.issuer_name}} (the “Project”), and to offer shares linked to that portfolio to eligible investors on the terms of the Company’s offering memorandum and a supplement to it.', 1),
     P('1.3 Each director confirms that they have no interest in the Project or in the acquisition described in section 5 that must be disclosed under the Company’s articles of association or the Act.', 1),
     ...operative('IT IS RESOLVED THAT:', { investment: investmentFromIssuerOrThirdParty() }),
@@ -110,7 +110,7 @@ const B = {
     ...header('WRITTEN RESOLUTIONS OF THE DIRECTORS'),
     P('Passed in writing on {{resolution.date}} in accordance with the Company’s articles of association and the BVI Business Companies Act (Revised Edition 2020) (the “Act”).'),
     H('1 Background'),
-    P('1.1 The Company is a segregated portfolio company [[IF umbrella.is_regulated_fund]] and is recognised as a {{umbrella.fund_category}} under the Securities and Investment Business Act (Revised Edition 2020) [[END IF]].', 1),
+    P('1.1 The Company is a segregated portfolio company[[IF umbrella.is_regulated_fund]] and is recognised as a {{umbrella.fund_category}} under the Securities and Investment Business Act (Revised Edition 2020)[[END IF]].', 1),
     P('1.2 The directors propose to create a new segregated portfolio to acquire {{asset.instrument}} of {{asset.issuer_name}} (the “Project Shares”) from {{asset.seller_name}} (the “Seller”), which is an affiliate of {{sponsor.legal_name}} (the “Sponsor”).', 1),
     P('1.3 The Seller acquired the Project Shares on {{asset.sponsor_acquisition_date}} at {{asset.sponsor_cost_per_share}} per share. The proposed transfer price is {{asset.price_per_share}} per share (the “Transfer Price”), a markup of {{asset.markup_pct}} on the Seller’s cost.', 1),
     P('1.4 {{asset.valuer_name}} has provided an independent valuation of the Project Shares dated {{asset.valuation_date}} (the “Valuation”), which was tabled with these resolutions.', 1),
@@ -156,7 +156,7 @@ const Cv = {
     TABLE([
       ['Date and time', '{{meeting.date}} at {{meeting.time}}'],
       ['Place', '{{meeting.place}}'],
-      ['Present', '[[FOR EACH director IN meeting.attendees]] {{director.name}} [[END FOR EACH]]'],
+      ['Present', '[[FOR EACH director IN meeting.attendees]]{{director.name}}[[END FOR EACH]]'],
       ['In attendance', '{{meeting.in_attendance}}'],
       ['Chair', '{{meeting.chair_name}}'],
     ], [2400, 6626], { labelCol: true }),
@@ -164,8 +164,10 @@ const Cv = {
     H('1 Quorum and notice'),
     P('1.1 The chair noted that notice of the meeting had been given in accordance with the Company’s articles of association and that a quorum was present. The chair declared the meeting open.', 1),
     H('Declarations of interest'),
-    COND('[[IF any director.is_interested]]'),
-    P('{{director.name}} declared that they are interested in the matters to be considered as {{director.interest_description}}, and [[IF director.abstains]] did not vote on the resolutions in section 5 [[END IF]].', 1),
+    COND('[[IF resolution.interest_declared]]'),
+    COND('[[FOR EACH director IN meeting.attendees WHERE director.is_interested]]'),
+    P('{{director.name}} declared that they are interested in the matters to be considered as {{director.interest_description}}[[IF director.abstains]], and did not vote on the resolutions in section 5[[END IF]].', 1),
+    COND('[[END FOR EACH]]'),
     COND('[[ELSE]]'),
     P('Each director present confirmed that they have no interest in the matters to be considered that must be disclosed under the Company’s articles of association or the BVI Business Companies Act (Revised Edition 2020).', 1),
     COND('[[END IF]]'),
@@ -173,7 +175,7 @@ const Cv = {
     ...BUL([
       'The draft supplement to the offering memorandum dated {{umbrella.om_date}} relating to the proposed portfolio (the “Supplement”).',
       'The summary of the proposed acquisition of {{asset.instrument}} of {{asset.issuer_name}}.',
-      '[[IF asset.acquisition_source = gp_sourced]] The independent valuation by {{asset.valuer_name}} dated {{asset.valuation_date}} and the draft conflict disclosure statement. [[END IF]]',
+      '[[IF asset.acquisition_source = gp_sourced]]The independent valuation by {{asset.valuer_name}} dated {{asset.valuation_date}} and the draft conflict disclosure statement.[[END IF]]',
     ]),
     H('Discussion'),
     P('The directors discussed the proposed portfolio, the terms of the offer, the proposed acquisition and the matters in the documents tabled.'),

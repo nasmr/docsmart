@@ -2,7 +2,7 @@
 const fs = require('fs');
 const {
   Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthType, ShadingType,
-  AlignmentType, BorderStyle, PageBreak, Header, Footer, PageNumber, LevelFormat,
+  AlignmentType, BorderStyle, PageBreak, Header, Footer, PageNumber, LevelFormat, HeadingLevel,
 } = require('docx');
 
 const SERIF = 'Georgia';
@@ -94,15 +94,23 @@ function T(text) {
 function ST(text) {
   return new Paragraph({ alignment: AlignmentType.CENTER, spacing: sp(0, 80), children: runs(text, { size: 20, color: C.grey }) });
 }
+// Headings use Word's Heading 1 style, and a leading number ("2 Creation of the Portfolio")
+// becomes Word automatic numbering, so the templates import the way a firm's master does. Word
+// computes the numbers; the numbers written here only mark which paragraphs are numbered. Where a
+// condition offers alternative clauses, Word numbers both (3.1, 3.2); assembly renumbers after
+// evaluating the conditions.
 function H(text) {
-  return new Paragraph({ keepNext: true, spacing: sp(240, 100), children: runs(text, { bold: true, size: 23 }) });
+  const m = String(text).match(/^(\d+)\s+([\s\S]*)$/);
+  return new Paragraph({ heading: HeadingLevel.HEADING_1, keepNext: true, spacing: sp(240, 100),
+    ...(m ? { numbering: { reference: 'clauses', level: 0 } } : {}),
+    children: runs(m ? m[2] : text, { bold: true, size: 23 }) });
 }
+// A numbered clause ("2.1 A segregated portfolio…") uses automatic numbering at the second level.
 function P(text, level = 0) {
-  const m = level ? String(text).match(/^(\d+(?:\.\d+)*)\s+([\s\S]*)$/) : null;
+  const m = level ? String(text).match(/^(\d+(?:\.\d+)+)\s+([\s\S]*)$/) : null;
   if (m) {
-    return new Paragraph({ spacing: { before: 0, after: 120, line: 300 }, indent: { left: 709, hanging: 709 },
-      tabStops: [{ type: 'left', position: 709 }],
-      children: [new TextRun({ text: m[1], font: SERIF, size: BODY, color: C.ink }), new TextRun({ text: '\t', font: SERIF, size: BODY }), ...runs(m[2])] });
+    return new Paragraph({ numbering: { reference: 'clauses', level: 1 }, spacing: { before: 0, after: 120, line: 300 },
+      children: runs(m[2]) });
   }
   return new Paragraph({ spacing: { before: 0, after: 120, line: 300 }, indent: level ? { left: 709 } : undefined,
     children: runs(text) });
@@ -240,6 +248,12 @@ async function build(meta, body, outDir) {
     numbering: { config: [
       { reference: 'bul', levels: [{ level: 0, format: LevelFormat.BULLET, text: '•', alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 567, hanging: 283 } } } }] },
       { reference: 'num', levels: [{ level: 0, format: LevelFormat.DECIMAL, text: '%1.', alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 425, hanging: 340 } } } }] },
+      { reference: 'clauses', levels: [
+        { level: 0, format: LevelFormat.DECIMAL, text: '%1', alignment: AlignmentType.LEFT,
+          style: { run: { font: SERIF, size: 23, bold: true }, paragraph: { indent: { left: 709, hanging: 709 } } } },
+        { level: 1, format: LevelFormat.DECIMAL, text: '%1.%2', alignment: AlignmentType.LEFT,
+          style: { run: { font: SERIF, size: BODY }, paragraph: { indent: { left: 709, hanging: 709 } } } },
+      ] },
     ] },
     sections: [{
       properties: { page: { margin: { top: 1440, bottom: 1440, left: 1440, right: 1440 } } },

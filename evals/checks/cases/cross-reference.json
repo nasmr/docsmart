@@ -28,7 +28,7 @@
       "base": { "document": "doc_atlas2_d13" },
       "changes": [
         { "op": "set_record", "path": "portfolios/atlas-ii.json#asset.placement.has_fee", "value": false },
-        { "op": "replace_text", "at": "§10.2", "find": "[[IF asset.has_placement_fee]] The Sponsor has no interest in the placement fee described in section 4.4. [[END IF]]", "replace": "The Sponsor has no interest in the placement fee described in section 4.4." }
+        { "op": "replace_text", "at": "§10.2", "find": "[[IF asset.has_placement_fee]] The Sponsor has no interest in the placement fee described in section 4.4.[[END IF]]", "replace": " The Sponsor has no interest in the placement fee described in section 4.4." }
       ],
       "expect": [{ "severity": "blocks", "at": "§10.2", "about": "“section 4.4” is excluded because asset.has_placement_fee is false" }],
       "why": "The template wraps both sides in the same condition. This case removes the wrapper from one side, which is the mistake to catch after a template edit."

@@ -182,6 +182,7 @@
 
     "resolution.date": { "type": "date", "source": "DocumentInstance.inputs.resolution_date", "origin": "document", "description": "Date of the resolutions", "notes": "For written resolutions this may be the date the last director signs. See README gap G6." },
     "resolution.effective_date": { "type": "date", "source": "DocumentInstance.inputs.effective_date", "origin": "document", "description": "Date the portfolio is created" },
+    "resolution.interest_declared": { "type": "boolean", "source": "DocumentInstance.inputs.director_interests[].is_interested", "origin": "derived", "description": "Whether any director present has declared an interest", "notes": "True when any director interest entered for the document has is_interested." },
     "resolution.effective_date_differs": { "type": "boolean", "source": "DocumentInstance.inputs (effective_date later than resolution_date)", "origin": "derived", "description": "Whether the effective date is later than signing" },
 
     "meeting.date": { "type": "date", "source": "DocumentInstance.inputs.meeting.date", "origin": "document", "description": "Meeting date" },

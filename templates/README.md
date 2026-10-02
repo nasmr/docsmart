@@ -30,6 +30,8 @@ These are the conventions the template importer (build plan B3) will parse.
 | Dark box, `LOCKED · CONTRACTING PARTY` | The generated contracting-party wording. Read-only. |
 | Amber box, `COUNSEL NOTE` | A question or note for counsel. Removed when a document is assembled. |
 
+Headings use Word's Heading 1 style, and numbered headings and clauses use Word automatic numbering, as a firm's master would. Where a condition offers alternative clauses, Word numbers both (for example 3.1 and 3.2); assembly renumbers after evaluating the conditions.
+
 Field names are listed with their sources in the guide. `fields/catalogue.json` gives each one a type, a source entity and an origin, and is the starting point for the slot schema in the data model (build plan B2 and B3). See `fields/README.md`.
 
 ## generator/

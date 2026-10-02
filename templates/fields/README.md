@@ -52,9 +52,10 @@ These came up while building the catalogue. Each needs a decision before the bui
 
 ## Template issues
 
-These come from `npm run fields` and are listed at the end of `usage.md`. They are drafting problems in the first-pass templates, not catalogue problems:
+`npm run fields` lists drafting problems in the templates at the end of `usage.md`. There are none at present. Three found earlier were fixed in the generator on 2 October 2026:
 
-- **D12-C, declarations of interest:** it uses `[[IF any director.is_interested]]` and then `{{director.name}}` outside a loop, so it can't say which director it means, or handle more than one. D12-B's `[[FOR EACH director IN umbrella.directors WHERE director.is_interested]]` is the pattern that works.
-- **D1SP-B, clause 6.3:** it uses `[[Counsel wording on trustee limitation of liability]]` as a placeholder. `[[…]]` is reserved for conditions and loops, so the importer would misread it. An amber counsel note is the right marking.
+- **D12-C, declarations of interest:** it used `[[IF any director.is_interested]]` with `{{director.name}}` outside a loop. It now loops over `meeting.attendees` where a director is interested. A new derived field, `resolution.interest_declared`, chooses between the declarations and the confirmation that there are none.
+- **D1SP-B, clause 6.3:** a `[[Counsel wording …]]` placeholder is now a counsel note.
+- **D13, the issuer designation:** the label “Issuer” is now a separate paragraph above the locked wording, which holds exactly the designation (decision 0008).
 
 `guide.js` still has its own copy of the field descriptions. It should read them from `catalogue.json` once the catalogue is agreed, so there is one source.
