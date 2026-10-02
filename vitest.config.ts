@@ -7,6 +7,8 @@ export default defineConfig({
   },
   test: {
     include: ['{apps,services,packages}/*/src/**/*.test.{ts,tsx}'],
+    // Integration tests need Postgres and SeaweedFS: pnpm test:integration.
+    exclude: ['**/node_modules/**', '**/*.int.test.ts'],
     passWithNoTests: true,
   },
 });

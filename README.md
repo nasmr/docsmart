@@ -27,9 +27,11 @@ corepack enable          # provides pnpm at the version in package.json
 pnpm install
 cp .env.example .env
 pnpm db:up               # Postgres 18 and SeaweedFS (S3), waits until healthy
+pnpm db:migrate          # apply the SQL migrations (needs DATABASE_URL from .env)
 pnpm build               # tsc -b over all packages
 pnpm typecheck           # packages and the web app
-pnpm test                # Vitest
+pnpm test                # unit tests (no database needed)
+pnpm test:integration    # against Postgres and SeaweedFS (needs pnpm db:up)
 pnpm lint                # Biome
 pnpm --filter @docsmart/web run dev
 pnpm db:down

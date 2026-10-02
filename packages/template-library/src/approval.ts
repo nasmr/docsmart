@@ -31,9 +31,12 @@ export interface Approver {
 }
 
 export class ApprovalRefused extends Error {
-  constructor(readonly reasons: string[]) {
+  readonly reasons: string[];
+
+  constructor(reasons: string[]) {
     super(reasons.join(' '));
     this.name = 'ApprovalRefused';
+    this.reasons = reasons;
   }
 }
 

@@ -13,7 +13,9 @@
     "lint": "biome check .",
     "format": "biome format --write .",
     "db:up": "docker compose up -d --wait",
-    "db:down": "docker compose down"
+    "db:down": "docker compose down",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "db:migrate": "pnpm --filter @docsmart/api run migrate"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.14",

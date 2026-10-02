@@ -10,5 +10,22 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     }
+  },
+  "dependencies": {
+    "@docsmart/assembly": "workspace:*",
+    "@docsmart/calc": "workspace:*",
+    "@docsmart/domain": "workspace:*",
+    "@docsmart/platform": "workspace:*",
+    "@docsmart/template-library": "workspace:*",
+    "kysely": "^0.29.6",
+    "pg": "^8.23.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-s3": "^3.1144.0",
+    "@types/pg": "^8.23.1"
+  },
+  "scripts": {
+    "migrate": "node src/db/migrate.ts"
   }
 }

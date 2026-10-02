@@ -19,7 +19,8 @@ services:
   # S3-compatible object storage for the evidence store (SVC-EVID).
   seaweedfs:
     image: chrislusf/seaweedfs:4.48
-    command: server -dir=/data -s3 -s3.config=/etc/seaweedfs/s3.json
+    # One node: allow enough volumes for several buckets, and keep each volume small.
+    command: server -dir=/data -s3 -s3.config=/etc/seaweedfs/s3.json -volume.max=100 -master.volumeSizeLimitMB=512
     ports:
       - "127.0.0.1:8333:8333"
     volumes:
