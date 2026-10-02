@@ -9,6 +9,11 @@
       "development": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./names": {
+      "development": "./src/names.ts",
+      "types": "./dist/names.d.ts",
+      "default": "./dist/names.js"
     }
   },
   "dependencies": {

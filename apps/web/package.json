@@ -11,13 +11,18 @@
     "typecheck": "tsc -p . --noEmit"
   },
   "dependencies": {
+    "@docsmart/assembly": "workspace:*",
+    "@docsmart/domain": "workspace:*",
+    "@docsmart/schemas": "workspace:*",
     "react": "^19.3.0",
-    "react-dom": "^19.3.0"
+    "react-dom": "^19.3.0",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.1",
-    "vite": "^8.3.1"
+    "vite": "^8.3.1",
+    "@types/node": "^24"
   }
 }

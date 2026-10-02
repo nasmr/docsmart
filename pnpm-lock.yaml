@@ -181,13 +181,28 @@ importers:
 
   apps/web:
     dependencies:
+      '@docsmart/assembly':
+        specifier: workspace:*
+        version: link:../../packages/assembly
+      '@docsmart/domain':
+        specifier: workspace:*
+        version: link:../../packages/domain
+      '@docsmart/schemas':
+        specifier: workspace:*
+        version: link:../../packages/schemas
       react:
         specifier: ^19.3.0
         version: 19.3.0
       react-dom:
         specifier: ^19.3.0
         version: 19.3.0(react@19.3.0)
+      zod:
+        specifier: ^4.6.5
+        version: 4.6.5
     devDependencies:
+      '@types/node':
+        specifier: ^24
+        version: 24.19.0
       '@types/react':
         specifier: ^19.3.0
         version: 19.3.0

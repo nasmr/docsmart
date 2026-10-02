@@ -61,6 +61,23 @@ export const SavedRecord = z
 export const RecordResponse = z
   .object({ entity: RecordEntity, id: z.string(), data: z.record(z.string(), z.unknown()) })
   .meta({ id: 'Record' });
+export const ListRecordsParams = z.object({ entity: RecordEntity });
+export const ListRecordsQuery = z.object({
+  /** Only the records that belong to this portfolio (by their portfolio_id, or kept under its id). */
+  portfolio_id: Id.optional(),
+});
+export const RecordList = z
+  .object({
+    records: z.array(
+      z.object({
+        entity: RecordEntity,
+        id: z.string(),
+        version: z.number().int(),
+        data: z.record(z.string(), z.unknown()),
+      }),
+    ),
+  })
+  .meta({ id: 'RecordList' });
 
 // ---------- templates ----------
 
@@ -181,6 +198,12 @@ export const DocumentResponse = z
     ready_version_id: z.string().nullable(),
   })
   .meta({ id: 'Document' });
+
+export const ListDocumentsQuery = z.object({
+  scope: z.enum(['umbrella', 'portfolio']).optional(),
+  portfolio_id: Id.optional(),
+});
+export const DocumentList = z.object({ documents: z.array(DocumentResponse) }).meta({ id: 'DocumentList' });
 
 const DocumentPointer = z.object({ document_id: Id, version_id: Id });
 
