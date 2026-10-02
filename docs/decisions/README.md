@@ -14,6 +14,7 @@ One file per decision. A decision starts as **Proposed**, becomes **Accepted** o
 | [0008](0008-canonical-template-format.md) | Canonical template format: our own clause tree | Accepted | — |
 | [0009](0009-ready-package-stays-frozen.md) | A ready document's package stays frozen when records change | Accepted | — |
 | [0010](0010-word-import-libraries-and-tracked-changes.md) | Word import: libraries, and refusing tracked changes | Accepted | — |
+| [0011](0011-house-formatting.md) | House formatting for assembled documents | Accepted | — |
 
 ## Format
 

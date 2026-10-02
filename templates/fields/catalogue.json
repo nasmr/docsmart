@@ -18,7 +18,7 @@
     "address": "Postal address, multi-line.",
     "email": "Email address.",
     "boolean": "true or false. Used only in conditions.",
-    "enum": "One of the listed values. Rendered with its label.",
+    "enum": "One of the listed values. Printed with its label from `labels`, or with underscores as spaces (decision 0011).",
     "hash": "SHA-256 content hash, lower-case hex."
   },
   "origins": {
@@ -93,7 +93,7 @@
     "portfolio.subscription_price": { "type": "money", "source": "PortfolioTerms.subscription_price", "origin": "record", "description": "Issue price per portfolio share" },
     "portfolio.mgmt_fee_rate": { "type": "rate", "source": "PortfolioTerms.mgmt_fee_rate", "origin": "record", "description": "Management fee rate" },
     "portfolio.fee_basis": { "type": "text", "source": "PortfolioTerms.fee_basis", "origin": "record", "description": "What the management fee is charged on", "notes": "Inserted after “a year on”, e.g. “the aggregate subscribed capital of the Portfolio”." },
-    "portfolio.fee_frequency": { "type": "enum", "values": ["quarterly", "semi_annually", "annually"], "source": "PortfolioTerms.fee_frequency", "origin": "record", "description": "How often fees are paid" },
+    "portfolio.fee_frequency": { "type": "enum", "values": ["quarterly", "semi_annually", "annually"], "labels": { "semi_annually": "semi-annually" }, "source": "PortfolioTerms.fee_frequency", "origin": "record", "description": "How often fees are paid" },
     "portfolio.perf_fee_rate": { "type": "rate", "source": "PortfolioTerms.perf_fee_rate", "origin": "record", "description": "Performance fee rate" },
     "portfolio.has_hurdle": { "type": "boolean", "source": "PortfolioTerms.has_hurdle", "origin": "record", "description": "Whether the performance fee has a hurdle" },
     "portfolio.hurdle_rate": { "type": "rate", "source": "PortfolioTerms.hurdle_rate", "origin": "record", "description": "Annual hurdle before performance fee" },
@@ -154,7 +154,7 @@
     "investor.identity_ref": { "type": "identifier", "source": "Party.id", "origin": "platform", "description": "Platform identity reference" },
     "investor.kyc_completed_date": { "type": "date", "source": "Party.kyc.completed_date", "origin": "record", "description": "Date identity checks last completed", "notes": "Held by the identity module; read-only in this slice." },
     "investor.formed_for_investment": { "type": "boolean", "source": "SubscriptionRequest.eligibility.formed_for_investment", "origin": "record", "description": "Whether the entity was formed to invest in this portfolio (look-through for investor-count limits)", "notes": "Specific to the portfolio, so held on the subscription, not the party." },
-    "investor.status_selected": { "type": "enum", "values": ["professional", "exempted", "other_basis"], "source": "SubscriptionRequest.eligibility.status", "origin": "record", "description": "Investor-status option ticked", "notes": "The investor's own confirmation. The platform does not determine eligibility." },
+    "investor.status_selected": { "type": "enum", "values": ["professional", "exempted", "other_basis"], "labels": { "professional": "professional investor", "exempted": "exempted investor", "other_basis": "eligible on another basis" }, "source": "SubscriptionRequest.eligibility.status", "origin": "record", "description": "Investor-status option ticked", "notes": "The investor's own confirmation. The platform does not determine eligibility." },
     "investor.existing_portfolio_name": { "type": "text", "source": "Portfolio(of prior Role).legal_name", "origin": "derived", "description": "Portfolio the investor already holds", "notes": "Names another portfolio on purpose. See README gap G3 (INV-10)." },
     "investor.prior_agreement_date": { "type": "date", "source": "DocumentInstance(prior D1-SP).executed_date", "origin": "platform", "description": "Date of the earlier subscription agreement" },
     "investor.prior_agreement_ref": { "type": "identifier", "source": "DocumentInstance(prior D1-SP).ref", "origin": "platform", "description": "Reference of the earlier agreement" },
