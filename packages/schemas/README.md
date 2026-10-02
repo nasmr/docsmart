@@ -2,7 +2,7 @@
 
 **Decision:** 0005 item 6
 **Milestone:** M1
-**Status:** Not started
+**Status:** Built: the API contract for this slice
 
 ## What goes here
 

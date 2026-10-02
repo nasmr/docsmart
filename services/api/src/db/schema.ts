@@ -56,6 +56,7 @@ export interface Database extends PlatformTables {
     slot_snapshot: JsonOnce;
     calculations: JsonOnce;
     referenced_hashes: JsonOnce;
+    rendering_sha256: string | null;
     created_by: string;
     created_at: Defaulted<Date>;
   };

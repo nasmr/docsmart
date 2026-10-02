@@ -160,6 +160,15 @@ export async function recordVersion(
     }
     references[ref.kind] = { ...ref, content_hash: row.content_hash };
   }
+  let rendering: string | undefined;
+  if (v.store) {
+    rendering = await putEvidence(tx, v.store, {
+      tenant_id: who.tenant_id,
+      bytes: await renderWord(v.assembled.document),
+      media_type: WORD_MEDIA_TYPE,
+      created_by: who.actor,
+    });
+  }
   const previous = doc.lifecycle.context.current_version;
   const number = (previous?.number ?? 0) + 1;
   const ref = { id: v.version_id, number, content_hash: v.assembled.content_hash };
@@ -177,6 +186,7 @@ export async function recordVersion(
       slot_snapshot: JSON.stringify(v.assembled.values),
       calculations: JSON.stringify(v.assembled.calculations),
       referenced_hashes: JSON.stringify(references),
+      rendering_sha256: rendering ?? null,
       created_by: who.actor,
     })
     .execute();
@@ -203,15 +213,6 @@ export async function recordVersion(
     .values({ tenant_id: who.tenant_id, version_id: v.version_id, check: 'required_slot' })
     .execute();
 
-  let rendering: string | undefined;
-  if (v.store) {
-    rendering = await putEvidence(tx, v.store, {
-      tenant_id: who.tenant_id,
-      bytes: await renderWord(v.assembled.document),
-      media_type: WORD_MEDIA_TYPE,
-      created_by: who.actor,
-    });
-  }
   await audit(tx, {
     tenant_id: who.tenant_id,
     actor: who.actor,
