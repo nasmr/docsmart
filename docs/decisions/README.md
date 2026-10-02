@@ -15,6 +15,7 @@ One file per decision. A decision starts as **Proposed**, becomes **Accepted** o
 | [0009](0009-ready-package-stays-frozen.md) | A ready document's package stays frozen when records change | Accepted | — |
 | [0010](0010-word-import-libraries-and-tracked-changes.md) | Word import: libraries, and refusing tracked changes | Accepted | — |
 | [0011](0011-house-formatting.md) | House formatting for assembled documents | Accepted | — |
+| [0012](0012-s3-client.md) | S3 client for the evidence store | Accepted | — |
 
 ## Format
 
