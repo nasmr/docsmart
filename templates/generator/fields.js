@@ -1,6 +1,7 @@
-// Checks the templates against templates/fields/catalogue.json and writes templates/fields/usage.md.
-//   node fields.js          check, then rewrite usage.md
-//   node fields.js --check  check, and fail if usage.md is out of date
+// Checks the templates against templates/fields/catalogue.json and writes templates/fields/usage.md
+// and usage.json.
+//   node fields.js          check, then rewrite both
+//   node fields.js --check  check, and fail if either is out of date
 // Exits 1 if a template uses something the catalogue lacks, or the catalogue lists something no
 // template uses. Template issues (unbound loop fields, stray [[...]] text) are reported, not fatal.
 const fs = require('fs');
@@ -176,13 +177,22 @@ const md = L.join('\n');
 
 for (const e of errors) console.error('error: ' + e);
 for (const i of uniqueIssues) console.warn('template issue: ' + i);
-const file = path.join(dir, 'usage.md');
-if (process.argv.includes('--check')) {
-  const current = fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : '';
-  if (current !== md) { console.error('error: templates/fields/usage.md is out of date; run npm run fields'); process.exit(1); }
-} else {
-  fs.writeFileSync(file, md);
-  console.log('wrote', path.relative(process.cwd(), file));
+// usage.json: every field, condition, list, zone, locked wording and placeholder each template
+// uses, with the conditions and loops around it. The template importer's tests compare against it.
+const records = {};
+for (const id of ids) {
+  records[id] = usage.filter((u) => u.template === id).map((u) => ({ kind: u.kind, name: u.name, context: u.context }));
+}
+const outputs = [['usage.md', md], ['usage.json', JSON.stringify({ generated_by: 'templates/generator/fields.js', templates: records }, null, 1) + '\n']];
+for (const [name, content] of outputs) {
+  const file = path.join(dir, name);
+  if (process.argv.includes('--check')) {
+    const current = fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : '';
+    if (current !== content) { console.error(`error: templates/fields/${name} is out of date; run npm run fields`); process.exit(1); }
+  } else {
+    fs.writeFileSync(file, content);
+    console.log('wrote', path.relative(process.cwd(), file));
+  }
 }
 console.log(Object.keys(cat.fields).length + ' fields, ' + Object.keys(cat.lists).length + ' lists, ' + Object.keys(cat.zones).length + ' zones; '
   + errors.length + ' errors, ' + uniqueIssues.length + ' template issues');

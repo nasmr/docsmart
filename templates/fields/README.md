@@ -6,13 +6,14 @@ Every field, condition flag, list and AI-drafted zone used by the first-pass tem
 |---|---|
 | `catalogue.json` | The catalogue. Edited by hand. |
 | `usage.md` | Which templates use each field, and under which condition. Generated; do not edit. |
+| `usage.json` | The same records as data: every field, condition, list, zone and locked wording in each template, with the conditions and loops around it. Generated; the template importer's tests compare against it. |
 
 ## Keeping it in step with the templates
 
 ```
 cd templates/generator
-npm run fields        # check, and rewrite usage.md
-npm run fields:check  # check, and fail if usage.md is out of date
+npm run fields        # check, and rewrite usage.md and usage.json
+npm run fields:check  # check, and fail if either is out of date
 ```
 
 The check fails if a template uses a field, list, zone or condition value the catalogue lacks, or if the catalogue lists something no template uses. It also reports template issues (below) without failing.

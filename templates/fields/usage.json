@@ -1,0 +1,2580 @@
+{
+ "generated_by": "templates/generator/fields.js",
+ "templates": {
+  "D12-A": [
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.company_number",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "resolution.date",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "umbrella.is_regulated_fund",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.fund_category",
+    "context": [
+     "umbrella.is_regulated_fund"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.max_quantity",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.instrument",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_jurisdiction",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.total_consideration",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.seller_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.minimum_close_amount",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "resolution.effective_date",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "umbrella.is_regulated_fund",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.share_class_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.share_par_value",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "umbrella.is_regulated_fund",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.om_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.subscription_price",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.min_subscription",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.max_offer",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.offer_open_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.offer_close_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.allocation_method_description",
+    "context": []
+   },
+   {
+    "kind": "locked",
+    "name": "{{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "resolution.effective_date_differs",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "resolution.effective_date",
+    "context": [
+     "resolution.effective_date_differs"
+    ]
+   },
+   {
+    "kind": "list",
+    "name": "umbrella.directors",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "director.name",
+    "context": [
+     "EACH director IN umbrella.directors"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "director.signed_date",
+    "context": [
+     "EACH director IN umbrella.directors"
+    ]
+   }
+  ],
+  "D12-B": [
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.company_number",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "resolution.date",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "umbrella.is_regulated_fund",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.fund_category",
+    "context": [
+     "umbrella.is_regulated_fund"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "asset.instrument",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.seller_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "sponsor.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.sponsor_acquisition_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.sponsor_cost_per_share",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.price_per_share",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.markup_pct",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.valuer_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.valuation_date",
+    "context": []
+   },
+   {
+    "kind": "list",
+    "name": "umbrella.directors",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "director.is_interested",
+    "context": [
+     "EACH director IN umbrella.directors"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "director.name",
+    "context": [
+     "EACH director IN umbrella.directors WHERE director.is_interested"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "director.interest_description",
+    "context": [
+     "EACH director IN umbrella.directors WHERE director.is_interested"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "asset.max_quantity",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.total_consideration",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.minimum_close_amount",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_name",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "umbrella.om_requires_related_party_consent",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.related_party_consent_clause",
+    "context": [
+     "umbrella.om_requires_related_party_consent"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "resolution.effective_date",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "umbrella.is_regulated_fund",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.share_class_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.share_par_value",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "umbrella.is_regulated_fund",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.om_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.subscription_price",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.min_subscription",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.max_offer",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.offer_open_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.offer_close_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.allocation_method_description",
+    "context": []
+   },
+   {
+    "kind": "locked",
+    "name": "{{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "resolution.effective_date_differs",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "resolution.effective_date",
+    "context": [
+     "resolution.effective_date_differs"
+    ]
+   },
+   {
+    "kind": "list",
+    "name": "umbrella.directors",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "director.name",
+    "context": [
+     "EACH director IN umbrella.directors"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "director.signed_date",
+    "context": [
+     "EACH director IN umbrella.directors"
+    ]
+   }
+  ],
+  "D12-C": [
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.company_number",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "meeting.date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "meeting.time",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "meeting.place",
+    "context": []
+   },
+   {
+    "kind": "list",
+    "name": "meeting.attendees",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "director.name",
+    "context": [
+     "EACH director IN meeting.attendees"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "meeting.in_attendance",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "meeting.chair_name",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "any director.is_interested",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "director.name",
+    "context": [
+     "any director.is_interested"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "director.interest_description",
+    "context": [
+     "any director.is_interested"
+    ]
+   },
+   {
+    "kind": "condition",
+    "name": "director.abstains",
+    "context": [
+     "any director.is_interested"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.om_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.instrument",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_name",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "asset.acquisition_source = gp_sourced",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.valuer_name",
+    "context": [
+     "asset.acquisition_source = gp_sourced"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "asset.valuation_date",
+    "context": [
+     "asset.acquisition_source = gp_sourced"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "asset.max_quantity",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.instrument",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.total_consideration",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.seller_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.minimum_close_amount",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "asset.acquisition_source = gp_sourced",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.price_per_share",
+    "context": [
+     "asset.acquisition_source = gp_sourced"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "asset.sponsor_cost_per_share",
+    "context": [
+     "asset.acquisition_source = gp_sourced"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "resolution.effective_date",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "umbrella.is_regulated_fund",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.share_class_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.share_par_value",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "umbrella.is_regulated_fund",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.om_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.subscription_price",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.min_subscription",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.max_offer",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.offer_open_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.offer_close_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.allocation_method_description",
+    "context": []
+   },
+   {
+    "kind": "locked",
+    "name": "{{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "meeting.chair_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "meeting.minutes_signed_date",
+    "context": []
+   }
+  ],
+  "D13-A": [
+   {
+    "kind": "field",
+    "name": "portfolio.supplement_number",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "supplement.date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.om_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_name",
+    "context": []
+   },
+   {
+    "kind": "locked",
+    "name": "Issuer: {{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.om_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.share_class_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.share_par_value",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.subscription_price",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.min_subscription",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.max_offer",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.minimum_close_amount",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.offer_open_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.offer_close_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.total_consideration",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.instrument",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.round_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.price_per_share",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.long_stop_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.term_years",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.extension_years",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.mgmt_fee_rate",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.fee_basis",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.perf_fee_rate",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "portfolio.has_hurdle",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.hurdle_rate",
+    "context": [
+     "portfolio.has_hurdle"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.org_expense_cap",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.cost_rule_ref",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.base_currency",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.administrator_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.instrument",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_jurisdiction",
+    "context": []
+   },
+   {
+    "kind": "zone",
+    "name": "issuer_description",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.total_consideration",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.price_per_share",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.round_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.long_stop_date",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "portfolio.costs_deducted_on_lapse",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.lapse_cost_cap",
+    "context": [
+     "portfolio.costs_deducted_on_lapse"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.mgmt_fee_rate",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.fee_basis",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.fee_frequency",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.perf_fee_rate",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "portfolio.has_hurdle",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.hurdle_rate",
+    "context": [
+     "portfolio.has_hurdle"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.org_expense_cap",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.cost_rule_ref",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.allocation_method_description",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.funding_deadline",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.minimum_close_amount",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.base_currency",
+    "context": []
+   },
+   {
+    "kind": "zone",
+    "name": "project_risk_factors",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "umbrella.fund_category = private_investment_fund",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.investor_basis_description",
+    "context": [
+     "umbrella.fund_category = private_investment_fund"
+    ]
+   }
+  ],
+  "D13-B": [
+   {
+    "kind": "field",
+    "name": "portfolio.supplement_number",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "supplement.date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.om_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_name",
+    "context": []
+   },
+   {
+    "kind": "locked",
+    "name": "Issuer: {{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.om_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.share_class_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.share_par_value",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.subscription_price",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.min_subscription",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.max_offer",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.minimum_close_amount",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.offer_open_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.offer_close_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.max_quantity",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.instrument",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.seller_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.price_per_share",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.total_consideration",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.sponsor_cost_per_share",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.sponsor_acquisition_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.markup_pct",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.valuer_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.valuation_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.term_years",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.extension_years",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.mgmt_fee_rate",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.fee_basis",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.perf_fee_rate",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "portfolio.has_hurdle",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.hurdle_rate",
+    "context": [
+     "portfolio.has_hurdle"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.org_expense_cap",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.cost_rule_ref",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.base_currency",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.administrator_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.instrument",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_jurisdiction",
+    "context": []
+   },
+   {
+    "kind": "zone",
+    "name": "issuer_description",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.max_quantity",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.seller_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.price_per_share",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.minimum_close_amount",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.consent_status",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "asset.sponsor_retains_shares",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.sponsor_retained_quantity",
+    "context": [
+     "asset.sponsor_retains_shares"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "asset.sponsor_acquisition_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.sponsor_cost_per_share",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.price_per_share",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.markup_pct",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.valuer_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.valuation_range",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.valuation_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "conflict_disclosure.date",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "umbrella.om_requires_related_party_consent",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.related_party_consent_clause",
+    "context": [
+     "umbrella.om_requires_related_party_consent"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.mgmt_fee_rate",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.fee_basis",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.fee_frequency",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.perf_fee_rate",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "portfolio.has_hurdle",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.hurdle_rate",
+    "context": [
+     "portfolio.has_hurdle"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.org_expense_cap",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.cost_rule_ref",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.allocation_method_description",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.funding_deadline",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.minimum_close_amount",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.base_currency",
+    "context": []
+   },
+   {
+    "kind": "zone",
+    "name": "project_risk_factors",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "umbrella.fund_category = private_investment_fund",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.investor_basis_description",
+    "context": [
+     "umbrella.fund_category = private_investment_fund"
+    ]
+   }
+  ],
+  "D13-C": [
+   {
+    "kind": "field",
+    "name": "portfolio.supplement_number",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "supplement.date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.om_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_name",
+    "context": []
+   },
+   {
+    "kind": "locked",
+    "name": "Issuer: {{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.om_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.share_class_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.share_par_value",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.subscription_price",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.min_subscription",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.max_offer",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.minimum_close_amount",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.offer_open_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.offer_close_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.max_quantity",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.instrument",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.price_per_share",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.total_consideration",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.transfer_restrictions",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.consent_status",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.term_years",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.extension_years",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.mgmt_fee_rate",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.fee_basis",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.perf_fee_rate",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "portfolio.has_hurdle",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.hurdle_rate",
+    "context": [
+     "portfolio.has_hurdle"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.org_expense_cap",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.cost_rule_ref",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.base_currency",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.administrator_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.instrument",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.issuer_jurisdiction",
+    "context": []
+   },
+   {
+    "kind": "zone",
+    "name": "issuer_description",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.price_per_share",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.completion_window_days",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "asset.has_placement_fee",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "asset.placement_fee_description",
+    "context": [
+     "asset.has_placement_fee"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "asset.placement_agent_name",
+    "context": [
+     "asset.has_placement_fee"
+    ]
+   },
+   {
+    "kind": "condition",
+    "name": "asset.has_placement_fee",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.mgmt_fee_rate",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.fee_basis",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.fee_frequency",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.perf_fee_rate",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "portfolio.has_hurdle",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.hurdle_rate",
+    "context": [
+     "portfolio.has_hurdle"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.org_expense_cap",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.cost_rule_ref",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.allocation_method_description",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.funding_deadline",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.minimum_close_amount",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.base_currency",
+    "context": []
+   },
+   {
+    "kind": "zone",
+    "name": "project_risk_factors",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "umbrella.fund_category = private_investment_fund",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.investor_basis_description",
+    "context": [
+     "umbrella.fund_category = private_investment_fund"
+    ]
+   }
+  ],
+  "D1SP-A": [
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "locked",
+    "name": "{{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.subscription_terms_version",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.om_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.supplement_number",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "supplement.date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.subscription_terms_hash",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.supplement_hash",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "subscription.requested_amount",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.allocation_method_description",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.subscription_price",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.funding_deadline",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.investor_basis_description",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "investor.type = entity",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "asset.acquisition_source = gp_sourced",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "conflict_disclosure.date",
+    "context": [
+     "asset.acquisition_source = gp_sourced"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "asset.price_per_share",
+    "context": [
+     "asset.acquisition_source = gp_sourced"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "asset.markup_pct",
+    "context": [
+     "asset.acquisition_source = gp_sourced"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "asset.sponsor_cost_per_share",
+    "context": [
+     "asset.acquisition_source = gp_sourced"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "investor.full_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.signed_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "company_signatory.name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "company_signatory.title",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "subscription.allocated_amount",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "subscription.shares",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "subscription.accepted_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.full_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.date_of_birth",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.nationality",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.residential_address",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.tax_residence",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.tax_id",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.email",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "subscription.requested_amount",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.status_selected",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.identity_ref",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "payment.account_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "payment.bank_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "payment.account_number",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "payment.swift",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "payment.reference",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.funding_deadline",
+    "context": []
+   }
+  ],
+  "D1SP-B": [
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "locked",
+    "name": "{{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.subscription_terms_version",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.om_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.supplement_number",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "supplement.date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.subscription_terms_hash",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.supplement_hash",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "subscription.requested_amount",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.allocation_method_description",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.subscription_price",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.funding_deadline",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.investor_basis_description",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "investor.type = entity",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "asset.acquisition_source = gp_sourced",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "conflict_disclosure.date",
+    "context": [
+     "asset.acquisition_source = gp_sourced"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "asset.price_per_share",
+    "context": [
+     "asset.acquisition_source = gp_sourced"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "asset.markup_pct",
+    "context": [
+     "asset.acquisition_source = gp_sourced"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "asset.sponsor_cost_per_share",
+    "context": [
+     "asset.acquisition_source = gp_sourced"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "investor.jurisdiction",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "investor.formed_for_investment",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "investor.is_trustee",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.trust_name",
+    "context": [
+     "investor.is_trustee"
+    ]
+   },
+   {
+    "kind": "placeholder",
+    "name": "Counsel wording on trustee limitation of liability",
+    "context": [
+     "investor.is_trustee"
+    ]
+   },
+   {
+    "kind": "list",
+    "name": "investor.authorised_signatories",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "signatory.name",
+    "context": [
+     "EACH signatory IN investor.authorised_signatories"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "signatory.title",
+    "context": [
+     "EACH signatory IN investor.authorised_signatories"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "investor.legal_name",
+    "context": [
+     "EACH signatory IN investor.authorised_signatories"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "signatory.signed_date",
+    "context": [
+     "EACH signatory IN investor.authorised_signatories"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "company_signatory.name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "company_signatory.title",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "subscription.allocated_amount",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "subscription.shares",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "subscription.accepted_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.entity_type",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.jurisdiction",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.registration_number",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.registered_address",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.tax_residence",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.tax_id",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.notice_contact",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "subscription.requested_amount",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.status_selected",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.identity_ref",
+    "context": []
+   },
+   {
+    "kind": "list",
+    "name": "investor.controllers",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "person.name",
+    "context": [
+     "EACH person IN investor.controllers"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "person.role",
+    "context": [
+     "EACH person IN investor.controllers"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "person.ownership_description",
+    "context": [
+     "EACH person IN investor.controllers"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "payment.account_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "payment.bank_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "payment.account_number",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "payment.swift",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "payment.reference",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.funding_deadline",
+    "context": []
+   }
+  ],
+  "D1SP-C": [
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "locked",
+    "name": "{{umbrella.legal_name}} for and on behalf of {{portfolio.legal_name}}",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.subscription_terms_version",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.om_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.supplement_number",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "supplement.date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.subscription_terms_hash",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.supplement_hash",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.existing_portfolio_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.prior_agreement_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.prior_agreement_ref",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "subscription.requested_amount",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.allocation_method_description",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.subscription_price",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.funding_deadline",
+    "context": []
+   },
+   {
+    "kind": "condition",
+    "name": "asset.acquisition_source = gp_sourced",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "conflict_disclosure.date",
+    "context": [
+     "asset.acquisition_source = gp_sourced"
+    ]
+   },
+   {
+    "kind": "condition",
+    "name": "investor.type = individual",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.full_name",
+    "context": [
+     "investor.type = individual"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "investor.signed_date",
+    "context": [
+     "investor.type = individual"
+    ]
+   },
+   {
+    "kind": "list",
+    "name": "investor.authorised_signatories",
+    "context": [
+     "NOT investor.type = individual"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "signatory.name",
+    "context": [
+     "NOT investor.type = individual",
+     "EACH signatory IN investor.authorised_signatories"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "signatory.title",
+    "context": [
+     "NOT investor.type = individual",
+     "EACH signatory IN investor.authorised_signatories"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "investor.legal_name",
+    "context": [
+     "NOT investor.type = individual",
+     "EACH signatory IN investor.authorised_signatories"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "signatory.signed_date",
+    "context": [
+     "NOT investor.type = individual",
+     "EACH signatory IN investor.authorised_signatories"
+    ]
+   },
+   {
+    "kind": "field",
+    "name": "umbrella.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.legal_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "company_signatory.name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "company_signatory.title",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "subscription.allocated_amount",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "subscription.shares",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "subscription.accepted_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.display_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.identity_ref",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.kyc_completed_date",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.status_selected",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "subscription.requested_amount",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "investor.changes_since_prior",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "payment.account_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "payment.bank_name",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "payment.account_number",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "payment.swift",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "payment.reference",
+    "context": []
+   },
+   {
+    "kind": "field",
+    "name": "portfolio.funding_deadline",
+    "context": []
+   }
+  ]
+ }
+}
